@@ -1,0 +1,102 @@
+@(title: String)(section: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>@title</title>
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700" rel="stylesheet">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/style.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+	<script src="@routes.Assets.at("javascripts/config.js")" type="text/javascript"></script>
+	<script src="@routes.Assets.at("javascripts/skel.min.js")" type="text/javascript"></script>
+	<script src="@routes.Assets.at("javascripts/skel-panels.min.js")" type="text/javascript"></script>
+    </head>
+    <body>
+		<!-- Header -->
+
+			<div id="header-wrapper">
+				<header class="container" id="site-header">
+					<div class="row">
+						<div class="12u">
+							<div id="logo">
+								<h1>Smarter Playlists</h1>
+							</div>
+							<nav id="nav">
+								<ul>
+									<li @if(section.equals("home")){ class="current_page_item"}><a href="/">Home</a></li>
+									<li @if(section.equals("about")){ class="current_page_item"}><a href="/about">About</a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</header>
+			</div>
+
+		<!-- Main -->
+
+			<div id="main-wrapper">
+				<div class="container">
+
+					<!-- Divider -->
+
+						<div class="row">
+							<div class="12u">
+								<div class="divider divider-top"></div>
+							</div>
+						</div>
+
+					<!-- Highlight Box -->
+
+						<div class="row">
+							<div class="12u">
+								<div class="highlight-box">
+									<h2>Amet lorem varius tempus consequat lorem?</h2>
+									<span>(tempus aliquam lorem blandit etiam suspendisse dapibus)</span>
+								</div>
+							</div>
+						</div>
+
+					<!-- CTA Box -->
+
+						<div class="row">
+							<div class="12u">
+								<div class="cta-box">
+									<span>Amet lorem varius tempus consequat lorem?</span>
+									<a href="#" class="button">Ipsum Consequat</a>
+								</div>
+							</div>
+						</div>
+
+					<!-- Divider -->
+
+						<div class="row">
+							<div class="12u">
+								<div class="divider divider-bottom"></div>
+							</div>
+						</div>
+				</div>
+			</div>
+
+        @content
+		<!-- Footer -->
+
+			<div id="footer-wrapper">
+				<footer class="container" id="site-footer">
+					<div class="row">
+						<div class="12u">
+							<div class="divider"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="12u">
+							<div id="copyright">
+								&copy; Ben Levy. All rights reserved. | Design: <a href="http://html5up.net" target="_blank">HTML5 UP</a>
+							</div>
+						</div>
+					</div>
+				</footer>
+			</div>
+    </body>
+</html>

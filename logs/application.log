@@ -1,0 +1,219 @@
+2013-11-25 18:34:39,228 - [INFO] - from play in pool-4-thread-5 
+Listening for HTTP on /0:0:0:0:0:0:0:0%0:9000
+
+2013-11-25 18:36:14,005 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2013-11-25 19:18:51,247 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2013-11-25 19:20:04,471 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2013-11-25 19:21:24,895 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2013-11-25 19:22:50,245 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2013-11-27 23:44:27,512 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2013-11-27 23:47:22,379 - [ERROR] - from application in New I/O worker #1 
+
+
+! @6gdap8c50 - Internal server error, for (GET) [/] ->
+
+play.PlayExceptions$CompilationException: Compilation error[type mismatch;
+ found   : play.api.templates.HtmlFormat.Appendable
+    (which expands to)  play.api.templates.Html
+ required: String]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14$$anonfun$apply$16.apply(PlayReloader.scala:304) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14$$anonfun$apply$16.apply(PlayReloader.scala:304) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library.jar:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14.apply(PlayReloader.scala:304) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14.apply(PlayReloader.scala:298) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library.jar:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:298) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:296) ~[na:na]
+	at scala.util.Either$LeftProjection.map(Either.scala:377) ~[scala-library.jar:na]
+	at play.PlayReloader$$anon$1.reload(PlayReloader.scala:296) ~[na:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:104) ~[play_2.10.jar:2.2.1]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:102) ~[play_2.10.jar:2.2.1]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library.jar:na]
+
+2013-11-27 23:48:01,350 - [ERROR] - from application in New I/O worker #1 
+
+
+! @6gdapahm4 - Internal server error, for (GET) [/] ->
+
+play.PlayExceptions$CompilationException: Compilation error[too many arguments for method apply: (title: String)(section: String)(content: play.api.templates.Html)play.api.templates.HtmlFormat.Appendable in object main]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14$$anonfun$apply$16.apply(PlayReloader.scala:304) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14$$anonfun$apply$16.apply(PlayReloader.scala:304) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library.jar:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14.apply(PlayReloader.scala:304) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14.apply(PlayReloader.scala:298) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library.jar:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:298) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:296) ~[na:na]
+	at scala.util.Either$LeftProjection.map(Either.scala:377) ~[scala-library.jar:na]
+	at play.PlayReloader$$anon$1.reload(PlayReloader.scala:296) ~[na:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:104) ~[play_2.10.jar:2.2.1]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:102) ~[play_2.10.jar:2.2.1]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library.jar:na]
+
+2013-11-27 23:50:14,760 - [ERROR] - from application in New I/O worker #1 
+
+
+! @6gdapi75a - Internal server error, for (GET) [/] ->
+
+play.PlayExceptions$CompilationException: Compilation error[type mismatch;
+ found   : play.api.templates.HtmlFormat.Appendable
+    (which expands to)  play.api.templates.Html
+ required: String]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14$$anonfun$apply$16.apply(PlayReloader.scala:304) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14$$anonfun$apply$16.apply(PlayReloader.scala:304) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library.jar:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14.apply(PlayReloader.scala:304) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14.apply(PlayReloader.scala:298) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library.jar:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:298) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:296) ~[na:na]
+	at scala.util.Either$LeftProjection.map(Either.scala:377) ~[scala-library.jar:na]
+	at play.PlayReloader$$anon$1.reload(PlayReloader.scala:296) ~[na:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:104) ~[play_2.10.jar:2.2.1]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:102) ~[play_2.10.jar:2.2.1]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library.jar:na]
+
+2013-11-27 23:53:04,403 - [ERROR] - from application in New I/O worker #1 
+
+
+! @6gdb01o41 - Internal server error, for (GET) [/] ->
+
+play.PlayExceptions$CompilationException: Compilation error[too many arguments for method apply: (title: String)(section: String)(content: play.api.templates.Html)play.api.templates.HtmlFormat.Appendable in object main]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14$$anonfun$apply$16.apply(PlayReloader.scala:304) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14$$anonfun$apply$16.apply(PlayReloader.scala:304) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library.jar:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14.apply(PlayReloader.scala:304) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14.apply(PlayReloader.scala:298) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library.jar:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:298) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:296) ~[na:na]
+	at scala.util.Either$LeftProjection.map(Either.scala:377) ~[scala-library.jar:na]
+	at play.PlayReloader$$anon$1.reload(PlayReloader.scala:296) ~[na:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:104) ~[play_2.10.jar:2.2.1]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:102) ~[play_2.10.jar:2.2.1]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library.jar:na]
+
+2013-11-27 23:54:10,426 - [ERROR] - from application in New I/O worker #1 
+
+
+! @6gdb05hlb - Internal server error, for (GET) [/] ->
+
+play.PlayExceptions$CompilationException: Compilation error[too many arguments for method apply: (title: String)(section: String)(content: play.api.templates.Html)play.api.templates.HtmlFormat.Appendable in object main]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14$$anonfun$apply$16.apply(PlayReloader.scala:304) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14$$anonfun$apply$16.apply(PlayReloader.scala:304) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library.jar:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14.apply(PlayReloader.scala:304) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14.apply(PlayReloader.scala:298) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library.jar:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:298) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:296) ~[na:na]
+	at scala.util.Either$LeftProjection.map(Either.scala:377) ~[scala-library.jar:na]
+	at play.PlayReloader$$anon$1.reload(PlayReloader.scala:296) ~[na:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:104) ~[play_2.10.jar:2.2.1]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:102) ~[play_2.10.jar:2.2.1]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library.jar:na]
+
+2013-11-27 23:55:19,438 - [ERROR] - from application in New I/O worker #1 
+
+
+! @6gdb09fnk - Internal server error, for (GET) [/] ->
+
+play.PlayExceptions$CompilationException: Compilation error[not enough arguments for method apply: (title: String)(section: String)(content: play.api.templates.Html)play.api.templates.HtmlFormat.Appendable in object main.
+Unspecified value parameter title.]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14$$anonfun$apply$16.apply(PlayReloader.scala:304) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14$$anonfun$apply$16.apply(PlayReloader.scala:304) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library.jar:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14.apply(PlayReloader.scala:304) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14.apply(PlayReloader.scala:298) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library.jar:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:298) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:296) ~[na:na]
+	at scala.util.Either$LeftProjection.map(Either.scala:377) ~[scala-library.jar:na]
+	at play.PlayReloader$$anon$1.reload(PlayReloader.scala:296) ~[na:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:104) ~[play_2.10.jar:2.2.1]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:102) ~[play_2.10.jar:2.2.1]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library.jar:na]
+
+2013-11-27 23:56:17,118 - [ERROR] - from application in New I/O worker #1 
+
+
+! @6gdb0cn5d - Internal server error, for (GET) [/] ->
+
+play.PlayExceptions$CompilationException: Compilation error[type mismatch;
+ found   : play.api.templates.HtmlFormat.Appendable
+    (which expands to)  play.api.templates.Html
+ required: String]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14$$anonfun$apply$16.apply(PlayReloader.scala:304) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14$$anonfun$apply$16.apply(PlayReloader.scala:304) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library.jar:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14.apply(PlayReloader.scala:304) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14.apply(PlayReloader.scala:298) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library.jar:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:298) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:296) ~[na:na]
+	at scala.util.Either$LeftProjection.map(Either.scala:377) ~[scala-library.jar:na]
+	at play.PlayReloader$$anon$1.reload(PlayReloader.scala:296) ~[na:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:104) ~[play_2.10.jar:2.2.1]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:102) ~[play_2.10.jar:2.2.1]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library.jar:na]
+
+2013-11-27 23:57:26,152 - [INFO] - from play in play-internal-execution-context-2 
+Application started (Dev)
+
+2013-11-27 23:57:58,751 - [INFO] - from play in play-internal-execution-context-2 
+Application started (Dev)
+
