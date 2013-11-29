@@ -1,0 +1,4 @@
+logs/application.log
+target/**
+project/target/**
+project/project/target/**
