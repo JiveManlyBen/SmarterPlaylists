@@ -3,6 +3,7 @@ package controllers;
 import java.io.File;
 
 import play.*;
+import play.i18n.Messages;
 import play.mvc.*;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
@@ -19,7 +20,7 @@ public class Application extends Controller {
 	public static Result upload() {
 		MultipartFormData body = request().body().asMultipartFormData();
 		if (request().body().isMaxSizeExceeded()) {
-			flash("error", "File exceeded maximum size");
+			flash("error", Messages.get("upload.error.maxsize"));
 			return redirect(routes.Application.index());
 		}
 		FilePart playlist = body.getFile("playlist");
@@ -27,7 +28,7 @@ public class Application extends Controller {
 			String fileName = playlist.getFilename();
 			String contentType = playlist.getContentType();
 			if (!contentType.equals("text/xml")) {
-				flash("error", "Incorrect content type");
+				flash("error", Messages.get("upload.error.contenttype"));
 				return redirect(routes.Application.index());
 			}
 			else {
@@ -35,7 +36,7 @@ public class Application extends Controller {
 				return ok("Uploaded file: " + fileName);
 			}
 		} else {
-			flash("error", "Missing file");
+			flash("error", Messages.get("upload.error.missing"));
 			return redirect(routes.Application.index());
 		}
 	}
