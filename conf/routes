@@ -5,6 +5,9 @@
 # Home page
 GET     /                           controllers.Application.index()
 
+# File upload
+POST     /upload                           controllers.Application.upload()
+
 # About page
 GET	/about			    controllers.Application.about()
 

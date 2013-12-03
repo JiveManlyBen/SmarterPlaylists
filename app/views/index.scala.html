@@ -3,14 +3,16 @@
 @main(title)("home") {
 
                                         <!-- CTA Box -->
-						<form>
+						<form method="post" action="/upload" enctype="multipart/form-data">
                                                 <div class="row">
                                                         <div class="12u">
                                                                 <div class="cta-box">
-                                                                        <span>Amet lorem varius tempus consequat lorem?</span>
-									<br />
-									<input type="file" id="input">
-									<input class="button" type="submit" value="Upload">
+																@if(flash.containsKey("error")){
+																	<span class="error">@flash.get("error")</span>
+																}
+																	<h2>Amet lorem varius tempus consequat lorem?</h2>
+																	<input type="file" name="playlist">
+																	<input class="button" type="submit" value="Upload">
                                                                 </div>
                                                         </div>
                                                 </div>

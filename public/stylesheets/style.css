@@ -118,7 +118,7 @@
 	{
 		background: url('images/bg2.png');
 		text-align: center;
-		padding: 1.25em 0 1.25em 0;
+		padding: 0.25em 1.25em 0.5em;
 		text-shadow: 1px 2px 0px #fff;
 		font-size: 2em;
 	}
@@ -126,6 +126,11 @@
 		.cta-box .button
 		{
 			margin-left: 0.8em;
+		}
+		
+		.cta-box h2
+		{
+			margin: 0.25em 0 0.75em 0;
 		}
 
 	.highlight-box
@@ -205,3 +210,8 @@
 		{
 			border-top: none;
 		}
+
+	.error
+	{
+		color: red;
+	}
