@@ -26,6 +26,7 @@
 							<nav id="nav">
 								<ul>
 									<li @if(section.equals("home")){ class="current_page_item"}><a href="/">@Messages("nav.home")</a></li>
+									@if(section.equals("download")){<li class="current_page_item">@Messages("nav.download")</li>}
 									<li @if(section.equals("about")){ class="current_page_item"}><a href="/about">@Messages("nav.about")</a></li>
 								</ul>
 							</nav>

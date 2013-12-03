@@ -110,6 +110,7 @@
 			#nav ul li.current_page_item
 			{
 				background: url('images/nav-arrow.png') center 77px no-repeat;
+				color: #ffffff;
 			}
 
 				#nav ul li.current_page_item a

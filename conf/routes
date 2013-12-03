@@ -8,6 +8,9 @@ GET     /                           controllers.Application.index()
 # File upload
 POST     /upload                           controllers.Application.upload()
 
+# File upload
+GET     /download                           controllers.Application.download()
+
 # About page
 GET	/about			    controllers.Application.about()
 

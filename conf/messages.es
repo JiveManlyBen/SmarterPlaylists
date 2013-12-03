@@ -1,6 +1,7 @@
 footer.design=Diseño
 footer.rights=Todos los derechos reservados.
 nav.home=Inicio
+nav.download=Bajar
 nav.about=Sobre
 upload.button.upload=Subir
 upload.error.contenttype=El archivo subido debe ser un archivo XML biblioteca de iTunes.

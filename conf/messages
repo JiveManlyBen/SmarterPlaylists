@@ -1,6 +1,7 @@
 footer.design=Design
 footer.rights=All rights reserved.
 nav.home=Home
+nav.download=Download
 nav.about=About
 upload.button.upload=Upload
 upload.error.contenttype=The uploaded file needs to be an iTunes library XML file.

@@ -33,7 +33,8 @@ public class Application extends Controller {
 			}
 			else {
 				File file = playlist.getFile();
-				return ok("Uploaded file: " + fileName);
+				return redirect(routes.Application.download());
+
 			}
 		} else {
 			flash("error", Messages.get("upload.error.missing"));
@@ -41,8 +42,12 @@ public class Application extends Controller {
 		}
 	}
 
+    public static Result download() {
+        return ok(download.render(Messages.get("nav.download")));
+    }
+
     public static Result about() {
-        return ok(about.render("About", "All about the site"));
+        return ok(about.render(Messages.get("nav.about"), "All about the site"));
     }
 
 }
