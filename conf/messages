@@ -1,5 +1,8 @@
+footer.design=Design
+footer.rights=All rights reserved.
 nav.home=Home
 nav.about=About
+upload.button.upload=Upload
 upload.error.contenttype=The uploaded file needs to be an iTunes library XML file.
 upload.error.maxsize=The uploaded file exceeded the 25MB upload limit.
 upload.error.missing=The iTunes library XML file was missing from the upload.
