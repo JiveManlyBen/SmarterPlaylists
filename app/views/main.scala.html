@@ -1,10 +1,10 @@
-@(title: String)(section: String)(content: Html)
+@(section: String)(content: Html)
 
 <!DOCTYPE html>
 
 <html>
     <head>
-        <title>@title</title>
+        <title>@if(!section.equals("home")){@Messages("nav."+section) - }Smarter Playlists</title>
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700" rel="stylesheet">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/style.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">

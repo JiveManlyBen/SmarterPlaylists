@@ -13,7 +13,7 @@ import views.html.*;
 public class Application extends Controller {
 
     public static Result index() {
-        return ok(index.render("Smarter Playlists", "Content"));
+        return ok(index.render("Content"));
     }
 
 	@BodyParser.Of(value = BodyParser.MultipartFormData.class, maxLength = 25 * 1024 * 1024)
@@ -43,11 +43,11 @@ public class Application extends Controller {
 	}
 
     public static Result download() {
-        return ok(download.render(Messages.get("nav.download")));
+        return ok(download.render());
     }
 
     public static Result about() {
-        return ok(about.render(Messages.get("nav.about"), "All about the site"));
+        return ok(about.render("All about the site"));
     }
 
 }
