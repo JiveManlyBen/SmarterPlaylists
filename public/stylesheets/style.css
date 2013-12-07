@@ -85,6 +85,19 @@
 		background-image: linear-gradient(top, #58d3FF, #28a3df);
 	}
 
+	.button:disabled
+	{
+		background: #8E8E8E;
+		background-image: -moz-linear-gradient(top, #BABABA, #8E8E8E);
+		background-image: -webkit-linear-gradient(top, #BABABA, #8E8E8E);
+		background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#BABABA), to(#8E8E8E));
+		background-image: -ms-linear-gradient(top, #BABABA, #8E8E8E);
+		background-image: -o-linear-gradient(top, #BABABA, #8E8E8E);
+		background-image: linear-gradient(top, #BABABA, #8E8E8E);
+		border: 1px solid #8E8E8E;
+		box-shadow: 0 0 0 1px #1D1D1D inset, 0 2px 3px 0 rgba(0, 0, 0, 0.25);
+	}
+
 	.button:active
 	{
 		background: #38C3FF;
