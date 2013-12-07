@@ -1,3 +1,7 @@
+.classpath
+.project
+.settings/**
+.target/**
 logs/application.log
 target/**
 project/target/**
