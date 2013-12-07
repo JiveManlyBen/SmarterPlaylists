@@ -1,1 +1,1 @@
-web:	target/universal/stage/bin/smarterplaylists -Dhttp.port=$PORT
+web:	target/universal/stage/bin/smarter-playlists -Dhttp.port=$PORT
