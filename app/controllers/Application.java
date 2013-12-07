@@ -13,8 +13,6 @@ import javax.xml.XMLConstants;
 
 import org.w3c.dom.Document;
 
-import play.*;
-import play.api.i18n.Lang;
 import play.i18n.Messages;
 import play.Logger;
 import play.mvc.*;
@@ -51,10 +49,10 @@ public class Application extends Controller {
 				try {
 					DocumentBuilder builder = domFactory.newDocumentBuilder();
 					Document doc = builder.parse(file);
-
+					
 					Source xmlFile = new StreamSource(file);
 					SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-					Schema schema = schemaFactory.newSchema(new File("conf"+file.separator+"iTunes.xsd"));
+					Schema schema = schemaFactory.newSchema(new File("conf"+File.separator+"iTunes.xsd"));
 					Validator validator = schema.newValidator();
 					validator.validate(xmlFile);
 
