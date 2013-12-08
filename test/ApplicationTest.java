@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.*;
 
 import play.mvc.*;
+import play.mvc.Http.Response;
 import play.test.*;
 import play.data.DynamicForm;
 import play.data.validation.ValidationError;
@@ -28,17 +29,43 @@ import static org.fest.assertions.Assertions.*;
 public class ApplicationTest {
 
     @Test
-    public void simpleCheck() {
-        int a = 1 + 1;
-        assertThat(a).isEqualTo(2);
+    public void callIndex() {
+    	  running(fakeApplication(), new Runnable() {
+    		    public void run() {
+			        Result result = callAction(
+			        		controllers.routes.ref.Application.index()
+					);
+					assertThat(status(result)).isEqualTo(OK);
+			
+					result = route(fakeRequest(GET, "/"));
+					assertThat(status(result)).isEqualTo(OK);
+    		    }
+    	  });
     }
-
+    
     @Test
-    public void renderTemplate() {
-        Content html = views.html.index.render("Your new application is ready.");
-        assertThat(contentType(html)).isEqualTo("text/html");
-        assertThat(contentAsString(html)).contains("Your new application is ready.");
+    public void callAbout() {
+  	  running(fakeApplication(), new Runnable() {
+		    public void run() {
+    	Result result = callAction(
+    			controllers.routes.ref.Application.about()
+    	);
+    	assertThat(status(result)).isEqualTo(OK);
+    	
+		result = route(fakeRequest(GET, "/about"));
+		assertThat(status(result)).isEqualTo(OK);
+		    }
+	  });
     }
-
+    
+    @Test
+    public void callAdmin() {
+    	running(fakeApplication(), new Runnable() {
+    		public void run() {
+    			Result result = route(fakeRequest(GET, "/admin"));
+    			assertThat(result).isNull();
+    		}
+    	});
+    }
 
 }
