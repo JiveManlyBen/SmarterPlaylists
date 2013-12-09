@@ -98,7 +98,7 @@
 		box-shadow: 0 0 0 1px #1D1D1D inset, 0 2px 3px 0 rgba(0, 0, 0, 0.25);
 	}
 
-	.button:active
+	.button:enabled:active
 	{
 		background: #38C3FF;
 		background-image: -moz-linear-gradient(top, #0893cf, #38C3FF);
@@ -115,6 +115,10 @@
 		border-bottom: solid 1px #e5e5e5;
 		height: 4px;
 		margin: 0 0 0 0;
+	}
+	
+	.inputFile .error {
+		color: red;
 	}
 
 	.divider-top

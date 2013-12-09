@@ -3,7 +3,7 @@
 @main("home") {
 
                                         <!-- CTA Box -->
-						<form method="post" action="/upload" enctype="multipart/form-data">
+						<form id="playlistUploadForm" method="post" action="/upload" enctype="multipart/form-data">
                                                 <div class="row">
                                                         <div class="12u">
                                                                 <div class="cta-box">
@@ -11,8 +11,8 @@
 																	<span class="error">@flash.get("error")</span>
 																}
 																	<h2>Amet lorem varius tempus consequat lorem?</h2>
-																	<input type="file" name="playlist"i required>
-																	<input class="button" type="submit" value="@Messages("upload.button.upload")">
+																	<input id="playlistUploadFile" type="file" name="playlist" required>
+																	<input class="button playlistUploadButton" type="submit" value="@Messages("upload.button.upload")">
                                                                 </div>
                                                         </div>
                                                 </div>
