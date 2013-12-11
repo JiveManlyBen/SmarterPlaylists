@@ -3,6 +3,8 @@ package services;
 import java.io.File;
 import java.io.IOException;
 
+import java.text.ParseException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +31,8 @@ import domain.PlayList;
 import play.Logger;
 
 public class PlaylistService {
-	public static String parseXMLFile(File file) throws SAXException, IOException, ParserConfigurationException {
+	public static String parseXMLFile(File file) throws SAXException, IOException, 
+		ParserConfigurationException, NumberFormatException, ParseException {
 		Source xmlFile = new StreamSource(file);
 		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		Schema schema = schemaFactory.newSchema(new File("conf"+File.separator+"iTunes.xsd"));
@@ -39,6 +42,9 @@ public class PlaylistService {
 		domFactory.setValidating(true);
 		DocumentBuilder builder = domFactory.newDocumentBuilder();
 		Document doc = builder.parse(file);
+		NodeList plist = getFirstElementNode(doc.getChildNodes(), "plist").getChildNodes();
+		PlayList playList = new PlayList(getKeysAndValues(getFirstElementNode(plist, "dict").getChildNodes()));
+		Logger.debug(playList.toString());
 		return "ok";
 	}
 	private static List<Node> getElementNodes(NodeList nodes) {
@@ -64,7 +70,10 @@ public class PlaylistService {
 				key = node.getTextContent();
 			}
 			else if (key != null) {
-				keyMap.put(key, node.getTextContent());
+				if (node.getNodeName().equals("true") || node.getNodeName().equals("false"))
+					keyMap.put(key, node.getNodeName().equals("true") ? "1" : "0");
+				else
+					keyMap.put(key, node.getTextContent());
 				key = null;
 			}
 		}
