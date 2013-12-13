@@ -42,8 +42,7 @@ public class PlaylistService {
 		domFactory.setValidating(true);
 		DocumentBuilder builder = domFactory.newDocumentBuilder();
 		Document doc = builder.parse(file);
-		NodeList plist = getFirstElementNode(doc.getChildNodes(), "plist").getChildNodes();
-		PlayList playList = new PlayList(getKeysAndValues(getFirstElementNode(plist, "dict").getChildNodes()));
+		PlayList playList = getPlayList(doc);
 		Logger.debug(playList.toString());
 		return "ok";
 	}
@@ -78,5 +77,9 @@ public class PlaylistService {
 			}
 		}
 		return keyMap;
+	}
+	public static PlayList getPlayList(Document doc) throws NumberFormatException, ParseException{
+		NodeList plist = getFirstElementNode(doc.getChildNodes(), "plist").getChildNodes();
+		return new PlayList(getKeysAndValues(getFirstElementNode(plist, "dict").getChildNodes()));
 	}
 }
