@@ -1,6 +1,7 @@
 package tests;
 
 import domain.PlayList;
+import domain.Track;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,5 +41,23 @@ public class PlayListServiceTest {
 		assertThat(returnedList.isShowContentRatings()).isTrue();
 		assertThat(returnedList.getMusicFolder()).isEqualTo(("file://localhost/C:/Music/"));
 		assertThat(returnedList.getLibraryPersistentId()).isEqualTo("437026SJ3UJ3Y3T7");
+		
+		assertThat(returnedList.getTracks().size()).isEqualTo(24);
+		Track track = returnedList.getTracks().get(10892);
+		assertThat(track).isNotNull();
+		assertThat(track.getName()).isEqualTo("World (Demo)");
+		assertThat(track.getArtist()).isEqualTo("Foo Fighters");
+		assertThat(track.getAlbum()).isEqualTo("Five Songs & A Cover");
+		assertThat(track.getKind()).isEqualTo("MPEG audio file");
+		assertThat(track.getTrackNumber()).isEqualTo(4);
+		assertThat(track.getYear()).isEqualTo(2005);
+		calendarDate.set(2010, 2, 21, 4, 50, 12);
+		assertThat(track.getDateAdded()).isEqualTo(calendarDate.getTime());
+		assertThat(track.getPlayCount()).isEqualTo(117);
+		calendarDate.set(2013, 9, 16, 16, 8, 59);
+		assertThat(track.getPlayDate()).isEqualTo(calendarDate.getTime());
+		assertThat(track.getSkipCount()).isEqualTo(3);
+		assertThat(track.getPersistentID()).isEqualTo("023DDE089E93FEF0");
+		assertThat(track.getTrackType()).isEqualTo("File");
 	}
 }

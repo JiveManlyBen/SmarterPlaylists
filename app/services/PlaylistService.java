@@ -26,6 +26,7 @@ import org.w3c.dom.NodeList;
 
 import org.xml.sax.SAXException;
 
+import domain.Track;
 import domain.PlayList;
 
 import play.Logger;
@@ -78,8 +79,30 @@ public class PlaylistService {
 		}
 		return keyMap;
 	}
-	public static PlayList getPlayList(Document doc) throws NumberFormatException, ParseException{
+	public static PlayList getPlayList(Document doc) throws NumberFormatException, ParseException {
 		NodeList plist = getFirstElementNode(doc.getChildNodes(), "plist").getChildNodes();
-		return new PlayList(getKeysAndValues(getFirstElementNode(plist, "dict").getChildNodes()));
+		PlayList playList = new PlayList(getKeysAndValues(getFirstElementNode(plist, "dict").getChildNodes()));
+		playList.setTracks(getTracks(doc));
+		return playList;
+	}
+	private static Map<Integer, Track> getTracks(Document doc) throws NumberFormatException, ParseException {
+		Map<Integer, Track> trackMap = new HashMap<Integer, Track>();
+		Node dictNode = getFirstElementNode(getFirstElementNode(doc.getChildNodes(), "plist").getChildNodes(), "dict");
+		boolean foundKey = false;
+		for (Node node : getElementNodes(dictNode.getChildNodes())) {
+			if (foundKey) {
+				for (Node n : getElementNodes(node.getChildNodes())) {
+					if (n.getNodeName().equals("dict")) {
+						Map<String, String> map = getKeysAndValues(n.getChildNodes());
+						trackMap.put(Integer.parseInt(map.get("Track ID")), new Track(map));
+					}
+				}
+				break;
+			}
+			if (node.getNodeName().equals("key") && node.getTextContent().equals(PlayList.TRACKS)) {
+				foundKey = true;
+			}
+		}
+		return trackMap;
 	}
 }

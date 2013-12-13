@@ -24,6 +24,8 @@ public class PlayList {
 	private static final String MUSIC_FOLDER = "Music Folder";
 	private String libraryPersistentId;
 	private static final String LIBRARY_PERSISTENT_ID = "Library Persistent ID";
+	private Map<Integer, Track> tracks;
+	public static final String TRACKS = "Tracks";
 
 	public PlayList(int majorVersion, int minorVersion, Date date,
 			String applicationVersion, int features, boolean showContentRatings,
@@ -114,6 +116,14 @@ public class PlayList {
 		this.libraryPersistentId = libraryPersistentId;
 	}
 
+	public Map<Integer, Track> getTracks() {
+		return tracks;
+	}
+
+	public void setTracks(Map<Integer, Track> tracks) {
+		this.tracks = tracks;
+	}
+
 	@Override
 	public String toString() {
 		return "PlayList [majorVersion=" + majorVersion + ", minorVersion="
@@ -121,6 +131,6 @@ public class PlayList {
 				+ applicationVersion + ", features=" + features
 				+ ", showContentRatings=" + showContentRatings
 				+ ", musicFolder=" + musicFolder + ", libraryPersistentId="
-				+ libraryPersistentId + "]";
+				+ libraryPersistentId + ", tracks=" + tracks.size() + "]";
 	}
 }
