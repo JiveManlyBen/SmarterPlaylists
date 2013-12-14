@@ -4,6 +4,7 @@ import org.junit.*;
 
 import play.mvc.*;
 import play.test.*;
+import play.i18n.Messages;
 import play.libs.F.*;
 
 import static play.test.Helpers.*;
@@ -22,7 +23,7 @@ public class IntegrationTest {
         running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
             public void invoke(TestBrowser browser) {
                 browser.goTo("http://localhost:3333");
-                assertThat(browser.pageSource()).contains("Amet lorem varius tempus consequat lorem?");
+                assertThat(browser.pageSource()).contains(Messages.get("upload.label.header"));
             }
         });
     }
