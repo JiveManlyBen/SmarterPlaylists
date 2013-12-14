@@ -137,7 +137,7 @@
 		text-align: center;
 		padding: 0.25em 1.25em 0.5em;
 		text-shadow: 1px 2px 0px #fff;
-		font-size: 2em;
+		font-size: 1.4em;
 	}
 
 		.cta-box .button
@@ -148,6 +148,7 @@
 		.cta-box h2
 		{
 			margin: 0.25em 0 0.75em 0;
+			line-height: 1em;
 		}
 
 	.highlight-box
