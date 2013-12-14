@@ -3,7 +3,12 @@ package domain;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 public class Track {
@@ -60,7 +65,21 @@ public class Track {
 	private static final String LIBRARY_FOLDER_COUNT = "Library Folder Count";
 	
 	private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'");
-
+	
+	public Track(int trackId, String name, String artist, String album, 
+			String kind, Date dateAdded, Integer playCount, Date playDate,
+			String persistentID) {
+		this.trackId = trackId;
+		this.name = name;
+		this.artist = artist;
+		this.album = album;
+		this.kind = kind;
+		this.dateAdded = dateAdded;
+		this.playCount = playCount;
+		this.playDate = playDate;
+		this.persistentID = persistentID;
+	}
+	
 	public Track(int trackId, String name, String artist, String albumArtist,
 			String album, String genre, String kind, Integer size, Integer totalTime,
 			Integer trackNumber, Integer year, Date dateModified, Date dateAdded,
@@ -330,7 +349,22 @@ public class Track {
 	private static Integer getInteger(String strValue) {
 		return strValue != null ? Integer.parseInt(strValue) : null;
 	}
+	
 	private static Date getDate(String strValue) throws ParseException {
 		return strValue != null ? dateFormat.parse(strValue) : null;
+	}
+	
+    static class MostOftenPlayedComparator implements Comparator<Track> {            
+    	public int compare(Track t1, Track t2) {
+			Integer playCount1 = t1.getPlayCount() == null ? new Integer(0) : t1.getPlayCount();
+			Integer playCount2 = t2.getPlayCount() == null ? new Integer(0) : t2.getPlayCount();
+			return - playCount1.compareTo(playCount2);
+    	}
+    }
+    
+	public static List<Track> getMostPlayedTracks(Collection<Track> tracks) {
+		List<Track> trackList = new ArrayList<Track>(tracks);
+		Collections.sort(trackList, new MostOftenPlayedComparator());
+		return trackList;
 	}
 }
