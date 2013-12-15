@@ -233,3 +233,21 @@
 	{
 		color: red;
 	}
+	#copyright ul {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        zoom:1;
+        *display: inline;
+	}
+	#copyright ul li { 
+		float: left;
+	}
+	#copyright ul li:after {
+		content: "|";
+		padding: 0 .4em;
+	}
+	#copyright ul li.last:after {
+		content: "";
+		padding: 0 0;
+	}
