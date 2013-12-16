@@ -1,11 +1,8 @@
 package tests;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.*;
 
 import play.mvc.*;
@@ -59,7 +56,20 @@ public class ApplicationTest {
 		    }
 	  });
     }
-    
+
+    @Test
+    public void callLang() {
+    	running(fakeApplication(), new Runnable() {
+    		public void run() {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("name", "es");
+                Result result = route
+                        (fakeRequest(POST, "/lang").withHeader("Content-Type", "application/json").withFormUrlEncodedBody(map));
+                assertThat(result).isNotNull();
+    		}
+    	});
+    }
+
     @Test
     public void callAdmin() {
     	running(fakeApplication(), new Runnable() {

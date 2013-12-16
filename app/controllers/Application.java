@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.File;
 
+import play.i18n.Lang;
 import play.i18n.Messages;
 import play.Logger; 
 import play.mvc.BodyParser;
@@ -58,6 +59,16 @@ public class Application extends Controller {
 
     public static Result about() {
         return ok(about.render("All about the site"));
+    }
+
+    public static Result language() {
+    	String name = request().body().asFormUrlEncoded().get("name")[0];
+    	if (Lang.availables().contains(Lang.forCode(name))) {
+    		changeLang(name);
+    		return ok();
+    	}
+    	else
+    		return status(BAD_REQUEST);
     }
 
 }

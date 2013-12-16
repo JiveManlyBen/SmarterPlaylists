@@ -240,14 +240,14 @@
         zoom:1;
         *display: inline;
 	}
-	#copyright ul li { 
+	#copyright ul li.footer { 
 		float: left;
 	}
-	#copyright ul li:after {
+	#copyright ul li.footer:after {
 		content: "|";
 		padding: 0 .4em;
 	}
-	#copyright ul li.last:after {
+	#copyright ul li.footer.last:after {
 		content: "";
 		padding: 0 0;
 	}
