@@ -39,7 +39,7 @@ License URI: http://www.opensource.org/licenses/mit-license.php
 	font-size: 12px;
 	color: #444;
 	line-height: normal;
-	padding-top: 8px;
+	padding-top: 11px;
 	position: relative; /* sets the initial position for the drop-down menu */	
 	z-index: 100;
 }

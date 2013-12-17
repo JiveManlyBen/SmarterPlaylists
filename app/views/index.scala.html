@@ -11,8 +11,14 @@
 																	<span class="error">@flash.get("error")</span>
 																}
 																	<h2>@Messages("upload.label.header")</h2>
-																	<input id="playlistUploadFile" type="file" name="playlist" required>
-																	<input class="button playlistUploadButton" type="submit" value="@Messages("upload.button.upload")" disabled>
+																	<div class="input-row">
+																		<input id="playlistUploadFile" type="file" name="playlist" required>
+																		<input class="button playlistUploadButton" type="submit" value="@Messages("upload.button.upload")" disabled>
+																	</div>
+																	<div class="input-row">
+																		<label class="row-option"><input type="checkbox" id="mostoftenplayed" checked disabled> Most often played</label>
+																		<label>Limit number of songs <input type="number" id="limit" maxlength="5" min="0" name="Limit" size="5"></label>
+																	</div>
                                                                 </div>
                                                         </div>
                                                 </div>
