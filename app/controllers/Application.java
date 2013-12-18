@@ -27,6 +27,10 @@ public class Application extends Controller {
 			flash("error", Messages.get("upload.error.maxsize"));
 			return redirect(routes.Application.index());
 		}
+		if (body.asFormUrlEncoded().get("MostOftenPlayed") == null) {
+			flash("error", Messages.get("upload.error.nooption"));
+			return redirect(routes.Application.index());
+		}
 		FilePart playlist = body.getFile("playlist");
 		if (playlist != null) {
 			String contentType = playlist.getContentType();
