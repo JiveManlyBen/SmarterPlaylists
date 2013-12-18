@@ -118,11 +118,15 @@ public class PlayListServiceTest {
 		assertThat(trackList.get(0).getTrackId()).isEqualTo(8844);
 		assertThat(trackList.get(trackList.size() - 1).getTrackId()).isEqualTo(11716);
 		
-		int limit = 10;
+
 		trackList = getTrackList();
 		int initialCount = trackList.size();
-		assertThat(initialCount).isLessThan(limit);
+		int limit = 100 + initialCount;
 		trackList = Track.getMostPlayedTracks(trackList, limit);
 		assertThat(trackList.size()).isEqualTo(initialCount);
+		
+		trackList = getTrackList();
+		trackList = Track.getMostPlayedTracks(trackList, 0);
+		assertThat(trackList.size()).isEqualTo(0);
 	}
 }
