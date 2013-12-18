@@ -367,4 +367,14 @@ public class Track {
 		Collections.sort(trackList, new MostOftenPlayedComparator());
 		return trackList;
 	}
+	
+	public static List<Track> getMostPlayedTracks(Collection<Track> tracks, int limit) {
+		List<Track> trackList = getMostPlayedTracks(tracks);
+		try {
+			return trackList.subList(0, limit);
+		}
+		catch(IndexOutOfBoundsException ex) {
+			return trackList;
+		}
+	}
 }

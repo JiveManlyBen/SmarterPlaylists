@@ -25,7 +25,45 @@ import org.xml.sax.SAXException;
 import services.PlaylistService;
 
 public class PlayListServiceTest {
+
+	private List<Track> getTrackList() {
+        Calendar calendarDate = Calendar.getInstance();
+        calendarDate.clear();
+		
+        calendarDate.set(2010, 2, 21, 5, 0, 27);
+        Date dateAdded = calendarDate.getTime();
+        calendarDate.set(2013, 7, 8, 21, 5, 7);
+        Date playDate = calendarDate.getTime();
+		List<Track> trackList = new ArrayList<Track>();
+		trackList.add(new Track(11716, "My Friends", "Red Hot Chili Peppers", "One Hot Minute", 
+			"MPEG audio file", dateAdded, 36, playDate,
+			"58129546BE036721"));
+		
+	    calendarDate.set(2010, 2, 21, 4, 49, 15);
+	    dateAdded = calendarDate.getTime();
+	    calendarDate.set(2013, 10, 19, 4, 43, 39);
+	    playDate = calendarDate.getTime();
+		trackList.add(new Track(8844, "Come Alive", "Foo Fighters", "Echoes, Silence, Patience & Grace", 
+			"MPEG audio file", dateAdded, 153, playDate,
+			"FEBA0A5A4AD727B0"));
 	
+	    calendarDate.set(2013, 11, 11, 6, 12, 24);
+	    dateAdded = calendarDate.getTime();
+		trackList.add(new Track(54321, "Losing My Edge", "LCD Soundsystem", "LCD Soundsystem", 
+			"MPEG audio file", dateAdded, null, null,
+			"HDF9EJDU7HEKDNEU"));
+		
+	    calendarDate.set(2010, 6, 5, 22, 46, 19);
+	    dateAdded = calendarDate.getTime();
+	    calendarDate.set(2013, 8, 18, 5, 11, 31);
+	    playDate = calendarDate.getTime();
+		trackList.add(new Track(12326, "4th Of July", "Soundgarden", "Superunknown", 
+			"MPEG audio file", dateAdded, 106, playDate,
+			"64CEC1404A7F5071"));
+		
+		return trackList;
+	}
+
 	@Test
 	public void checkPlaylistParsing() throws ParserConfigurationException, SAXException, IOException, NumberFormatException, ParseException {
 		DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
@@ -66,42 +104,25 @@ public class PlayListServiceTest {
 
 	@Test
 	public void checkTrackOrdering() {
-        Calendar calendarDate = Calendar.getInstance();
-        calendarDate.clear();
-		
-        calendarDate.set(2010, 2, 21, 5, 0, 27);
-        Date dateAdded = calendarDate.getTime();
-        calendarDate.set(2013, 7, 8, 21, 5, 7);
-        Date playDate = calendarDate.getTime();
-		List<Track> trackList = new ArrayList<Track>();
-		trackList.add(new Track(11716, "My Friends", "Red Hot Chili Peppers", "One Hot Minute", 
-			"MPEG audio file", dateAdded, 36, playDate,
-			"58129546BE036721"));
-		
-        calendarDate.set(2010, 2, 21, 4, 49, 15);
-        dateAdded = calendarDate.getTime();
-        calendarDate.set(2013, 10, 19, 4, 43, 39);
-        playDate = calendarDate.getTime();
-		trackList.add(new Track(8844, "Come Alive", "Foo Fighters", "Echoes, Silence, Patience & Grace", 
-			"MPEG audio file", dateAdded, 153, playDate,
-			"FEBA0A5A4AD727B0"));
-
-        calendarDate.set(2013, 11, 11, 6, 12, 24);
-        dateAdded = calendarDate.getTime();
-		trackList.add(new Track(54321, "Losing My Edge", "LCD Soundsystem", "LCD Soundsystem", 
-			"MPEG audio file", dateAdded, null, null,
-			"HDF9EJDU7HEKDNEU"));
-		
-        calendarDate.set(2010, 6, 5, 22, 46, 19);
-        dateAdded = calendarDate.getTime();
-        calendarDate.set(2013, 8, 18, 5, 11, 31);
-        playDate = calendarDate.getTime();
-		trackList.add(new Track(12326, "4th Of July", "Soundgarden", "Superunknown", 
-			"MPEG audio file", dateAdded, 106, playDate,
-			"64CEC1404A7F5071"));
-		
+		List<Track> trackList = getTrackList();
 		trackList = Track.getMostPlayedTracks(trackList);
 		assertThat(trackList.get(0).getTrackId()).isEqualTo(8844);
 		assertThat(trackList.get(trackList.size() - 1).getTrackId()).isEqualTo(54321);
+	}
+	
+	@Test
+	public void checkTrackOrderingWithLimit() {
+		List<Track> trackList = getTrackList();
+		trackList = Track.getMostPlayedTracks(trackList, 3);
+		assertThat(trackList.size()).isEqualTo(3);
+		assertThat(trackList.get(0).getTrackId()).isEqualTo(8844);
+		assertThat(trackList.get(trackList.size() - 1).getTrackId()).isEqualTo(11716);
+		
+		int limit = 10;
+		trackList = getTrackList();
+		int initialCount = trackList.size();
+		assertThat(initialCount).isLessThan(limit);
+		trackList = Track.getMostPlayedTracks(trackList, limit);
+		assertThat(trackList.size()).isEqualTo(initialCount);
 	}
 }
