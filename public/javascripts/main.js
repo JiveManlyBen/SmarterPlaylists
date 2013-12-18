@@ -1,7 +1,13 @@
 jQuery(function($){
+	enableUploadButton();
 	$('#playlistUploadFile').on("change", function() {
-		$(".playlistUploadButton").prop("disabled", false);
+		enableUploadButton();
 	});
+	function enableUploadButton() {
+		var playlistUploadFile = $('#playlistUploadFile').val();
+		if (playlistUploadFile != null && playlistUploadFile !== "")
+			$(".playlistUploadButton").prop("disabled", false);
+	}
     $('#polyglotLanguageSwitcher').polyglotLanguageSwitcher({
 		effect: 'fade',
         testMode: true,
