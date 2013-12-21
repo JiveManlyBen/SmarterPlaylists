@@ -131,6 +131,6 @@ public class PlayList {
 				+ applicationVersion + ", features=" + features
 				+ ", showContentRatings=" + showContentRatings
 				+ ", musicFolder=" + musicFolder + ", libraryPersistentId="
-				+ libraryPersistentId + ", tracks=" + tracks.size() + "]";
+				+ libraryPersistentId + ", tracks=" + (tracks != null ? tracks.size() : 0) + "]";
 	}
 }
