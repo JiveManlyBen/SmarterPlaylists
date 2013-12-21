@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.xml.XMLConstants;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -23,13 +27,15 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import com.apple.itunes.Plist;
+
 import play.Logger;
 import domain.PlayList;
 import domain.Track;
 
 public class PlaylistService {
 	public static String parseXMLFile(File file) throws SAXException, IOException, 
-		ParserConfigurationException, NumberFormatException, ParseException {
+		ParserConfigurationException, NumberFormatException, ParseException, JAXBException {
 		Source xmlFile = new StreamSource(file);
 		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		Schema schema = schemaFactory.newSchema(new File("conf"+File.separator+"iTunes.xsd"));
@@ -39,6 +45,11 @@ public class PlaylistService {
 		domFactory.setValidating(true);
 		DocumentBuilder builder = domFactory.newDocumentBuilder();
 		Document doc = builder.parse(file);
+		
+        JAXBContext jc = JAXBContext.newInstance(Plist.class);
+        Unmarshaller unmarshaller = jc.createUnmarshaller();
+        Plist plist = (Plist) unmarshaller.unmarshal(file);
+		
 		PlayList playList = getPlayList(doc);
 		Logger.debug(playList.toString());
 		return "ok";
