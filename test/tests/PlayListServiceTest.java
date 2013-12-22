@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.UnmarshalException;
 
 import org.junit.Test;
 import org.xml.sax.SAXException;
@@ -98,7 +99,7 @@ public class PlayListServiceTest {
 		try {
 			PlayListService.getLibrary(new File("test/assets/Bad_Format.xml"));
 			throw new Exception("Test should fail because of the format of the XML file.");
-		} catch (SAXException e) {
+		} catch (UnmarshalException e) {
 		}
 	}
 

@@ -55,13 +55,12 @@ public class PlayListService {
         }
 		return keyMap;
 	}
-	public static Library getLibrary(File file) throws JAXBException, NumberFormatException, ParseException, SAXException, IOException {
+	public static Library getLibrary(File file) throws SAXException, JAXBException, NumberFormatException, ParseException {
         SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         Schema schema = schemaFactory.newSchema(new File("conf"+File.separator+"iTunes.xsd"));
-        Validator validator = schema.newValidator();
-        validator.validate(new StreamSource(file));
         JAXBContext jc = JAXBContext.newInstance(Plist.class);
         Unmarshaller unmarshaller = jc.createUnmarshaller();
+        unmarshaller.setSchema(schema);
         Plist plist = (Plist) unmarshaller.unmarshal(file);
 		Library library = new Library(getKeysAndValues(plist.getDict()));
 		library.setTracks(getTracks(plist.getDict()));
