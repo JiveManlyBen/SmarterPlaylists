@@ -1,7 +1,6 @@
 package tests;
 
-import domain.PlayList;
-import domain.Track;
+import static org.fest.assertions.Assertions.assertThat;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,18 +10,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import static org.fest.assertions.Assertions.assertThat;
+import javax.xml.bind.JAXBException;
 
 import org.junit.Test;
-
-import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import services.PlaylistService;
+import domain.PlayList;
+import domain.Track;
 
 public class PlayListServiceTest {
 
@@ -65,12 +60,8 @@ public class PlayListServiceTest {
 	}
 
 	@Test
-	public void checkPlaylistParsing() throws ParserConfigurationException, SAXException, IOException, NumberFormatException, ParseException {
-		DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
-		domFactory.setValidating(true);
-		DocumentBuilder builder = domFactory.newDocumentBuilder();
-		Document doc = builder.parse(new File("test/assets/Well_Formed.xml"));
-		PlayList returnedList = PlaylistService.getPlayList(doc);
+	public void checkPlaylistParsing() throws NumberFormatException, JAXBException, ParseException, SAXException, IOException {
+		PlayList returnedList = PlaylistService.getPlayList(new File("test/assets/Well_Formed.xml"));
 		assertThat(returnedList.getMajorVersion()).isEqualTo(1);
 		assertThat(returnedList.getMinorVersion()).isEqualTo(2);
         Calendar calendarDate = Calendar.getInstance();
@@ -100,6 +91,15 @@ public class PlayListServiceTest {
 		assertThat(track.getSkipCount()).isEqualTo(3);
 		assertThat(track.getPersistentID()).isEqualTo("023DDE089E93FEF0");
 		assertThat(track.getTrackType()).isEqualTo("File");
+	}
+	
+	@Test
+	public void checkBadPlaylistXML() throws Exception {
+		try {
+			PlaylistService.getPlayList(new File("test/assets/Bad_Format.xml"));
+			throw new Exception("Test should fail because of the format of the XML file.");
+		} catch (SAXException e) {
+		}
 	}
 
 	@Test
