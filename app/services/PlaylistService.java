@@ -25,13 +25,13 @@ import com.apple.itunes.False;
 import com.apple.itunes.Plist;
 import com.apple.itunes.True;
 
-import domain.PlayList;
+import domain.Library;
 import domain.Track;
 
 public class PlaylistService {
 	public static String parseXMLFile(File file) throws NumberFormatException, JAXBException, ParseException, SAXException, IOException {
-		PlayList playList = getPlayList(file);
-		Logger.debug(playList.toString());
+		Library library = getLibrary(file);
+		Logger.debug(library.toString());
 		return "ok";
 	}
 	private static Map<String, String> getKeysAndValues(Dict dict) {
@@ -53,11 +53,9 @@ public class PlaylistService {
         		key = null;
         	}
         }
-		
-		
 		return keyMap;
 	}
-	public static PlayList getPlayList(File file) throws JAXBException, NumberFormatException, ParseException, SAXException, IOException {
+	public static Library getLibrary(File file) throws JAXBException, NumberFormatException, ParseException, SAXException, IOException {
         SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         Schema schema = schemaFactory.newSchema(new File("conf"+File.separator+"iTunes.xsd"));
         Validator validator = schema.newValidator();
@@ -65,9 +63,9 @@ public class PlaylistService {
         JAXBContext jc = JAXBContext.newInstance(Plist.class);
         Unmarshaller unmarshaller = jc.createUnmarshaller();
         Plist plist = (Plist) unmarshaller.unmarshal(file);
-		PlayList playList = new PlayList(getKeysAndValues(plist.getDict()));
-		playList.setTracks(getTracks(plist.getDict()));
-		return playList;
+		Library library = new Library(getKeysAndValues(plist.getDict()));
+		library.setTracks(getTracks(plist.getDict()));
+		return library;
 	}
 	private static Map<Integer, Track> getTracks(Dict dict) throws NumberFormatException, ParseException {
 		Map<Integer, Track> trackMap = new HashMap<Integer, Track>();
@@ -84,7 +82,7 @@ public class PlaylistService {
 			}
 			if (o instanceof JAXBElement<?>) {
 				JAXBElement<?> element = (JAXBElement<?>) o;
-				if (element.getName().getLocalPart().equals("key") && element.getValue().toString().equals(PlayList.TRACKS)) {
+				if (element.getName().getLocalPart().equals("key") && element.getValue().toString().equals(Library.TRACKS)) {
 					foundTracks = true;
 				}
 			}

@@ -16,7 +16,7 @@ import org.junit.Test;
 import org.xml.sax.SAXException;
 
 import services.PlaylistService;
-import domain.PlayList;
+import domain.Library;
 import domain.Track;
 
 public class PlayListServiceTest {
@@ -61,7 +61,7 @@ public class PlayListServiceTest {
 
 	@Test
 	public void checkPlaylistParsing() throws NumberFormatException, JAXBException, ParseException, SAXException, IOException {
-		PlayList returnedList = PlaylistService.getPlayList(new File("test/assets/Well_Formed.xml"));
+		Library returnedList = PlaylistService.getLibrary(new File("test/assets/Well_Formed.xml"));
 		assertThat(returnedList.getMajorVersion()).isEqualTo(1);
 		assertThat(returnedList.getMinorVersion()).isEqualTo(2);
         Calendar calendarDate = Calendar.getInstance();
@@ -96,7 +96,7 @@ public class PlayListServiceTest {
 	@Test
 	public void checkBadPlaylistXML() throws Exception {
 		try {
-			PlaylistService.getPlayList(new File("test/assets/Bad_Format.xml"));
+			PlaylistService.getLibrary(new File("test/assets/Bad_Format.xml"));
 			throw new Exception("Test should fail because of the format of the XML file.");
 		} catch (SAXException e) {
 		}

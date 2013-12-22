@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
-public class PlayList {
+public class Library {
 	private int majorVersion;
 	private static final String MAJOR_VERSION = "Major Version";
 	private int minorVersion;
@@ -27,7 +27,7 @@ public class PlayList {
 	private Map<Integer, Track> tracks;
 	public static final String TRACKS = "Tracks";
 
-	public PlayList(int majorVersion, int minorVersion, Date date,
+	public Library(int majorVersion, int minorVersion, Date date,
 			String applicationVersion, int features, boolean showContentRatings,
 			String musicFolder, String libraryPersistentId) {
 		this.majorVersion = majorVersion;
@@ -40,7 +40,7 @@ public class PlayList {
 		this.libraryPersistentId = libraryPersistentId;
 	}
 
-	public PlayList(Map<String, String> keyMap) throws NumberFormatException, ParseException {
+	public Library(Map<String, String> keyMap) throws NumberFormatException, ParseException {
 		this(
 				Integer.parseInt(keyMap.get(MAJOR_VERSION)),
 				Integer.parseInt(keyMap.get(MINOR_VERSION)),
@@ -126,7 +126,7 @@ public class PlayList {
 
 	@Override
 	public String toString() {
-		return "PlayList [majorVersion=" + majorVersion + ", minorVersion="
+		return "Library [majorVersion=" + majorVersion + ", minorVersion="
 				+ minorVersion + ", date=" + date + ", applicationVersion="
 				+ applicationVersion + ", features=" + features
 				+ ", showContentRatings=" + showContentRatings
