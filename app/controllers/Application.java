@@ -10,7 +10,7 @@ import play.mvc.Controller;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
-import services.PlaylistService;
+import services.PlayListService;
 
 import views.html.*;
 
@@ -41,7 +41,7 @@ public class Application extends Controller {
 			else {
 				try {
 					File file = playlist.getFile();
-					PlaylistService.parseXMLFile(file);
+					PlayListService.parseXMLFile(file);
 					return redirect(routes.Application.download());
 				}
 				catch (Exception ex) {

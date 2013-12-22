@@ -28,7 +28,7 @@ import com.apple.itunes.True;
 import domain.Library;
 import domain.Track;
 
-public class PlaylistService {
+public class PlayListService {
 	public static String parseXMLFile(File file) throws NumberFormatException, JAXBException, ParseException, SAXException, IOException {
 		Library library = getLibrary(file);
 		Logger.debug(library.toString());
