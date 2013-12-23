@@ -1,10 +1,14 @@
 package domain;
 
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
+
+import com.apple.itunes.Dict;
+import com.apple.itunes.Plist;
 
 public class Library {
 	private int majorVersion;
@@ -122,6 +126,26 @@ public class Library {
 
 	public void setTracks(Map<Integer, Track> tracks) {
 		this.tracks = tracks;
+	}
+
+	public Plist getPlist() {
+		Plist plist = new Plist();
+		plist.setVersion(new BigDecimal("1.0"));
+		Dict libraryDict = new Dict();
+		libraryDict.addKeyAndValue(MAJOR_VERSION, majorVersion);
+		libraryDict.addKeyAndValue(MINOR_VERSION, minorVersion);
+		libraryDict.addKeyAndValue(DATE, date, dateFormat);
+		libraryDict.addKeyAndValue(APPLICATION_VERSION, applicationVersion);
+		libraryDict.addKeyAndValue(FEATURES, features);
+		libraryDict.addKeyAndValue(SHOW_CONTENT_RATINGS, showContentRatings);
+		libraryDict.addKeyAndValue(MUSIC_FOLDER, musicFolder);
+		libraryDict.addKeyAndValue(LIBRARY_PERSISTENT_ID, libraryPersistentId);
+		Dict tracksDict = new Dict();
+		for (Track track : tracks.values())
+			tracksDict.addKeyAndValue(Integer.toString(track.getTrackId()), track.getDict());
+		libraryDict.addKeyAndValue(TRACKS, tracksDict);
+		plist.setDict(libraryDict);
+		return plist;
 	}
 
 	@Override

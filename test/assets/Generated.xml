@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Major Version</key><integer>1</integer>
+	<key>Minor Version</key><integer>2</integer>
+	<key>Date</key><date>2013-11-28T02:17:11Z</date>
+	<key>Application Version</key><string>11.1.3</string>
+	<key>Features</key><integer>5</integer>
+	<key>Show Content Ratings</key><true/>
+	<key>Music Folder</key><string>file://localhost/C:/Music/</string>
+	<key>Library Persistent ID</key><string>437026SJ3UJ3Y3T7</string>
+	<key>Tracks</key>
+	<dict>
+		<key>8844</key>
+		<dict>
+			<key>Track ID</key><integer>8844</integer>
+			<key>Name</key><string>Come Alive</string>
+			<key>Artist</key><string>Foo Fighters</string>
+			<key>Album</key><string>Echoes, Silence, Patience &#38; Grace</string>
+			<key>Kind</key><string>MPEG audio file</string>
+			<key>Date Added</key><date>2010-03-21T04:49:15Z</date>
+			<key>Play Count</key><integer>153</integer>
+			<key>Play Date UTC</key><date>2013-11-19T04:43:39Z</date>
+			<key>Persistent ID</key><string>FEBA0A5A4AD727B0</string>
+		</dict>
+		<key>11716</key>
+		<dict>
+			<key>Track ID</key><integer>11716</integer>
+			<key>Name</key><string>My Friends</string>
+			<key>Artist</key><string>Red Hot Chili Peppers</string>
+			<key>Album</key><string>One Hot Minute</string>
+			<key>Kind</key><string>MPEG audio file</string>
+			<key>Date Added</key><date>2010-03-21T05:00:27Z</date>
+			<key>Play Count</key><integer>36</integer>
+			<key>Play Date UTC</key><date>2013-08-08T09:05:07Z</date>
+			<key>Persistent ID</key><string>58129546BE036721</string>
+		</dict>
+		<key>12326</key>
+		<dict>
+			<key>Track ID</key><integer>12326</integer>
+			<key>Name</key><string>4th Of July</string>
+			<key>Artist</key><string>Soundgarden</string>
+			<key>Album</key><string>Superunknown</string>
+			<key>Kind</key><string>MPEG audio file</string>
+			<key>Date Added</key><date>2010-07-05T10:46:19Z</date>
+			<key>Play Count</key><integer>106</integer>
+			<key>Play Date UTC</key><date>2013-09-18T05:11:31Z</date>
+			<key>Persistent ID</key><string>64CEC1404A7F5071</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

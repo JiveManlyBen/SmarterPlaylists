@@ -130,4 +130,11 @@ public class PlayListServiceTest {
 		trackList = Track.getMostPlayedTracks(trackList, 0);
 		assertThat(trackList.size()).isEqualTo(0);
 	}
+
+	@Test
+	public void checkGeneratingXML() throws NumberFormatException, SAXException, JAXBException, ParseException {
+		File file = new File("test/assets/Generated.xml");
+		Library returnedList = PlayListService.getLibrary(file);
+		assertThat(returnedList.getPlist()).isEqualTo(PlayListService.getPlist(file)); 
+	}
 }

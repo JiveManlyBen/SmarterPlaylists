@@ -11,6 +11,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.apple.itunes.Dict;
+
 public class Track {
 
 	private int trackId;
@@ -376,5 +378,40 @@ public class Track {
 		catch(IndexOutOfBoundsException ex) {
 			return trackList;
 		}
+	}
+
+	public Dict getDict() {
+		Dict dict = new Dict();
+		dict.addKeyAndValue(TRACK_ID, trackId);
+		dict.addKeyAndValue(NAME, name);
+		dict.addKeyAndValue(ARTIST, artist);
+		if (albumArtist != null) dict.addKeyAndValue(ALBUM_ARTIST, albumArtist);
+		//Composer
+		dict.addKeyAndValue(ALBUM, album);
+		if (genre != null) dict.addKeyAndValue(GENRE, genre);
+		if (kind != null) dict.addKeyAndValue(KIND, kind);
+		//Size
+		if (totalTime != null) dict.addKeyAndValue(TOTAL_TIME, totalTime);
+		//Disc Number
+		//Disc Count
+		if (trackNumber != null) dict.addKeyAndValue(TRACK_NUMBER, trackNumber);
+		//Track Count
+		if (year != null) dict.addKeyAndValue(YEAR, year);
+		if (dateModified != null) dict.addKeyAndValue(DATE_MODIFIED, dateModified, dateFormat);
+		if (dateAdded != null) dict.addKeyAndValue(DATE_ADDED, dateAdded, dateFormat);
+		//Bit Rate
+		//Sample Rate
+		dict.addKeyAndValue(PLAY_COUNT, playCount);
+		//Play Date
+		dict.addKeyAndValue(PLAY_DATE, playDate, dateFormat);
+		//Normalization
+		//Compilation
+		//Artwork Count
+		dict.addKeyAndValue(PERSISTENT_ID, persistentID);
+		if (trackType != null) dict.addKeyAndValue(TRACK_TYPE, trackType);
+		if (location != null) dict.addKeyAndValue(LOCATION, location);
+		if (fileFolderCount != null) dict.addKeyAndValue(FILE_FOLDER_COUNT, fileFolderCount);
+		if (libraryFolderCount != null) dict.addKeyAndValue(LIBRARY_FOLDER_COUNT, libraryFolderCount);
+		return dict;
 	}
 }

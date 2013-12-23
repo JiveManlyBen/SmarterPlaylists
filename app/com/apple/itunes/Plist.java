@@ -97,4 +97,20 @@ public class Plist {
         this.version = value;
     }
 
+	public boolean equals(Object obj) {
+	    if (obj == this) {
+	        return true;
+	    }
+	    if (obj == null || obj.getClass() != this.getClass()) {
+	        return false;
+	    }
+	    Plist p = (Plist) obj;
+	    if (this.getVersion() == null && p.getVersion() != null)
+	    	return false;
+	    if (this.getVersion() != null && !this.getVersion().equals(p.getVersion()))
+	    	return false;
+	    if (!this.getDict().equals(p.getDict()))
+	    	return false;
+	    return true;
+	}
 }

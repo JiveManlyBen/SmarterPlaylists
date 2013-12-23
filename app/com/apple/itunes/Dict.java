@@ -9,7 +9,10 @@
 package com.apple.itunes;
 
 import java.math.BigInteger;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -18,6 +21,7 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.namespace.QName;
 
 
 /**
@@ -107,4 +111,65 @@ public class Dict {
         return this.dictOrArrayOrData;
     }
 
+    public void addKeyAndValue(String key, int value) {
+    	JAXBElement<String> keyElement = new JAXBElement<String>(new QName("key"), String.class, key);
+    	JAXBElement<BigInteger> valueElement = new JAXBElement<BigInteger>(new QName("integer"), BigInteger.class, BigInteger.valueOf(value));
+    	getDictOrArrayOrData().add(keyElement);
+    	dictOrArrayOrData.add(valueElement);
+    }
+
+    public void addKeyAndValue(String key, String value) {
+    	JAXBElement<String> keyElement = new JAXBElement<String>(new QName("key"), String.class, key);
+    	JAXBElement<String> valueElement = new JAXBElement<String>(new QName("string"), String.class, value);
+    	getDictOrArrayOrData().add(keyElement);
+    	dictOrArrayOrData.add(valueElement);
+    }
+    
+    public void addKeyAndValue(String key, boolean value) {
+    	JAXBElement<String> keyElement = new JAXBElement<String>(new QName("key"), String.class, key);
+    	getDictOrArrayOrData().add(keyElement);
+    	dictOrArrayOrData.add(value ? new True() : new False());
+    }
+    
+    public void addKeyAndValue(String key, Date value, DateFormat dateFormat) {
+    	JAXBElement<String> keyElement = new JAXBElement<String>(new QName("key"), String.class, key);
+    	JAXBElement<String> valueElement = new JAXBElement<String>(new QName("date"), String.class, dateFormat.format(value));
+    	getDictOrArrayOrData().add(keyElement);
+    	dictOrArrayOrData.add(valueElement);
+    }
+    
+    public void addKeyAndValue(String key, Dict value) {
+    	JAXBElement<String> keyElement = new JAXBElement<String>(new QName("key"), String.class, key);
+    	getDictOrArrayOrData().add(keyElement);
+    	dictOrArrayOrData.add(value);
+    }
+
+	public boolean equals(Object obj) {
+	    if (obj == this) {
+	        return true;
+	    }
+	    if (obj == null || obj.getClass() != this.getClass()) {
+	        return false;
+	    }
+	    Dict d = (Dict) obj;
+	    if (this.getDictOrArrayOrData() == null && d.getDictOrArrayOrData() != null)
+	    	return false;
+	    if (this.getDictOrArrayOrData() != null && d.getDictOrArrayOrData() != null) {
+	    	if (this.getDictOrArrayOrData().size() != d.getDictOrArrayOrData().size())
+	    		return false;
+	    	Iterator<Object> iter = d.getDictOrArrayOrData().iterator();
+	    	for (Object o1 : this.getDictOrArrayOrData()) {
+	    		Object o2 = iter.next();
+	    		if (o1 instanceof JAXBElement && o2 instanceof JAXBElement) {
+	    			JAXBElement<?> j1 = (JAXBElement<?>) o1;
+	    			JAXBElement<?> j2 = (JAXBElement<?>) o2;
+	    			if (!j1.getName().equals(j2.getName()) || !j1.getValue().equals(j2.getValue()))
+	    				return false;
+	    		}
+	    		else if (!o1.equals(o2))
+	    			return false;
+	    	}
+	    }
+	    return true;
+	}
 }

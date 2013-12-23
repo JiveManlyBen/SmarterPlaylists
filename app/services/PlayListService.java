@@ -3,7 +3,7 @@ package services;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.xml.XMLConstants;
@@ -11,10 +11,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
-import javax.xml.validation.Validator;
 
 import org.xml.sax.SAXException;
 
@@ -35,7 +33,7 @@ public class PlayListService {
 		return "ok";
 	}
 	private static Map<String, String> getKeysAndValues(Dict dict) {
-		Map<String, String> keyMap = new HashMap<String, String>();
+		Map<String, String> keyMap = new LinkedHashMap<String, String>();
 		String key = null;
         for (Object o : dict.getDictOrArrayOrData()) {
         	if (o instanceof JAXBElement) {
@@ -55,19 +53,23 @@ public class PlayListService {
         }
 		return keyMap;
 	}
+	public static Plist getPlist(File file) throws SAXException, JAXBException, NumberFormatException, ParseException {
+		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		Schema schema = schemaFactory.newSchema(new File("conf"+File.separator+"iTunes.xsd"));
+		JAXBContext jc = JAXBContext.newInstance(Plist.class);
+		Unmarshaller unmarshaller = jc.createUnmarshaller();
+		unmarshaller.setSchema(schema);
+		Plist plist = (Plist) unmarshaller.unmarshal(file);
+		return plist;
+	}
 	public static Library getLibrary(File file) throws SAXException, JAXBException, NumberFormatException, ParseException {
-        SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        Schema schema = schemaFactory.newSchema(new File("conf"+File.separator+"iTunes.xsd"));
-        JAXBContext jc = JAXBContext.newInstance(Plist.class);
-        Unmarshaller unmarshaller = jc.createUnmarshaller();
-        unmarshaller.setSchema(schema);
-        Plist plist = (Plist) unmarshaller.unmarshal(file);
+        Plist plist = getPlist(file);
 		Library library = new Library(getKeysAndValues(plist.getDict()));
 		library.setTracks(getTracks(plist.getDict()));
 		return library;
 	}
 	private static Map<Integer, Track> getTracks(Dict dict) throws NumberFormatException, ParseException {
-		Map<Integer, Track> trackMap = new HashMap<Integer, Track>();
+		Map<Integer, Track> trackMap = new LinkedHashMap <Integer, Track>();
 		boolean foundTracks = false;
 		for (Object o : dict.getDictOrArrayOrData()) {
 			if (foundTracks && o instanceof Dict) {
