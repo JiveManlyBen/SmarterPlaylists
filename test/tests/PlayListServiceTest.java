@@ -121,8 +121,7 @@ public class PlayListServiceTest {
 
 	@Test
 	public void checkTrackOrdering() {
-		List<Track> trackList;
-		trackList = Track.getMostPlayedTracks(getTrackList());
+		List<Track> trackList = Track.getMostPlayedTracks(getTrackList());
 		assertThat(trackList.get(0).getTrackId()).isEqualTo(8844);
 		assertThat(trackList.get(trackList.size() - 1).getTrackId()).isEqualTo(54321);
 		int count = 1;
