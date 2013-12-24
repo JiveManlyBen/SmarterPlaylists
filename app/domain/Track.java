@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -252,7 +253,7 @@ public class Track {
 	}
 
 	public Integer getPlayCount() {
-		return playCount;
+		return playCount == null ? 0 : playCount;
 	}
 
 	public void setPlayCount(Integer playCount) {
@@ -356,10 +357,11 @@ public class Track {
 		return strValue != null ? dateFormat.parse(strValue) : null;
 	}
 	
-    static class MostOftenPlayedComparator implements Comparator<Track> {            
+    static class MostOftenPlayedComparator implements Comparator<Track> {
+    	private static Calendar calendarDate = Calendar.getInstance();
     	public int compare(Track t1, Track t2) {
-			Integer playCount1 = t1.getPlayCount() == null ? new Integer(0) : t1.getPlayCount();
-			Integer playCount2 = t2.getPlayCount() == null ? new Integer(0) : t2.getPlayCount();
+			Double playCount1 = new Double((double)t1.getPlayCount()/ ( calendarDate.getTimeInMillis() - t1.getDateAdded().getTime() ));
+			Double playCount2 = new Double((double)t2.getPlayCount()/ ( calendarDate.getTimeInMillis() - t2.getDateAdded().getTime() ));
 			return - playCount1.compareTo(playCount2);
     	}
     }

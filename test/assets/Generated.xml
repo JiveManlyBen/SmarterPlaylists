@@ -48,6 +48,32 @@
 			<key>Play Date UTC</key><date>2013-09-18T05:11:31Z</date>
 			<key>Persistent ID</key><string>64CEC1404A7F5071</string>
 		</dict>
+		<key>15322</key>
+		<dict>
+			<key>Track ID</key><integer>15322</integer>
+			<key>Name</key><string>Pyramids</string>
+			<key>Artist</key><string>Frank Ocean</string>
+			<key>Album</key><string>channel ORANGE</string>
+			<key>Genre</key><string>R&#38;B</string>
+			<key>Kind</key><string>MPEG audio file</string>
+			<key>Date Added</key><date>2012-12-25T23:33:40Z</date>
+			<key>Play Count</key><integer>36</integer>
+			<key>Play Date UTC</key><date>2013-09-07T17:36:52Z</date>
+			<key>Persistent ID</key><string>7F4DCB36553A2885</string>
+		</dict>
+		<key>15506</key>
+		<dict>
+			<key>Track ID</key><integer>15506</integer>
+			<key>Name</key><string>Isn't Life Wonderful? (Alex's Original Vocal Mix)</string>
+			<key>Artist</key><string>Alex d'Elia Vs. Ebop Allstars</string>
+			<key>Album</key><string>Trance Nation 4</string>
+			<key>Genre</key><string>Trance</string>
+			<key>Kind</key><string>MPEG audio file</string>
+			<key>Date Added</key><date>2012-12-27T05:14:12Z</date>
+			<key>Play Count</key><integer>3</integer>
+			<key>Play Date UTC</key><date>2013-01-23T03:30:43Z</date>
+			<key>Persistent ID</key><string>BF1BACAA02D17B5C</string>
+		</dict>
 	</dict>
 </dict>
 </plist>

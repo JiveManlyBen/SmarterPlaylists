@@ -8,15 +8,23 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.UnmarshalException;
 
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
+import play.Logger;
 import services.PlayListService;
+
+import com.apple.itunes.Plist;
+
 import domain.Library;
 import domain.Track;
 
@@ -25,7 +33,7 @@ public class PlayListServiceTest {
 	private List<Track> getTrackList() {
         Calendar calendarDate = Calendar.getInstance();
         calendarDate.clear();
-		
+
         calendarDate.set(2010, 2, 21, 5, 0, 27);
         Date dateAdded = calendarDate.getTime();
         calendarDate.set(2013, 7, 8, 21, 5, 7);
@@ -56,6 +64,14 @@ public class PlayListServiceTest {
 		trackList.add(new Track(12326, "4th Of July", "Soundgarden", "Superunknown", 
 			"MPEG audio file", dateAdded, 106, playDate,
 			"64CEC1404A7F5071"));
+		
+		calendarDate.set(2012, 11, 25, 23, 33, 40);
+		dateAdded = calendarDate.getTime();
+		calendarDate.set(2013, 8, 7, 17, 36, 52);
+		playDate = calendarDate.getTime();
+		trackList.add(new Track(15322, "Pyramids", "Frank Ocean", "channel ORANGE", 
+				"MPEG audio file", dateAdded, 36, playDate,
+				"7F4DCB36553A2885"));
 		
 		return trackList;
 	}
@@ -105,10 +121,16 @@ public class PlayListServiceTest {
 
 	@Test
 	public void checkTrackOrdering() {
-		List<Track> trackList = getTrackList();
-		trackList = Track.getMostPlayedTracks(trackList);
+		List<Track> trackList;
+		trackList = Track.getMostPlayedTracks(getTrackList());
 		assertThat(trackList.get(0).getTrackId()).isEqualTo(8844);
 		assertThat(trackList.get(trackList.size() - 1).getTrackId()).isEqualTo(54321);
+		int count = 1;
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+		for (Track track : trackList) {
+			map.put(new Integer(track.getTrackId()), new Integer(count++));
+		}
+		assertThat(map.get(15322)).isLessThan(map.get(11716));
 	}
 	
 	@Test
@@ -117,9 +139,8 @@ public class PlayListServiceTest {
 		trackList = Track.getMostPlayedTracks(trackList, 3);
 		assertThat(trackList.size()).isEqualTo(3);
 		assertThat(trackList.get(0).getTrackId()).isEqualTo(8844);
-		assertThat(trackList.get(trackList.size() - 1).getTrackId()).isEqualTo(11716);
+		assertThat(trackList.get(trackList.size() - 1).getTrackId()).isEqualTo(12326);
 		
-
 		trackList = getTrackList();
 		int initialCount = trackList.size();
 		int limit = 100 + initialCount;
@@ -135,6 +156,12 @@ public class PlayListServiceTest {
 	public void checkGeneratingXML() throws NumberFormatException, SAXException, JAXBException, ParseException {
 		File file = new File("test/assets/Generated.xml");
 		Library returnedList = PlayListService.getLibrary(file);
+		if (Logger.isDebugEnabled()) {
+	        JAXBContext jc = JAXBContext.newInstance(Plist.class);
+	        Marshaller marshaller = jc.createMarshaller();
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			marshaller.marshal( returnedList.getPlist(), System.out );
+		}
 		assertThat(returnedList.getPlist()).isEqualTo(PlayListService.getPlist(file)); 
 	}
 }
