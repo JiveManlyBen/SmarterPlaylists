@@ -66,7 +66,7 @@ public class Track {
 	private Integer libraryFolderCount;
 	private static final String LIBRARY_FOLDER_COUNT = "Library Folder Count";
 	
-	private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'");
+	private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 	
 	public Track(int trackId, String name, String artist, String album, 
 			String kind, Date dateAdded, Integer playCount, Date playDate,

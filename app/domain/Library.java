@@ -17,7 +17,7 @@ public class Library {
 	private static final String MINOR_VERSION = "Minor Version";
 	private Date date;
 	private static final String DATE = "Date";
-	private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'");
+	private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 	private String applicationVersion;
 	private static final String APPLICATION_VERSION = "Application Version";
 	private int features;
