@@ -27,7 +27,7 @@ public class Application extends Controller {
 			flash("error", Messages.get("upload.error.maxsize"));
 			return redirect(routes.Application.index());
 		}
-		if (body.asFormUrlEncoded().get("MostOftenPlayed") == null) {
+		if (!body.asFormUrlEncoded().keySet().contains("MostOftenPlayed")) {
 			flash("error", Messages.get("upload.error.nooption"));
 			return redirect(routes.Application.index());
 		}
