@@ -108,6 +108,10 @@ public class PlayListServiceTest {
 		assertThat(track.getSkipCount()).isEqualTo(3);
 		assertThat(track.getPersistentID()).isEqualTo("023DDE089E93FEF0");
 		assertThat(track.getTrackType()).isEqualTo("File");
+		
+		returnedList = PlayListService.getLibrary(new File("test/assets/Empty.xml"));
+
+		assertThat(returnedList.getTracks().size()).isEqualTo(0);
 	}
 	
 	@Test
