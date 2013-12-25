@@ -31,23 +31,23 @@ public class Application extends Controller {
 			flash("error", Messages.get("upload.error.nooption"));
 			return redirect(routes.Application.index());
 		}
-		FilePart playlist = body.getFile("playlist");
-		if (playlist != null) {
-			String contentType = playlist.getContentType();
+		FilePart library = body.getFile("library");
+		if (library != null) {
+			String contentType = library.getContentType();
 			if (!contentType.equals("text/xml")) {
 				flash("error", Messages.get("upload.error.contenttype"));
 				return redirect(routes.Application.index());
 			}
 			else {
 				try {
-					File file = playlist.getFile();
+					File file = library.getFile();
 					PlayListService.parseXMLFile(file);
 					return redirect(routes.Application.download());
 				}
 				catch (Exception ex) {
 					flash("error", Messages.get("upload.error.parse"));
 					if (Logger.isDebugEnabled())
-						Logger.debug("File: " + playlist.getFilename(), ex);
+						Logger.debug("File: " + library.getFilename(), ex);
 					return redirect(routes.Application.index());
 				}
 			}
