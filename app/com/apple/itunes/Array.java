@@ -9,7 +9,9 @@
 package com.apple.itunes;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -74,5 +76,26 @@ public class Array {
         }
         return this.dict;
     }
-
+	public boolean equals(Object obj) {
+	    if (obj == this) {
+	        return true;
+	    }
+	    if (obj == null || obj.getClass() != this.getClass()) {
+	        return false;
+	    }
+	    Array a = (Array) obj;
+	    if (this.getDict() == null && a.getDict() != null)
+	    	return false;
+	    if (this.getDict() != null && a.getDict() != null) {
+	    	if (this.getDict().size() != a.getDict().size())
+	    		return false;
+	    	Iterator<Dict> iter = a.getDict().iterator();
+	    	for (Dict d1 : this.getDict()) {
+	    		Dict d2 = iter.next();
+	    		if (!d1.equals(d2))
+	    			return false;
+	    	}
+	    }
+	    return true;
+	}
 }
