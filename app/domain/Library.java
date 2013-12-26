@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.apple.itunes.Array;
 import com.apple.itunes.Dict;
 import com.apple.itunes.Plist;
 
@@ -155,7 +156,12 @@ public class Library {
 		for (Track track : tracks.values())
 			tracksDict.addKeyAndValue(Integer.toString(track.getTrackId()), track.getDict());
 		libraryDict.addKeyAndValue(TRACKS, tracksDict);
-		//TODO: add the playlist dicts
+		if (playlists != null && playlists.size() > 0) {
+			Array playlistsArray = new Array();
+			for (Playlist playlist : playlists)
+				playlistsArray.getDict().add(playlist.getDict());
+			libraryDict.addKeyAndValue(PLAYLISTS, playlistsArray);
+		}
 		plist.setDict(libraryDict);
 		return plist;
 	}

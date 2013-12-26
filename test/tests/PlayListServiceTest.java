@@ -132,6 +132,7 @@ public class PlayListServiceTest {
 		assertThat(firstPlaylist.getMovies()).isNull();
 		assertThat(firstPlaylist.isAllItems()).isEqualTo(true);
 		assertThat(firstPlaylist.getPlaylistItems().size()).isEqualTo(22);
+		assertThat(firstPlaylist.getPlaylistItems().get(0)).isNotNull();
 	}
 	
 	@Test

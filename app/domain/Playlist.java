@@ -3,6 +3,9 @@ package domain;
 import java.util.List;
 import java.util.Map;
 
+import com.apple.itunes.Array;
+import com.apple.itunes.Dict;
+
 public class Playlist {
 	private int playlistId;
 	private static String PLAYLIST_ID = "Playlist ID";
@@ -149,6 +152,31 @@ public class Playlist {
 				+ distinguishedKind + ", master=" + master + ", music=" + music
 				+ ", movies=" + movies + ", tvShows=" + tvShows + ", allItems="
 				+ ", playlistItems=" + (playlistItems != null ? playlistItems.size() : 0) + "]";
+	}
+	
+	public Dict getDict() {
+		Dict dict = new Dict();
+		dict.addKeyAndValue(NAME, name);
+		dict.addKeyAndValue(PLAYLIST_ID, playlistId);
+		dict.addKeyAndValue(PERSISTENT_ID, persistentID);
+		if (distinguishedKind != null) dict.addKeyAndValue(DISTINGUISHED_KIND, distinguishedKind);
+		if (master != null) dict.addKeyAndValue(MASTER, master);
+		if (music != null) dict.addKeyAndValue(MUSIC, music);
+		if (movies != null) dict.addKeyAndValue(MOVIES, movies);
+		if (tvShows != null) dict.addKeyAndValue(TV_SHOWS, tvShows);
+		dict.addKeyAndValue(ALL_ITEMS, allItems);
+		if (playlistItems != null && playlistItems.size() > 0) {
+			Array itemsArray = new Array();
+			for (Integer i : playlistItems) {
+				if (i != null) {
+					Dict itemDict = new Dict();
+					itemDict.addKeyAndValue(Track.TRACK_ID, i);
+					itemsArray.getDict().add(itemDict);
+				}
+			}
+			dict.addKeyAndValue(PLAYLIST_ITEMS, itemsArray);
+		}
+		return dict;
 	}
 	
 	private static Boolean getBooleanValue(String value) {

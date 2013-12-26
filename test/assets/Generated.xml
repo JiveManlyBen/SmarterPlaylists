@@ -75,5 +75,41 @@
 			<key>Persistent ID</key><string>BF1BACAA02D17B5C</string>
 		</dict>
 	</dict>
+	<key>Playlists</key>
+	<array>
+		<dict>
+			<key>Name</key><string>Example Playlist</string>
+			<key>Playlist ID</key><integer>52376</integer>
+			<key>Playlist Persistent ID</key><string>KOE84JR7TCSI4094</string>
+			<key>Distinguished Kind</key><integer>4</integer>
+			<key>Music</key><true/>
+			<key>All Items</key><true/>
+			<key>Playlist Items</key>
+			<array>
+				<dict>
+					<key>Track ID</key><integer>8844</integer>
+				</dict>
+				<dict>
+					<key>Track ID</key><integer>12326</integer>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>Name</key><string>Movies</string>
+			<key>Playlist ID</key><integer>108</integer>
+			<key>Playlist Persistent ID</key><string>104BB3CA6F6BA6BD</string>
+			<key>Distinguished Kind</key><integer>2</integer>
+			<key>Movies</key><true/>
+			<key>All Items</key><true/>
+		</dict>
+		<dict>
+			<key>Name</key><string>TV Shows</string>
+			<key>Playlist ID</key><integer>111</integer>
+			<key>Playlist Persistent ID</key><string>29E3E831B6L1AB7C</string>
+			<key>Distinguished Kind</key><integer>3</integer>
+			<key>TV Shows</key><true/>
+			<key>All Items</key><true/>
+		</dict>
+	</array>
 </dict>
 </plist>
