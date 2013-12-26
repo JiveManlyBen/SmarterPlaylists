@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import com.apple.itunes.Dict;
@@ -30,6 +31,8 @@ public class Library {
 	private static final String LIBRARY_PERSISTENT_ID = "Library Persistent ID";
 	private Map<Integer, Track> tracks;
 	public static final String TRACKS = "Tracks";
+	private List<Playlist> playlists;
+	public static final String PLAYLISTS = "Playlists";
 
 	public Library(int majorVersion, int minorVersion, Date date,
 			String applicationVersion, int features, boolean showContentRatings,
@@ -51,7 +54,7 @@ public class Library {
 				dateFormat.parse(keyMap.get(DATE)),
 				keyMap.get(APPLICATION_VERSION),
 				Integer.parseInt(keyMap.get(FEATURES)),
-				Integer.parseInt(keyMap.get(SHOW_CONTENT_RATINGS)) == 1,
+				Boolean.parseBoolean(keyMap.get(SHOW_CONTENT_RATINGS)),
 				keyMap.get(MUSIC_FOLDER),
 				keyMap.get(LIBRARY_PERSISTENT_ID));
 	}
@@ -128,6 +131,14 @@ public class Library {
 		this.tracks = tracks;
 	}
 
+	public List<Playlist> getPlaylists() {
+		return playlists;
+	}
+
+	public void setPlaylists(List<Playlist> playlists) {
+		this.playlists = playlists;
+	}
+
 	public Plist getPlist() {
 		Plist plist = new Plist();
 		plist.setVersion(new BigDecimal("1.0"));
@@ -144,6 +155,7 @@ public class Library {
 		for (Track track : tracks.values())
 			tracksDict.addKeyAndValue(Integer.toString(track.getTrackId()), track.getDict());
 		libraryDict.addKeyAndValue(TRACKS, tracksDict);
+		//TODO: add the playlist dicts
 		plist.setDict(libraryDict);
 		return plist;
 	}
@@ -155,6 +167,7 @@ public class Library {
 				+ applicationVersion + ", features=" + features
 				+ ", showContentRatings=" + showContentRatings
 				+ ", musicFolder=" + musicFolder + ", libraryPersistentId="
-				+ libraryPersistentId + ", tracks=" + (tracks != null ? tracks.size() : 0) + "]";
+				+ libraryPersistentId + ", tracks=" + (tracks != null ? tracks.size() : 0)
+				+ ", playlists=" + (playlists != null ? playlists.size() : 0) + "]";
 	}
 }

@@ -10,7 +10,7 @@ public class Playlist {
 	private static String NAME = "Name";
 	private String persistentID;
 	private static String PERSISTENT_ID = "Playlist Persistent ID";
-	private int distinguishedKind;
+	private Integer distinguishedKind;
 	private static String DISTINGUISHED_KIND = "Distinguished Kind";
 	private Boolean master;
 	private static String MASTER = "Master";
@@ -27,10 +27,8 @@ public class Playlist {
 	private List<Integer> playlistItems;
 	public static String PLAYLIST_ITEMS = "Playlist Items";
 
-
-
 	public Playlist(int playlistId, String name, String persistentID,
-			int distinguishedKind, Boolean master, Boolean visible,
+			Integer distinguishedKind, Boolean master, Boolean visible,
 			Boolean music, Boolean movies, Boolean tvShows, boolean allItems,
 			List<Integer> playlistItems) {
 		this.playlistId = playlistId;
@@ -48,10 +46,11 @@ public class Playlist {
 	
 	public Playlist(Map<String, String> playlistMap) {
 		this(Integer.parseInt(playlistMap.get(PLAYLIST_ID)), playlistMap.get(NAME), 
-				playlistMap.get(PERSISTENT_ID), Integer.parseInt(playlistMap.get(DISTINGUISHED_KIND)), 
-				Boolean.parseBoolean(playlistMap.get(MASTER)), Boolean.parseBoolean(playlistMap.get(VISIBLE)),
-				Boolean.parseBoolean(playlistMap.get(MUSIC)), Boolean.parseBoolean(playlistMap.get(MOVIES)), 
-				Boolean.parseBoolean(playlistMap.get(TV_SHOWS)), Boolean.getBoolean(playlistMap.get(ALL_ITEMS)),
+				playlistMap.get(PERSISTENT_ID), 
+				(playlistMap.get(DISTINGUISHED_KIND) != null ? Integer.parseInt(playlistMap.get(DISTINGUISHED_KIND)) : null), 
+				getBooleanValue(playlistMap.get(MASTER)), getBooleanValue(playlistMap.get(VISIBLE)),
+				getBooleanValue(playlistMap.get(MUSIC)), getBooleanValue(playlistMap.get(MOVIES)), 
+				getBooleanValue(playlistMap.get(TV_SHOWS)), getBooleanValue(playlistMap.get(ALL_ITEMS)),
 				null);
 	}
 
@@ -79,11 +78,11 @@ public class Playlist {
 		this.persistentID = persistentID;
 	}
 
-	public int getDistinguishedKind() {
+	public Integer getDistinguishedKind() {
 		return distinguishedKind;
 	}
 
-	public void setDistinguishedKind(int distinguishedKind) {
+	public void setDistinguishedKind(Integer distinguishedKind) {
 		this.distinguishedKind = distinguishedKind;
 	}
 
@@ -150,5 +149,11 @@ public class Playlist {
 				+ distinguishedKind + ", master=" + master + ", music=" + music
 				+ ", movies=" + movies + ", tvShows=" + tvShows + ", allItems="
 				+ ", playlistItems=" + (playlistItems != null ? playlistItems.size() : 0) + "]";
+	}
+	
+	private static Boolean getBooleanValue(String value) {
+		if (value == null)
+			return null;
+		return Boolean.valueOf(value);
 	}
 }

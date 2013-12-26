@@ -17,7 +17,7 @@ import com.apple.itunes.Dict;
 public class Track {
 
 	private int trackId;
-	private static final String TRACK_ID = "Track ID";
+	public static final String TRACK_ID = "Track ID";
 	private String name;
 	private static final String NAME = "Name";
 	private String artist;

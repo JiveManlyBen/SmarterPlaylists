@@ -3,7 +3,10 @@ package services;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.XMLConstants;
@@ -18,12 +21,14 @@ import org.xml.sax.SAXException;
 
 import play.Logger;
 
+import com.apple.itunes.Array;
 import com.apple.itunes.Dict;
 import com.apple.itunes.False;
 import com.apple.itunes.Plist;
 import com.apple.itunes.True;
 
 import domain.Library;
+import domain.Playlist;
 import domain.Track;
 
 public class PlayListService {
@@ -47,7 +52,7 @@ public class PlayListService {
     			}
         	}
         	else if (o instanceof True || o instanceof False) {
-        		keyMap.put(key, o instanceof True ? "1" : "0");
+        		keyMap.put(key, o instanceof True ? "true" : "false");
         		key = null;
         	}
         }
@@ -66,7 +71,23 @@ public class PlayListService {
         Plist plist = getPlist(file);
 		Library library = new Library(getKeysAndValues(plist.getDict()));
 		library.setTracks(getTracks(plist.getDict()));
+		library.setPlaylists(getPlaylists(plist.getDict()));
 		return library;
+	}
+	private static Object getKeyElement(String key, Dict dict) {
+		boolean foundElement = false;
+		for (Object o : dict.getDictOrArrayOrData()) {
+			if (foundElement) {
+				return o;
+			}
+			if (o instanceof JAXBElement<?>) {
+				JAXBElement<?> element = (JAXBElement<?>) o;
+				if (element.getName().getLocalPart().equals("key") && element.getValue().toString().equals(key)) {
+					foundElement = true;
+				}
+			}
+		}
+		return null;
 	}
 	private static Map<Integer, Track> getTracks(Dict dict) throws NumberFormatException, ParseException {
 		Map<Integer, Track> trackMap = new LinkedHashMap <Integer, Track>();
@@ -76,7 +97,7 @@ public class PlayListService {
 				for (Object element : ((Dict) o).getDictOrArrayOrData()) {
 					if (element instanceof Dict) {
 						Map<String, String> map = getKeysAndValues((Dict) element);
-						trackMap.put(Integer.parseInt(map.get("Track ID")), new Track(map));
+						trackMap.put(Integer.parseInt(map.get(Track.TRACK_ID)), new Track(map));
 					}
 				}
 				break;
@@ -89,5 +110,28 @@ public class PlayListService {
 			}
 		}
 		return trackMap;
+	}
+	private static List<Playlist> getPlaylists(Dict dict) {
+		List<Playlist> playlists = new LinkedList<Playlist>();
+		Object o = getKeyElement(Library.PLAYLISTS, dict);
+		if (o instanceof Array) {
+			for (Dict dictElement : ((Array) o).getDict()) {
+				Map<String, String> map = getKeysAndValues(dictElement);
+				Playlist playlist = new Playlist(map);
+				List<Integer> trackList = new LinkedList<Integer>();
+				Object arrObj = getKeyElement(Playlist.PLAYLIST_ITEMS, dictElement);
+				if (arrObj instanceof Array) {
+					Iterator<Dict> iter = ((Array)arrObj).getDict().iterator();
+					while (iter.hasNext()) {
+						Object trackObj = getKeyElement(Track.TRACK_ID, iter.next());
+						if (trackObj instanceof JAXBElement<?>)
+							trackList.add(Integer.getInteger(((JAXBElement<?>) trackObj).getValue().toString()));
+					}
+				}
+				playlist.setPlaylistItems(trackList);
+				playlists.add(playlist);
+			}
+		}
+		return playlists;
 	}
 }

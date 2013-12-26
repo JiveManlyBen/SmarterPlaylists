@@ -26,6 +26,7 @@ import services.PlayListService;
 import com.apple.itunes.Plist;
 
 import domain.Library;
+import domain.Playlist;
 import domain.Track;
 
 public class PlayListServiceTest {
@@ -77,22 +78,28 @@ public class PlayListServiceTest {
 	}
 
 	@Test
-	public void checkPlaylistParsing() throws NumberFormatException, JAXBException, ParseException, SAXException, IOException {
-		Library returnedList = PlayListService.getLibrary(new File("test/assets/Well_Formed.xml"));
-		assertThat(returnedList.getMajorVersion()).isEqualTo(1);
-		assertThat(returnedList.getMinorVersion()).isEqualTo(2);
+	public void checkLibraryParsing() throws NumberFormatException, JAXBException, ParseException, SAXException, IOException {
+		Library returnedLibrary = PlayListService.getLibrary(new File("test/assets/Well_Formed.xml"));
+		assertThat(returnedLibrary.getMajorVersion()).isEqualTo(1);
+		assertThat(returnedLibrary.getMinorVersion()).isEqualTo(2);
         Calendar calendarDate = Calendar.getInstance();
         calendarDate.clear();
         calendarDate.set(2013, 10, 28, 2, 17, 11);
-		assertThat(returnedList.getDate()).isEqualTo(calendarDate.getTime());
-		assertThat(returnedList.getApplicationVersion()).isEqualTo("11.1.3");
-		assertThat(returnedList.getFeatures()).isEqualTo(5);
-		assertThat(returnedList.isShowContentRatings()).isTrue();
-		assertThat(returnedList.getMusicFolder()).isEqualTo(("file://localhost/C:/Music/"));
-		assertThat(returnedList.getLibraryPersistentId()).isEqualTo("437026SJ3UJ3Y3T7");
+		assertThat(returnedLibrary.getDate()).isEqualTo(calendarDate.getTime());
+		assertThat(returnedLibrary.getApplicationVersion()).isEqualTo("11.1.3");
+		assertThat(returnedLibrary.getFeatures()).isEqualTo(5);
+		assertThat(returnedLibrary.isShowContentRatings()).isTrue();
+		assertThat(returnedLibrary.getMusicFolder()).isEqualTo(("file://localhost/C:/Music/"));
+		assertThat(returnedLibrary.getLibraryPersistentId()).isEqualTo("437026SJ3UJ3Y3T7");
+	}	
 
-		assertThat(returnedList.getTracks().size()).isEqualTo(24);
-		Track track = returnedList.getTracks().get(10892);
+	@Test
+	public void checkTrackParsing() throws NumberFormatException, JAXBException, ParseException, SAXException, IOException {
+		Library returnedLibrary = PlayListService.getLibrary(new File("test/assets/Well_Formed.xml"));
+        Calendar calendarDate = Calendar.getInstance();
+        calendarDate.clear();
+		assertThat(returnedLibrary.getTracks().size()).isEqualTo(24);
+		Track track = returnedLibrary.getTracks().get(10892);
 		assertThat(track).isNotNull();
 		assertThat(track.getName()).isEqualTo("World (Demo)");
 		assertThat(track.getArtist()).isEqualTo("Foo Fighters");
@@ -109,9 +116,22 @@ public class PlayListServiceTest {
 		assertThat(track.getPersistentID()).isEqualTo("023DDE089E93FEF0");
 		assertThat(track.getTrackType()).isEqualTo("File");
 		
-		returnedList = PlayListService.getLibrary(new File("test/assets/Empty.xml"));
-
-		assertThat(returnedList.getTracks().size()).isEqualTo(0);
+		returnedLibrary = PlayListService.getLibrary(new File("test/assets/Empty.xml"));
+		assertThat(returnedLibrary.getTracks().size()).isEqualTo(0);
+	}
+	
+	@Test
+	public void checkPlaylistParsing() throws NumberFormatException, JAXBException, ParseException, SAXException, IOException {
+		Library returnedLibrary = PlayListService.getLibrary(new File("test/assets/Well_Formed.xml"));
+		assertThat(returnedLibrary.getPlaylists()).isNotNull();
+		assertThat(returnedLibrary.getPlaylists().size()).isEqualTo(2);
+		Playlist firstPlaylist = returnedLibrary.getPlaylists().get(0);
+		assertThat(firstPlaylist.getName()).isEqualTo("Regular Playlist");
+		assertThat(firstPlaylist.getPlaylistId()).isEqualTo(41852);
+		assertThat(firstPlaylist.getPersistentID()).isEqualTo("C7A5AD12589AC69B");
+		assertThat(firstPlaylist.getMovies()).isNull();
+		assertThat(firstPlaylist.isAllItems()).isEqualTo(true);
+		assertThat(firstPlaylist.getPlaylistItems().size()).isEqualTo(22);
 	}
 	
 	@Test
@@ -158,13 +178,13 @@ public class PlayListServiceTest {
 	@Test
 	public void checkGeneratingXML() throws NumberFormatException, SAXException, JAXBException, ParseException {
 		File file = new File("test/assets/Generated.xml");
-		Library returnedList = PlayListService.getLibrary(file);
+		Library returnedLibrary = PlayListService.getLibrary(file);
 		if (Logger.isDebugEnabled()) {
 	        JAXBContext jc = JAXBContext.newInstance(Plist.class);
 	        Marshaller marshaller = jc.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			marshaller.marshal( returnedList.getPlist(), System.out );
+			marshaller.marshal( returnedLibrary.getPlist(), System.out );
 		}
-		assertThat(returnedList.getPlist()).isEqualTo(PlayListService.getPlist(file)); 
+		assertThat(returnedLibrary.getPlist()).isEqualTo(PlayListService.getPlist(file)); 
 	}
 }
