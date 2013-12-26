@@ -116,7 +116,7 @@ public class PlayListService {
 					while (iter.hasNext()) {
 						Object trackObj = getKeyElement(Track.TRACK_ID, iter.next());
 						if (trackObj instanceof JAXBElement<?>)
-							trackList.add(Integer.getInteger(((JAXBElement<?>) trackObj).getValue().toString()));
+							trackList.add(new Integer(((JAXBElement<?>) trackObj).getValue().toString()));
 					}
 				}
 				playlist.setPlaylistItems(trackList);
