@@ -91,21 +91,12 @@ public class PlayListService {
 	}
 	private static Map<Integer, Track> getTracks(Dict dict) throws NumberFormatException, ParseException {
 		Map<Integer, Track> trackMap = new LinkedHashMap <Integer, Track>();
-		boolean foundTracks = false;
-		for (Object o : dict.getDictOrArrayOrData()) {
-			if (foundTracks && o instanceof Dict) {
-				for (Object element : ((Dict) o).getDictOrArrayOrData()) {
-					if (element instanceof Dict) {
-						Map<String, String> map = getKeysAndValues((Dict) element);
-						trackMap.put(Integer.parseInt(map.get(Track.TRACK_ID)), new Track(map));
-					}
-				}
-				break;
-			}
-			if (o instanceof JAXBElement<?>) {
-				JAXBElement<?> element = (JAXBElement<?>) o;
-				if (element.getName().getLocalPart().equals("key") && element.getValue().toString().equals(Library.TRACKS)) {
-					foundTracks = true;
+		Object o = getKeyElement(Library.TRACKS, dict);
+		if (o instanceof Dict) {
+			for (Object element : ((Dict) o).getDictOrArrayOrData()) {
+				if (element instanceof Dict) {
+					Map<String, String> map = getKeysAndValues((Dict) element);
+					trackMap.put(Integer.parseInt(map.get(Track.TRACK_ID)), new Track(map));
 				}
 			}
 		}
