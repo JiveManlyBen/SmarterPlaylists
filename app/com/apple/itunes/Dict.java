@@ -144,6 +144,12 @@ public class Dict {
     	dictOrArrayOrData.add(value);
     }
 
+    public void addKeyAndValue(String key, Array value) {
+    	JAXBElement<String> keyElement = new JAXBElement<String>(new QName("key"), String.class, key);
+    	getDictOrArrayOrData().add(keyElement);
+    	dictOrArrayOrData.add(value);
+    }
+
 	public boolean equals(Object obj) {
 	    if (obj == this) {
 	        return true;
