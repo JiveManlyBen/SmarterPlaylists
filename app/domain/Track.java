@@ -357,11 +357,20 @@ public class Track {
 		return strValue != null ? dateFormat.parse(strValue) : null;
 	}
 	
+	public Double getPlaysPerDay() {
+		Calendar calendarDate = Calendar.getInstance();
+		return getPlaysPerDay(calendarDate);
+	}
+	
+	private Double getPlaysPerDay(Calendar calendarDate) {
+		return new Double((double)this.getPlayCount()/ ( (calendarDate.getTimeInMillis() - this.getDateAdded().getTime()) / (1000*60*60*24)) );
+	}
+	
     static class MostOftenPlayedComparator implements Comparator<Track> {
     	private static Calendar calendarDate = Calendar.getInstance();
     	public int compare(Track t1, Track t2) {
-			Double playCount1 = new Double((double)t1.getPlayCount()/ ( calendarDate.getTimeInMillis() - t1.getDateAdded().getTime() ));
-			Double playCount2 = new Double((double)t2.getPlayCount()/ ( calendarDate.getTimeInMillis() - t2.getDateAdded().getTime() ));
+			Double playCount1 = t1.getPlaysPerDay(calendarDate);
+			Double playCount2 = t2.getPlaysPerDay(calendarDate);
 			return - playCount1.compareTo(playCount2);
     	}
     }
