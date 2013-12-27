@@ -19,20 +19,25 @@ public class Playlist {
 	private static String MASTER = "Master";
 	private Boolean visible;
 	private static String VISIBLE = "Visible";
-	private Boolean music;
-	private static String MUSIC = "Music";
 	private Boolean movies;
 	private static String MOVIES = "Movies";
+	private Boolean music;
+	private static String MUSIC = "Music";
 	private Boolean tvShows;
 	private static String TV_SHOWS = "TV Shows";
 	private boolean allItems;
 	private static String ALL_ITEMS = "All Items";
+	private byte[] smartInfo;
+	public static String SMART_INFO = "Smart Info";
+	private byte[] smartCriteria;
+	public static String SMART_CRITERIA = "Smart Criteria";
 	private List<Integer> playlistItems;
 	public static String PLAYLIST_ITEMS = "Playlist Items";
 
 	public Playlist(int playlistId, String name, String persistentID,
 			Integer distinguishedKind, Boolean master, Boolean visible,
 			Boolean music, Boolean movies, Boolean tvShows, boolean allItems,
+			byte[] smartInfo, byte[] smartCriteria,
 			List<Integer> playlistItems) {
 		this.playlistId = playlistId;
 		this.name = name;
@@ -44,6 +49,8 @@ public class Playlist {
 		this.movies = movies;
 		this.tvShows = tvShows;
 		this.allItems = allItems;
+		this.smartInfo = smartInfo;
+		this.smartCriteria = smartCriteria;
 		this.playlistItems = playlistItems;
 	}
 	
@@ -54,6 +61,7 @@ public class Playlist {
 				getBooleanValue(playlistMap.get(MASTER)), getBooleanValue(playlistMap.get(VISIBLE)),
 				getBooleanValue(playlistMap.get(MUSIC)), getBooleanValue(playlistMap.get(MOVIES)), 
 				getBooleanValue(playlistMap.get(TV_SHOWS)), getBooleanValue(playlistMap.get(ALL_ITEMS)),
+				null, null,
 				null);
 	}
 
@@ -137,6 +145,22 @@ public class Playlist {
 		this.allItems = allItems;
 	}
 
+	public byte[] getSmartInfo() {
+		return smartInfo;
+	}
+
+	public void setSmartInfo(byte[] smartInfo) {
+		this.smartInfo = smartInfo;
+	}
+
+	public byte[] getSmartCriteria() {
+		return smartCriteria;
+	}
+
+	public void setSmartCriteria(byte[] smartCriteria) {
+		this.smartCriteria = smartCriteria;
+	}
+
 	public List<Integer> getPlaylistItems() {
 		return playlistItems;
 	}
@@ -150,7 +174,8 @@ public class Playlist {
 		return "Playlist [playlistId=" + playlistId + ", name=" + name
 				+ ", persistentID=" + persistentID + ", distinguishedKind="
 				+ distinguishedKind + ", master=" + master + ", music=" + music
-				+ ", movies=" + movies + ", tvShows=" + tvShows + ", allItems="
+				+ ", movies=" + movies + ", tvShows=" + tvShows + ", allItems=" + allItems
+				+ ", smartInfo=" + (smartInfo != null) + ", smartCriteria=" + (smartCriteria != null)
 				+ ", playlistItems=" + (playlistItems != null ? playlistItems.size() : 0) + "]";
 	}
 	
@@ -165,6 +190,8 @@ public class Playlist {
 		if (movies != null) dict.addKeyAndValue(MOVIES, movies);
 		if (tvShows != null) dict.addKeyAndValue(TV_SHOWS, tvShows);
 		dict.addKeyAndValue(ALL_ITEMS, allItems);
+		if (smartInfo != null) dict.addKeyAndValue(SMART_INFO, smartInfo);
+		if (smartCriteria != null) dict.addKeyAndValue(SMART_CRITERIA, smartCriteria);
 		if (playlistItems != null && playlistItems.size() > 0) {
 			Array itemsArray = new Array();
 			for (Integer i : playlistItems) {

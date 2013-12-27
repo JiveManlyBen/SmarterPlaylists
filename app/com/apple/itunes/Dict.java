@@ -11,6 +11,7 @@ package com.apple.itunes;
 import java.math.BigInteger;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -150,6 +151,14 @@ public class Dict {
     	dictOrArrayOrData.add(value);
     }
 
+
+    public void addKeyAndValue(String key, byte[] value) {
+    	JAXBElement<String> keyElement = new JAXBElement<String>(new QName("key"), String.class, key);
+    	getDictOrArrayOrData().add(keyElement);
+    	JAXBElement<byte[]> valueElement = new JAXBElement<byte[]>(new QName("data"), byte[].class, value);
+    	dictOrArrayOrData.add(valueElement);
+    }
+
 	public boolean equals(Object obj) {
 	    if (obj == this) {
 	        return true;
@@ -169,8 +178,13 @@ public class Dict {
 	    		if (o1 instanceof JAXBElement && o2 instanceof JAXBElement) {
 	    			JAXBElement<?> j1 = (JAXBElement<?>) o1;
 	    			JAXBElement<?> j2 = (JAXBElement<?>) o2;
-	    			if (!j1.getName().equals(j2.getName()) || !j1.getValue().equals(j2.getValue()))
+	    			if (j1.getName().equals(j2.getName()) && j1.getValue() instanceof byte[] && j2.getValue() instanceof byte[]){
+	    				if (!Arrays.equals((byte[])j1.getValue(), (byte[])j2.getValue()))
+	    					return false;
+	    			}
+	    			else if (!j1.getName().equals(j2.getName()) || !j1.getValue().equals(j2.getValue())){
 	    				return false;
+	    			}
 	    		}
 	    		else if (!o1.equals(o2))
 	    			return false;
