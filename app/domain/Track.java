@@ -369,20 +369,22 @@ public class Track {
     static class MostOftenPlayedComparator implements Comparator<Track> {
     	private static Calendar calendarDate = Calendar.getInstance();
     	public int compare(Track t1, Track t2) {
-			Double playCount1 = t1.getPlaysPerDay(calendarDate);
-			Double playCount2 = t2.getPlaysPerDay(calendarDate);
+			int days1 = (int) ((calendarDate.getTimeInMillis() - t1.getDateAdded().getTime()) / (1000*60*60*24));
+			Double playCount1 = t1.getPlaysPerDay(calendarDate) / (days1 < 30 ? 2 * (4 - (days1/10)) : 1);
+			int days2 = (int) ((calendarDate.getTimeInMillis() - t2.getDateAdded().getTime()) / (1000*60*60*24));
+			Double playCount2 = t2.getPlaysPerDay(calendarDate) / (days2 < 30 ? 2 * (4 - (days2/10)) : 1);
 			return - playCount1.compareTo(playCount2);
     	}
     }
     
-	public static List<Track> getMostPlayedTracks(Collection<Track> tracks) {
+	public static List<Track> getMostOftenPlayedTracks(Collection<Track> tracks) {
 		List<Track> trackList = new ArrayList<Track>(tracks);
 		Collections.sort(trackList, new MostOftenPlayedComparator());
 		return trackList;
 	}
 	
-	public static List<Track> getMostPlayedTracks(Collection<Track> tracks, int limit) {
-		List<Track> trackList = getMostPlayedTracks(tracks);
+	public static List<Track> getMostOftenPlayedTracks(Collection<Track> tracks, int limit) {
+		List<Track> trackList = getMostOftenPlayedTracks(tracks);
 		try {
 			return trackList.subList(0, limit);
 		}

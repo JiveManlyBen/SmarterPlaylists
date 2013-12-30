@@ -74,6 +74,26 @@ public class PlayListServiceTest {
 				"MPEG audio file", dateAdded, 36, playDate,
 				"7F4DCB36553A2885"));
 		
+		calendarDate = Calendar.getInstance();
+		calendarDate.add(Calendar.DATE, -28);
+		dateAdded = calendarDate.getTime();
+		calendarDate = Calendar.getInstance();
+		calendarDate.add(Calendar.MINUTE, -15);
+		playDate = calendarDate.getTime();
+		trackList.add(new Track(15849, "Instant Crush", "Daft Punk", "Random Access Memories", 
+				"MPEG audio file", dateAdded, 9, playDate,
+		"GHYD78GFRYH498FH"));
+		
+		calendarDate = Calendar.getInstance();
+		calendarDate.add(Calendar.DATE, -14);
+		dateAdded = calendarDate.getTime();
+		calendarDate = Calendar.getInstance();
+		calendarDate.add(Calendar.MINUTE, -30);
+		playDate = calendarDate.getTime();
+		trackList.add(new Track(16524, "Run The Jewels", "Run The Jewels", "Run The Jewels", 
+				"MPEG audio file", dateAdded, 5, playDate,
+		"78YHFR4YU8H87FHQ"));
+		
 		return trackList;
 	}
 
@@ -146,8 +166,12 @@ public class PlayListServiceTest {
 
 	@Test
 	public void checkTrackOrdering() {
-		List<Track> trackList = Track.getMostPlayedTracks(getTrackList());
+		List<Track> trackList = Track.getMostOftenPlayedTracks(getTrackList());
+		for (Track t: trackList)
+			System.out.println(t);
 		assertThat(trackList.get(0).getTrackId()).isEqualTo(8844);
+		assertThat(trackList.get(2).getTrackId()).isEqualTo(12326);
+		assertThat(trackList.get(3).getTrackId()).isEqualTo(15849);
 		assertThat(trackList.get(trackList.size() - 1).getTrackId()).isEqualTo(54321);
 		int count = 1;
 		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
@@ -160,19 +184,21 @@ public class PlayListServiceTest {
 	@Test
 	public void checkTrackOrderingWithLimit() {
 		List<Track> trackList = getTrackList();
-		trackList = Track.getMostPlayedTracks(trackList, 3);
-		assertThat(trackList.size()).isEqualTo(3);
+		int listSize = 5;
+		trackList = Track.getMostOftenPlayedTracks(trackList, listSize);
+		assertThat(trackList.size()).isEqualTo(listSize);
 		assertThat(trackList.get(0).getTrackId()).isEqualTo(8844);
+		assertThat(trackList.get(2).getTrackId()).isEqualTo(12326);
 		assertThat(trackList.get(trackList.size() - 1).getTrackId()).isEqualTo(12326);
 		
 		trackList = getTrackList();
 		int initialCount = trackList.size();
 		int limit = 100 + initialCount;
-		trackList = Track.getMostPlayedTracks(trackList, limit);
+		trackList = Track.getMostOftenPlayedTracks(trackList, limit);
 		assertThat(trackList.size()).isEqualTo(initialCount);
 		
 		trackList = getTrackList();
-		trackList = Track.getMostPlayedTracks(trackList, 0);
+		trackList = Track.getMostOftenPlayedTracks(trackList, 0);
 		assertThat(trackList.size()).isEqualTo(0);
 	}
 
