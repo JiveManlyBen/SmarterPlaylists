@@ -19,6 +19,7 @@
 			<key>Artist</key><string>Foo Fighters</string>
 			<key>Album</key><string>Echoes, Silence, Patience &#38; Grace</string>
 			<key>Kind</key><string>MPEG audio file</string>
+			<key>Total Time</key><integer>295523</integer>
 			<key>Date Added</key><date>2010-03-21T04:49:15Z</date>
 			<key>Play Count</key><integer>153</integer>
 			<key>Play Date UTC</key><date>2013-11-19T04:43:39Z</date>
@@ -31,6 +32,7 @@
 			<key>Artist</key><string>Red Hot Chili Peppers</string>
 			<key>Album</key><string>One Hot Minute</string>
 			<key>Kind</key><string>MPEG audio file</string>
+			<key>Total Time</key><integer>143777</integer>
 			<key>Date Added</key><date>2010-03-21T05:00:27Z</date>
 			<key>Play Count</key><integer>36</integer>
 			<key>Play Date UTC</key><date>2013-08-08T09:05:07Z</date>
@@ -43,6 +45,7 @@
 			<key>Artist</key><string>Soundgarden</string>
 			<key>Album</key><string>Superunknown</string>
 			<key>Kind</key><string>MPEG audio file</string>
+			<key>Total Time</key><integer>369031</integer>
 			<key>Date Added</key><date>2010-07-05T10:46:19Z</date>
 			<key>Play Count</key><integer>106</integer>
 			<key>Play Date UTC</key><date>2013-09-18T05:11:31Z</date>
@@ -56,6 +59,7 @@
 			<key>Album</key><string>channel ORANGE</string>
 			<key>Genre</key><string>R&#38;B</string>
 			<key>Kind</key><string>MPEG audio file</string>
+			<key>Total Time</key><integer>593632</integer>
 			<key>Date Added</key><date>2012-12-25T23:33:40Z</date>
 			<key>Play Count</key><integer>36</integer>
 			<key>Play Date UTC</key><date>2013-09-07T17:36:52Z</date>
@@ -69,6 +73,7 @@
 			<key>Album</key><string>Trance Nation 4</string>
 			<key>Genre</key><string>Trance</string>
 			<key>Kind</key><string>MPEG audio file</string>
+			<key>Total Time</key><integer>223137</integer>
 			<key>Date Added</key><date>2012-12-27T05:14:12Z</date>
 			<key>Play Count</key><integer>3</integer>
 			<key>Play Date UTC</key><date>2013-01-23T03:30:43Z</date>

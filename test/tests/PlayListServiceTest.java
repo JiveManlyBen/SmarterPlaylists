@@ -41,7 +41,7 @@ public class PlayListServiceTest {
         Date playDate = calendarDate.getTime();
 		List<Track> trackList = new ArrayList<Track>();
 		trackList.add(new Track(11716, "My Friends", "Red Hot Chili Peppers", "One Hot Minute", 
-			"MPEG audio file", dateAdded, 36, playDate,
+			"MPEG audio file", 143777, dateAdded, 36, playDate,
 			"58129546BE036721"));
 		
 	    calendarDate.set(2010, 2, 21, 4, 49, 15);
@@ -49,13 +49,13 @@ public class PlayListServiceTest {
 	    calendarDate.set(2013, 10, 19, 4, 43, 39);
 	    playDate = calendarDate.getTime();
 		trackList.add(new Track(8844, "Come Alive", "Foo Fighters", "Echoes, Silence, Patience & Grace", 
-			"MPEG audio file", dateAdded, 153, playDate,
+			"MPEG audio file", 295523, dateAdded, 153, playDate,
 			"FEBA0A5A4AD727B0"));
 	
 	    calendarDate.set(2013, 11, 11, 6, 12, 24);
 	    dateAdded = calendarDate.getTime();
 		trackList.add(new Track(54321, "Losing My Edge", "LCD Soundsystem", "LCD Soundsystem", 
-			"MPEG audio file", dateAdded, null, null,
+			"MPEG audio file", 268225, dateAdded, null, null,
 			"HDF9EJDU7HEKDNEU"));
 		
 	    calendarDate.set(2010, 6, 5, 22, 46, 19);
@@ -63,7 +63,7 @@ public class PlayListServiceTest {
 	    calendarDate.set(2013, 8, 18, 5, 11, 31);
 	    playDate = calendarDate.getTime();
 		trackList.add(new Track(12326, "4th Of July", "Soundgarden", "Superunknown", 
-			"MPEG audio file", dateAdded, 106, playDate,
+			"MPEG audio file", 369031, dateAdded, 106, playDate,
 			"64CEC1404A7F5071"));
 		
 		calendarDate.set(2012, 11, 25, 23, 33, 40);
@@ -71,7 +71,7 @@ public class PlayListServiceTest {
 		calendarDate.set(2013, 8, 7, 17, 36, 52);
 		playDate = calendarDate.getTime();
 		trackList.add(new Track(15322, "Pyramids", "Frank Ocean", "channel ORANGE", 
-				"MPEG audio file", dateAdded, 36, playDate,
+				"MPEG audio file", 593632, dateAdded, 36, playDate,
 				"7F4DCB36553A2885"));
 		
 		calendarDate = Calendar.getInstance();
@@ -80,8 +80,8 @@ public class PlayListServiceTest {
 		calendarDate = Calendar.getInstance();
 		calendarDate.add(Calendar.MINUTE, -15);
 		playDate = calendarDate.getTime();
-		trackList.add(new Track(15849, "Instant Crush", "Daft Punk", "Random Access Memories", 
-				"MPEG audio file", dateAdded, 9, playDate,
+		trackList.add(new Track(19938, "Instant Crush", "Daft Punk", "Random Access Memories", 
+				"MPEG audio file", 337632, dateAdded, 9, playDate,
 		"GHYD78GFRYH498FH"));
 		
 		calendarDate = Calendar.getInstance();
@@ -90,8 +90,8 @@ public class PlayListServiceTest {
 		calendarDate = Calendar.getInstance();
 		calendarDate.add(Calendar.MINUTE, -30);
 		playDate = calendarDate.getTime();
-		trackList.add(new Track(16524, "Run The Jewels", "Run The Jewels", "Run The Jewels", 
-				"MPEG audio file", dateAdded, 5, playDate,
+		trackList.add(new Track(214121, "Run The Jewels", "Run The Jewels", "Run The Jewels", 
+				"MPEG audio file", 210703, dateAdded, 5, playDate,
 		"78YHFR4YU8H87FHQ"));
 		
 		return trackList;
@@ -167,11 +167,9 @@ public class PlayListServiceTest {
 	@Test
 	public void checkTrackOrdering() {
 		List<Track> trackList = Track.getMostOftenPlayedTracks(getTrackList());
-		for (Track t: trackList)
-			System.out.println(t);
 		assertThat(trackList.get(0).getTrackId()).isEqualTo(8844);
-		assertThat(trackList.get(2).getTrackId()).isEqualTo(12326);
-		assertThat(trackList.get(3).getTrackId()).isEqualTo(15849);
+		assertThat(trackList.get(2).getTrackId()).isEqualTo(19938);
+		assertThat(trackList.get(3).getTrackId()).isEqualTo(12326);
 		assertThat(trackList.get(trackList.size() - 1).getTrackId()).isEqualTo(54321);
 		int count = 1;
 		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
@@ -189,7 +187,7 @@ public class PlayListServiceTest {
 		assertThat(trackList.size()).isEqualTo(listSize);
 		assertThat(trackList.get(0).getTrackId()).isEqualTo(8844);
 		assertThat(trackList.get(2).getTrackId()).isEqualTo(12326);
-		assertThat(trackList.get(trackList.size() - 1).getTrackId()).isEqualTo(12326);
+		assertThat(trackList.get(trackList.size() - 1).getTrackId()).isEqualTo(214121);
 		
 		trackList = getTrackList();
 		int initialCount = trackList.size();

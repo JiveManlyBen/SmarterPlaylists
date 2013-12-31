@@ -32,7 +32,7 @@ public class Track {
 	private static final String KIND = "Kind";
 	private Integer size;
 	private static final String SIZE = "Size";
-	private Integer totalTime;
+	private int totalTime;
 	private static final String TOTAL_TIME = "Total Time";
 	private Integer trackNumber;
 	private static final String TRACK_NUMBER = "Track Number";
@@ -70,8 +70,8 @@ public class Track {
 	private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 	
 	public Track(int trackId, String name, String artist, String album, 
-			String kind, Date dateAdded, Integer playCount, Date playDate,
-			String persistentID) {
+			String kind, int totalTime, Date dateAdded, Integer playCount, 
+			Date playDate, String persistentID) {
 		this.trackId = trackId;
 		this.name = name;
 		this.artist = artist;
@@ -84,7 +84,7 @@ public class Track {
 	}
 	
 	public Track(int trackId, String name, String artist, String albumArtist,
-			String album, String genre, String kind, Integer size, Integer totalTime,
+			String album, String genre, String kind, Integer size, int totalTime,
 			Integer trackNumber, Integer year, Date dateModified, Date dateAdded,
 			Integer bitRate, Integer sampleRate, Integer playCount, Date playDate,
 			Integer skipCount, Date skipDate, Integer artworkCount,
@@ -200,11 +200,11 @@ public class Track {
 		return totalTime;
 	}
 
-	public void setTotalTime(Integer totalTime) {
+	public void setTotalTime(int totalTime) {
 		this.totalTime = totalTime;
 	}
 
-	public Integer getTrackNumber() {
+	public int getTrackNumber() {
 		return trackNumber;
 	}
 
@@ -404,7 +404,7 @@ public class Track {
 		if (genre != null) dict.addKeyAndValue(GENRE, genre);
 		if (kind != null) dict.addKeyAndValue(KIND, kind);
 		//Size
-		if (totalTime != null) dict.addKeyAndValue(TOTAL_TIME, totalTime);
+		dict.addKeyAndValue(TOTAL_TIME, totalTime);
 		//Disc Number
 		//Disc Count
 		if (trackNumber != null) dict.addKeyAndValue(TRACK_NUMBER, trackNumber);
