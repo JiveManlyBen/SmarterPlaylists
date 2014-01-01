@@ -17,6 +17,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.UnmarshalException;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
@@ -41,7 +42,7 @@ public class PlayListServiceTest {
         Date playDate = calendarDate.getTime();
 		List<Track> trackList = new ArrayList<Track>();
 		trackList.add(new Track(11716, "My Friends", "Red Hot Chili Peppers", "One Hot Minute", 
-			"MPEG audio file", 143777, dateAdded, 36, playDate, "58129546BE036721", 
+			"MPEG audio file", 242886, dateAdded, 36, playDate, "58129546BE036721", 
 			"file://localhost/C:/Music/Red%20Hot%20Chili%20Peppers%20-%20My%20Friends.mp3"));
 		
 	    calendarDate.set(2010, 2, 21, 4, 49, 15);
@@ -49,7 +50,7 @@ public class PlayListServiceTest {
 	    calendarDate.set(2013, 10, 19, 4, 43, 39);
 	    playDate = calendarDate.getTime();
 		trackList.add(new Track(8844, "Come Alive", "Foo Fighters", "Echoes, Silence, Patience & Grace", 
-			"MPEG audio file", 295523, dateAdded, 153, playDate, "FEBA0A5A4AD727B0",
+			"MPEG audio file", 310674, dateAdded, 153, playDate, "FEBA0A5A4AD727B0",
 			"file://localhost/C:/Music/Foo%20Fighters%20-%20Come%20Alive.mp3"));
 	
 	    calendarDate.set(2013, 11, 11, 6, 12, 24);
@@ -63,7 +64,7 @@ public class PlayListServiceTest {
 	    calendarDate.set(2013, 8, 18, 5, 11, 31);
 	    playDate = calendarDate.getTime();
 		trackList.add(new Track(12326, "4th Of July", "Soundgarden", "Superunknown", 
-			"MPEG audio file", 369031, dateAdded, 106, playDate, "64CEC1404A7F5071",
+			"MPEG audio file", 308349, dateAdded, 106, playDate, "64CEC1404A7F5071",
 			"file://localhost/C:/Music/Soundgarden%20-%204th%20Of%20July.mp3"));
 		
 		calendarDate.set(2012, 11, 25, 23, 33, 40);
@@ -82,7 +83,7 @@ public class PlayListServiceTest {
 		playDate = calendarDate.getTime();
 		trackList.add(new Track(19938, "Instant Crush", "Daft Punk", "Random Access Memories", 
 				"MPEG audio file", 337632, dateAdded, 9, playDate, "GHYD78GFRYH498FH",
-				"file://localhost/C:/Music/Daft%20Punk%20-%20Instant%20Crush.mp3"));
+				"file://localhost/Users/blevy/Music/iTunes/iTunes%20Media/Music/Daft%20Punk/Random%20Access%20Memories/Instant%20Crush.mp3"));
 		
 		calendarDate = Calendar.getInstance();
 		calendarDate.add(Calendar.DATE, -14);
@@ -211,5 +212,12 @@ public class PlayListServiceTest {
 			marshaller.marshal( returnedLibrary.getPlist(), System.out );
 		}
 		assertThat(returnedLibrary.getPlist()).isEqualTo(PlayListService.getPlist(file)); 
+	}
+
+	@Test
+	public void checkGeneratingM3U() throws IOException {
+		String generatedM3U = Library.getM3U(getTrackList());
+		String exampleM3U = FileUtils.readFileToString(new File("test/assets/Example.m3u"));
+		assertThat(generatedM3U).isEqualTo(exampleM3U);
 	}
 }

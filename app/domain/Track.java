@@ -77,6 +77,7 @@ public class Track {
 		this.artist = artist;
 		this.album = album;
 		this.kind = kind;
+		this.totalTime = totalTime;
 		this.dateAdded = dateAdded;
 		this.playCount = playCount;
 		this.playDate = playDate;

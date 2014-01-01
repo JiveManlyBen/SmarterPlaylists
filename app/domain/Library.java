@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import com.apple.itunes.Array;
 import com.apple.itunes.Dict;
@@ -164,6 +165,17 @@ public class Library {
 		}
 		plist.setDict(libraryDict);
 		return plist;
+	}
+	
+	public static String getM3U(List<Track> trackList) {
+		String m3uContents = "#EXTM3U";
+		for (Track track : trackList) {
+			String location = track.getLocation().replace("file://localhost", "");
+			if (Pattern.matches("^/[a-zA-Z]:/.*", location))
+				location = location.substring(1);
+			m3uContents += "\n\n#EXTINF:" + (track.getTotalTime() / 1000) + "," + track.getName() + "\n" + location;
+		}
+		return m3uContents;
 	}
 
 	@Override
