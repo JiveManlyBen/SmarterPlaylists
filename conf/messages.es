@@ -12,3 +12,4 @@ upload.error.parse=El archivo XML biblioteca de iTunes no se pudo analizar.
 upload.label.header=¡Subes un archivo XML biblioteca de iTunes para generar una mejor lista de reproducción!
 upload.label.limit=Limitar el número de canciones
 upload.label.mostoften=Mayoría de las veces jugado
+download.error.notfound=No se encuentra el archivo especificado.
