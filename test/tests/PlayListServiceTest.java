@@ -119,7 +119,7 @@ public class PlayListServiceTest {
 		Library returnedLibrary = PlayListService.getLibrary(new File("test/assets/Well_Formed.xml"));
         Calendar calendarDate = Calendar.getInstance();
         calendarDate.clear();
-		assertThat(returnedLibrary.getTracks().size()).isEqualTo(24);
+		assertThat(returnedLibrary.getTracks().size()).isEqualTo(25);
 		Track track = returnedLibrary.getTracks().get(10892);
 		assertThat(track).isNotNull();
 		assertThat(track.getName()).isEqualTo("World (Demo)");

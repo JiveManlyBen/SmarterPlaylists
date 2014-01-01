@@ -770,6 +770,21 @@
 			<key>File Folder Count</key><integer>5</integer>
 			<key>Library Folder Count</key><integer>1</integer>
 		</dict>
+		<key>18244</key>
+		<dict>
+			<key>Track ID</key><integer>18244</integer>
+			<key>Name</key><string>RT Podcast #188</string>
+			<key>Artist</key><string>Rooster Teeth Podcast</string>
+			<key>Album</key><string>Rooster Teeth Podcast</string>
+			<key>Genre</key><string>Podcast</string>
+			<key>Date Added</key><date>2013-08-04T19:12:52Z</date>
+			<key>Release Date</key><date>2012-10-17T21:56:15Z</date>
+			<key>Persistent ID</key><string>5K5EEC0HSO219BE4</string>
+			<key>Track Type</key><string>URL</string>
+			<key>Podcast</key><true/>
+			<key>Unplayed</key><true/>
+			<key>Location</key><string>http://www.podtrac.com/pts/redirect.mp3/traffic.libsyn.com/rtpodcast/Rooster_Teeth_Podcast_188.m4a</string>
+		</dict>
 	</dict>
 	<key>Playlists</key>
 	<array>

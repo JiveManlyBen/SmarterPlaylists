@@ -32,7 +32,7 @@ public class Track {
 	private static final String KIND = "Kind";
 	private Integer size;
 	private static final String SIZE = "Size";
-	private int totalTime;
+	private Integer totalTime;
 	private static final String TOTAL_TIME = "Total Time";
 	private Integer trackNumber;
 	private static final String TRACK_NUMBER = "Track Number";
@@ -70,7 +70,7 @@ public class Track {
 	private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 	
 	public Track(int trackId, String name, String artist, String album, 
-			String kind, int totalTime, Date dateAdded, Integer playCount, 
+			String kind, Integer totalTime, Date dateAdded, Integer playCount, 
 			Date playDate, String persistentID, String location) {
 		this.trackId = trackId;
 		this.name = name;
@@ -86,7 +86,7 @@ public class Track {
 	}
 	
 	public Track(int trackId, String name, String artist, String albumArtist,
-			String album, String genre, String kind, Integer size, int totalTime,
+			String album, String genre, String kind, Integer size, Integer totalTime,
 			Integer trackNumber, Integer year, Date dateModified, Date dateAdded,
 			Integer bitRate, Integer sampleRate, Integer playCount, Date playDate,
 			Integer skipCount, Date skipDate, Integer artworkCount,
@@ -202,7 +202,7 @@ public class Track {
 		return totalTime;
 	}
 
-	public void setTotalTime(int totalTime) {
+	public void setTotalTime(Integer totalTime) {
 		this.totalTime = totalTime;
 	}
 
