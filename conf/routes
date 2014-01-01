@@ -8,8 +8,11 @@ GET     /                           controllers.Application.index()
 # File upload
 POST     /upload                           controllers.Application.upload()
 
-# File upload
-GET     /download                           controllers.Application.download()
+# Download page
+GET     /downloads                           controllers.Application.downloads()
+
+# File download
+GET     /download/$uuid<[^/]*>                           controllers.Application.download(uuid:String)
 
 # About page
 GET	/about			    controllers.Application.about()

@@ -80,4 +80,15 @@ public class ApplicationTest {
     	});
     }
 
+    @Test
+    public void callDownload() {
+  	  running(fakeApplication(), new Runnable() {
+		    public void run() {
+    	Result result = callAction(
+    			controllers.routes.ref.Application.download("stuff")
+    	);
+    	assertThat(status(result)).isEqualTo(303);
+		    }
+	  });
+    }
 }
