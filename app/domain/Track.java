@@ -71,7 +71,7 @@ public class Track {
 	
 	public Track(int trackId, String name, String artist, String album, 
 			String kind, int totalTime, Date dateAdded, Integer playCount, 
-			Date playDate, String persistentID) {
+			Date playDate, String persistentID, String location) {
 		this.trackId = trackId;
 		this.name = name;
 		this.artist = artist;
@@ -81,6 +81,7 @@ public class Track {
 		this.playCount = playCount;
 		this.playDate = playDate;
 		this.persistentID = persistentID;
+		this.location = location;
 	}
 	
 	public Track(int trackId, String name, String artist, String albumArtist,

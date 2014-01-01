@@ -41,38 +41,38 @@ public class PlayListServiceTest {
         Date playDate = calendarDate.getTime();
 		List<Track> trackList = new ArrayList<Track>();
 		trackList.add(new Track(11716, "My Friends", "Red Hot Chili Peppers", "One Hot Minute", 
-			"MPEG audio file", 143777, dateAdded, 36, playDate,
-			"58129546BE036721"));
+			"MPEG audio file", 143777, dateAdded, 36, playDate, "58129546BE036721", 
+			"file://localhost/C:/Music/Red%20Hot%20Chili%20Peppers%20-%20My%20Friends.mp3"));
 		
 	    calendarDate.set(2010, 2, 21, 4, 49, 15);
 	    dateAdded = calendarDate.getTime();
 	    calendarDate.set(2013, 10, 19, 4, 43, 39);
 	    playDate = calendarDate.getTime();
 		trackList.add(new Track(8844, "Come Alive", "Foo Fighters", "Echoes, Silence, Patience & Grace", 
-			"MPEG audio file", 295523, dateAdded, 153, playDate,
-			"FEBA0A5A4AD727B0"));
+			"MPEG audio file", 295523, dateAdded, 153, playDate, "FEBA0A5A4AD727B0",
+			"file://localhost/C:/Music/Foo%20Fighters%20-%20Come%20Alive.mp3"));
 	
 	    calendarDate.set(2013, 11, 11, 6, 12, 24);
 	    dateAdded = calendarDate.getTime();
 		trackList.add(new Track(54321, "Losing My Edge", "LCD Soundsystem", "LCD Soundsystem", 
-			"MPEG audio file", 268225, dateAdded, null, null,
-			"HDF9EJDU7HEKDNEU"));
+			"MPEG audio file", 268225, dateAdded, null, null, "HDF9EJDU7HEKDNEU",
+			"file://localhost/C:/Music/LCD%20Soundsystem%20-%20Losing%20My%20Edge.mp3"));
 		
 	    calendarDate.set(2010, 6, 5, 22, 46, 19);
 	    dateAdded = calendarDate.getTime();
 	    calendarDate.set(2013, 8, 18, 5, 11, 31);
 	    playDate = calendarDate.getTime();
 		trackList.add(new Track(12326, "4th Of July", "Soundgarden", "Superunknown", 
-			"MPEG audio file", 369031, dateAdded, 106, playDate,
-			"64CEC1404A7F5071"));
+			"MPEG audio file", 369031, dateAdded, 106, playDate, "64CEC1404A7F5071",
+			"file://localhost/C:/Music/Soundgarden%20-%204th%20Of%20July.mp3"));
 		
 		calendarDate.set(2012, 11, 25, 23, 33, 40);
 		dateAdded = calendarDate.getTime();
 		calendarDate.set(2013, 8, 7, 17, 36, 52);
 		playDate = calendarDate.getTime();
 		trackList.add(new Track(15322, "Pyramids", "Frank Ocean", "channel ORANGE", 
-				"MPEG audio file", 593632, dateAdded, 36, playDate,
-				"7F4DCB36553A2885"));
+				"MPEG audio file", 593632, dateAdded, 36, playDate, "7F4DCB36553A2885",
+				"file://localhost/C:/Music/Frank%20Ocean%20-%20Pyramids.mp3"));
 		
 		calendarDate = Calendar.getInstance();
 		calendarDate.add(Calendar.DATE, -28);
@@ -81,8 +81,8 @@ public class PlayListServiceTest {
 		calendarDate.add(Calendar.MINUTE, -15);
 		playDate = calendarDate.getTime();
 		trackList.add(new Track(19938, "Instant Crush", "Daft Punk", "Random Access Memories", 
-				"MPEG audio file", 337632, dateAdded, 9, playDate,
-		"GHYD78GFRYH498FH"));
+				"MPEG audio file", 337632, dateAdded, 9, playDate, "GHYD78GFRYH498FH",
+				"file://localhost/C:/Music/Daft%20Punk%20-%20Instant%20Crush.mp3"));
 		
 		calendarDate = Calendar.getInstance();
 		calendarDate.add(Calendar.DATE, -14);
@@ -91,8 +91,8 @@ public class PlayListServiceTest {
 		calendarDate.add(Calendar.MINUTE, -30);
 		playDate = calendarDate.getTime();
 		trackList.add(new Track(214121, "Run The Jewels", "Run The Jewels", "Run The Jewels", 
-				"MPEG audio file", 210703, dateAdded, 5, playDate,
-		"78YHFR4YU8H87FHQ"));
+				"MPEG audio file", 210703, dateAdded, 5, playDate, "78YHFR4YU8H87FHQ",
+				"file://localhost/C:/Music/Run%20The%20Jewels%20-%20Run%20The%20Jewels.mp3"));
 		
 		return trackList;
 	}
