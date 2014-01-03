@@ -10,12 +10,14 @@ POST     /upload                           controllers.Application.upload()
 
 # Download page
 GET     /downloads                           controllers.Application.downloads()
+GET     /downloads/                           controllers.Application.downloads()
 
 # File download
 GET     /download/$uuid<[^/]*>                           controllers.Application.download(uuid:String)
 
 # About page
 GET	/about			    controllers.Application.about()
+GET	/about/			    controllers.Application.about()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

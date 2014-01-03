@@ -6,7 +6,7 @@
 
 window._skel_config = {
 	preset: 'standard',
-	prefix: 'assets/stylesheets/style',
+	prefix: '/assets/stylesheets/style',
 	resetCSS: true
 };
 
