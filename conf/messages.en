@@ -11,5 +11,5 @@ upload.error.nooption=Please select at least one playlist option.
 upload.error.parse=The iTunes library file could not be parsed.
 upload.label.header=Upload an iTunes library XML file to generate a better playlist!
 upload.label.limit=Limit number of songs
-upload.label.mostoften=Most often played
+upload.label.mostoftenplayed=Most often played
 download.error.notfound=The specified file was not found.
