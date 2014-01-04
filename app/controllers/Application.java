@@ -1,8 +1,11 @@
 package controllers;
 
 import java.io.File;
+import java.util.Collections;
 
 import org.apache.commons.lang3.StringUtils;
+
+import enums.TrackFilterType;
 
 import play.Logger;
 import play.i18n.Lang;
@@ -20,7 +23,7 @@ import views.html.index;
 public class Application extends Controller {
 
     public static Result index() {
-        return ok(index.render());
+        return ok(index.render(TrackFilterType.getCodes()));
     }
 
 	@BodyParser.Of(value = BodyParser.MultipartFormData.class, maxLength = 25 * 1024 * 1024)
@@ -30,7 +33,7 @@ public class Application extends Controller {
 			flash("error", Messages.get("upload.error.maxsize"));
 			return redirect(routes.Application.index());
 		}
-		if (!body.asFormUrlEncoded().keySet().contains("MostOftenPlayed")) {
+		if (Collections.disjoint(body.asFormUrlEncoded().keySet(), TrackFilterType.getCodes())) {
 			flash("error", Messages.get("upload.error.nooption"));
 			return redirect(routes.Application.index());
 		}

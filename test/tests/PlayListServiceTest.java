@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +30,7 @@ import com.apple.itunes.Plist;
 import domain.Library;
 import domain.Playlist;
 import domain.Track;
+import enums.TrackFilterType;
 
 public class PlayListServiceTest {
 
@@ -167,7 +169,7 @@ public class PlayListServiceTest {
 
 	@Test
 	public void checkTrackOrdering() {
-		List<Track> trackList = Track.getMostOftenPlayedTracks(getTrackList());
+		List<Track> trackList = Track.getSortedTracks((Collection<Track>) getTrackList(), TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), null);
 		assertThat(trackList.get(0).getTrackId()).isEqualTo(8844);
 		assertThat(trackList.get(2).getTrackId()).isEqualTo(19938);
 		assertThat(trackList.get(3).getTrackId()).isEqualTo(12326);
@@ -183,21 +185,22 @@ public class PlayListServiceTest {
 	@Test
 	public void checkTrackOrderingWithLimit() {
 		List<Track> trackList = getTrackList();
-		int listSize = 5;
-		trackList = Track.getMostOftenPlayedTracks(trackList, listSize);
+		int listSize = trackList.size() - 2;
+		trackList = Track.getSortedTracks((Collection<Track>) trackList, TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), listSize);
 		assertThat(trackList.size()).isEqualTo(listSize);
 		assertThat(trackList.get(0).getTrackId()).isEqualTo(8844);
-		assertThat(trackList.get(2).getTrackId()).isEqualTo(12326);
+		assertThat(trackList.get(2).getTrackId()).isEqualTo(19938);
+		assertThat(trackList.get(3).getTrackId()).isEqualTo(12326);
 		assertThat(trackList.get(trackList.size() - 1).getTrackId()).isEqualTo(214121);
 		
 		trackList = getTrackList();
 		int initialCount = trackList.size();
 		int limit = 100 + initialCount;
-		trackList = Track.getMostOftenPlayedTracks(trackList, limit);
+		trackList = Track.getSortedTracks((Collection<Track>) getTrackList(), TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), limit);
 		assertThat(trackList.size()).isEqualTo(initialCount);
 		
 		trackList = getTrackList();
-		trackList = Track.getMostOftenPlayedTracks(trackList, 0);
+		trackList = Track.getSortedTracks((Collection<Track>) getTrackList(), TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), 0);
 		assertThat(trackList.size()).isEqualTo(0);
 	}
 

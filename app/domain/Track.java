@@ -368,7 +368,7 @@ public class Track {
 		return new Double((double)this.getPlayCount()/ ( (calendarDate.getTimeInMillis() - this.getDateAdded().getTime()) / (1000*60*60*24)) );
 	}
 	
-    static class MostOftenPlayedComparator implements Comparator<Track> {
+    public static class MostOftenPlayedComparator implements Comparator<Track> {
     	private static Calendar calendarDate = Calendar.getInstance();
     	public int compare(Track t1, Track t2) {
 			int days1 = (int) ((calendarDate.getTimeInMillis() - t1.getDateAdded().getTime()) / (1000*60*60*24));
@@ -378,23 +378,21 @@ public class Track {
 			return - playCount1.compareTo(playCount2);
     	}
     }
-    
-	public static List<Track> getMostOftenPlayedTracks(Collection<Track> tracks) {
+
+	public static List<Track> getSortedTracks(Collection<Track> tracks, Comparator<Track> comparator, Integer limit) {
 		List<Track> trackList = new ArrayList<Track>(tracks);
-		Collections.sort(trackList, new MostOftenPlayedComparator());
-		return trackList;
-	}
-	
-	public static List<Track> getMostOftenPlayedTracks(Collection<Track> tracks, int limit) {
-		List<Track> trackList = getMostOftenPlayedTracks(tracks);
+		Collections.sort(trackList, comparator);
 		try {
 			return trackList.subList(0, limit);
+		}
+		catch(NullPointerException ex) {
+			return trackList;
 		}
 		catch(IndexOutOfBoundsException ex) {
 			return trackList;
 		}
 	}
-
+	
 	public Dict getDict() {
 		Dict dict = new Dict();
 		dict.addKeyAndValue(TRACK_ID, trackId);

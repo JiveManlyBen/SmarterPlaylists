@@ -1,0 +1,33 @@
+package enums;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+import domain.Track;
+
+public enum TrackFilterType {
+	MOST_OFTEN_PLAYED("mostoftenplayed", new Track.MostOftenPlayedComparator());
+	private String code;
+	private Comparator<Track> comparator;
+	
+	private TrackFilterType (String code, Comparator<Track> comparator) {
+		this.code = code;
+		this.comparator = comparator;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public Comparator<Track> getComparator() {
+		return comparator;
+	}
+	
+	public static List<String> getCodes() {
+		List<String> codeList = new ArrayList<String>();
+		for (TrackFilterType type : values())
+			codeList.add(type.getCode());
+		return codeList;
+	}
+}

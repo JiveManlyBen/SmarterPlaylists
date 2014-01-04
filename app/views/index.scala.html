@@ -1,4 +1,4 @@
-
+@(codes: List[String])
 
 @main("home") {
 
@@ -16,8 +16,10 @@
 																		<input class="button playlistUploadButton" type="submit" value="@Messages("upload.button.upload")" disabled>
 																	</div>
 																	<div class="input-row">
-																		<label class="row-option"><input type="checkbox" id="mostoftenplayed" name="mostoftenplayed" value="most" checked> @Messages("upload.label.mostoftenplayed")</label>
-																		<label>@Messages("upload.label.limit") <input type="number" id="limit" maxlength="5" min="0" name="Limit" size="5"></label>
+																	@for(code <- codes) {
+																		<label class="row-option"><input type="checkbox" id="@code" name="@code" value="most" checked> @Messages("upload.label." + code)</label>
+																		<label>@Messages("upload.label.limit") <input type="number" id="@code.concat("_limit")" maxlength="5" min="0" name="@code.concat("_limit")" size="5"></label>
+																	}
 																	</div>
                                                                 </div>
                                                         </div>
