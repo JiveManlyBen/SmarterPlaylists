@@ -1,4 +1,4 @@
-@(uuid: String)
+@(uuid: String, fileNames: List[String])
 
 @main("download") {
 
@@ -11,7 +11,9 @@
 																	<div class="error">@flash.get("error")</div>
 																}
 																	<h2>Download link</h2>
-                                                                    <span><a href="/download/@(uuid)">click here to download the playlist</a></span>
+																	@for(fileName <- fileNames) {
+																		<span><a href="/download/@(uuid)/@(fileName)">@(fileName)</a></span>
+																	}
                                                                 </div>
                                                         </div>
                                                 </div>

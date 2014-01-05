@@ -17,7 +17,7 @@
 																	</div>
 																	<div class="input-row">
 																	@for(code <- codes) {
-																		<label class="row-option"><input type="checkbox" id="@code" name="@code" value="most" checked> @Messages("upload.label." + code)</label>
+																		<label class="row-option"><input type="checkbox" id="@code" name="@code" value="most" checked> @Messages("filter.label." + code)</label>
 																		<label>@Messages("upload.label.limit") <input type="number" id="@code.concat("_limit")" maxlength="5" min="0" name="@code.concat("_limit")" size="5"></label>
 																	}
 																	</div>

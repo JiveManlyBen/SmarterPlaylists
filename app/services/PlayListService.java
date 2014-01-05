@@ -32,10 +32,10 @@ import domain.Playlist;
 import domain.Track;
 
 public class PlayListService {
-	public static String parseXMLFile(File file) throws NumberFormatException, JAXBException, ParseException, SAXException, IOException {
+	public static Library parseXMLFile(File file) throws NumberFormatException, JAXBException, ParseException, SAXException, IOException {
 		Library library = getLibrary(file);
 		Logger.debug(library.toString());
-		return "ok";
+		return library;
 	}
 	private static Map<String, String> getKeysAndStringValues(Dict dict) {
 		Map<String, String> keyMap = new LinkedHashMap<String, String>();

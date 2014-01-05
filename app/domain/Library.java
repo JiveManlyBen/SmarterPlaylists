@@ -173,7 +173,8 @@ public class Library {
 			String location = track.getLocation().replace("file://localhost", "");
 			if (Pattern.matches("^/[a-zA-Z]:/.*", location))
 				location = location.substring(1);
-			m3uContents += "\n\n#EXTINF:" + (track.getTotalTime() / 1000) + "," + track.getName() + "\n" + location;
+			if (track.getTotalTime() != null)
+				m3uContents += "\n\n#EXTINF:" + (track.getTotalTime() / 1000) + "," + track.getName() + "\n" + location;
 		}
 		return m3uContents;
 	}

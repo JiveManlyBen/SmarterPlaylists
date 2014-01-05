@@ -391,6 +391,9 @@ public class Track {
 		catch(IndexOutOfBoundsException ex) {
 			return trackList;
 		}
+		catch(IllegalArgumentException ex) {
+			return trackList;
+		}
 	}
 	
 	public Dict getDict() {

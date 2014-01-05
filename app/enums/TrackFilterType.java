@@ -15,6 +15,13 @@ public enum TrackFilterType {
 		this.code = code;
 		this.comparator = comparator;
 	}
+	
+	public static TrackFilterType get(String code) {
+		for (TrackFilterType type : values())
+			if (type.getCode().equals(code))
+				return type;
+		return null;
+	}
 
 	public String getCode() {
 		return code;
