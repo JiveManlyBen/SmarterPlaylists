@@ -22,7 +22,6 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import play.Logger;
 import services.PlayListService;
 
 import com.apple.itunes.Plist;
@@ -98,6 +97,14 @@ public class PlayListServiceTest {
 				"file://localhost/C:/Music/Run%20The%20Jewels%20-%20Run%20The%20Jewels.mp3"));
 		
 		return trackList;
+	}
+	
+	@SuppressWarnings("unused")
+	private void printPlist(Plist plist) throws JAXBException {
+        JAXBContext jc = JAXBContext.newInstance(Plist.class);
+        Marshaller marshaller = jc.createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		marshaller.marshal( plist, System.out );
 	}
 
 	@Test
@@ -208,12 +215,6 @@ public class PlayListServiceTest {
 	public void checkGeneratingXML() throws NumberFormatException, SAXException, JAXBException, ParseException {
 		File file = new File("test/assets/Generated.xml");
 		Library returnedLibrary = PlayListService.getLibrary(file);
-		if (Logger.isDebugEnabled()) {
-	        JAXBContext jc = JAXBContext.newInstance(Plist.class);
-	        Marshaller marshaller = jc.createMarshaller();
-			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			marshaller.marshal( returnedLibrary.getPlist(), System.out );
-		}
 		assertThat(returnedLibrary.getPlist()).isEqualTo(PlayListService.getPlist(file)); 
 	}
 
