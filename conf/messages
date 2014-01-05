@@ -13,3 +13,4 @@ upload.label.header=Upload an iTunes library XML file to generate a better playl
 upload.label.limit=Limit number of songs
 filter.label.mostoftenplayed=Most often played
 download.error.notfound=The specified file was not found.
+download.label.link=Download links

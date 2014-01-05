@@ -13,3 +13,4 @@ upload.label.header=¡Subes un archivo XML biblioteca de iTunes para generar una
 upload.label.limit=Limitar el número de canciones
 filter.label.mostoftenplayed=Mayoría de las veces jugado
 download.error.notfound=No se encuentra el archivo especificado.
+download.label.link=Bajar vínculos

@@ -10,7 +10,7 @@
                                                                 @if(flash.containsKey("error")){
 																	<div class="error">@flash.get("error")</div>
 																}
-																	<h2>Download link</h2>
+																	<h2>@Messages("download.label.link")</h2>
 																	@for(fileName <- fileNames) {
 																		<span><a href="/download/@(uuid)/@(fileName)">@(fileName)</a></span>
 																	}
