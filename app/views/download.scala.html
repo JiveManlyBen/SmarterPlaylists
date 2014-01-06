@@ -12,7 +12,7 @@
 																}
 																	<h2>@Messages("download.label.link")</h2>
 																	@for(fileName <- fileNames) {
-																		<span><a href="/download/@(uuid)/@(fileName)">@(fileName)</a></span>
+																		<span><a href="/download/@(uuid)/@(fileName)">@Messages("filter.label." + fileName.replace(".m3u",""))</a></span>
 																	}
                                                                 </div>
                                                         </div>
