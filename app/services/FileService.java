@@ -15,13 +15,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.SAXException;
 
 import play.Logger;
+import play.Play;
 import play.i18n.Messages;
 import domain.Library;
 import domain.Track;
 import enums.TrackFilterType;
 
 public class FileService {
-	public static final String M3U_TEMP_DIRECTORY = File.separator + "tmp" + File.separator + "m3u" + File.separator;
+	public static final String M3U_TEMP_DIRECTORY = Play.application().path() + File.separator + "tmp" + File.separator + "m3u" + File.separator;
 
 	public static void createTempPlaylistFiles(File file, Map<String, String> codeMap, String uuid) throws NumberFormatException, 
 		JAXBException, ParseException, SAXException, IOException {
