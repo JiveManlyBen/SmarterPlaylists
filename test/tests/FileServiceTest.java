@@ -19,11 +19,7 @@ import org.junit.After;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import play.Play;
-import play.i18n.Messages;
-
 import services.FileService;
-
 import enums.TrackFilterType;
 
 public class FileServiceTest {
@@ -52,7 +48,7 @@ public class FileServiceTest {
 					FileService.createTempPlaylistFiles(file, getCodeMap("5"), "uuid_1");
 					for (String code : TrackFilterType.getCodes()) {
 						File output = new File(FileService.M3U_TEMP_DIRECTORY + "uuid_1" + File.separator + 
-								"5 " + Messages.get("filter.label." + code) + ".m3u");
+								code + ".m3u");
 						assertThat(output.exists()).isTrue();
 					}
 				} catch (Exception e) {
@@ -70,7 +66,7 @@ public class FileServiceTest {
 		FileService.createTempPlaylistFiles(file, getCodeMap("5"), uuid);
 		List<String> downloadFiles = new ArrayList<String>();
 		for (String code : TrackFilterType.getCodes()) {
-			downloadFiles.add("5 " + Messages.get("filter.label." + code) + ".m3u");
+			downloadFiles.add(code + ".m3u");
 		}
 		assertThat(FileService.getTempPlaylistFiles(uuid)).isEqualTo(downloadFiles);
 	}

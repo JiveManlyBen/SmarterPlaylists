@@ -16,7 +16,6 @@ import org.xml.sax.SAXException;
 
 import play.Logger;
 import play.Play;
-import play.i18n.Messages;
 import domain.Library;
 import domain.Track;
 import enums.TrackFilterType;
@@ -32,8 +31,7 @@ public class FileService {
 			Integer limit = StringUtils.isEmpty(entry.getValue().trim()) ? null : new Integer(entry.getValue().trim());
 			List<Track> trackList = Track.getSortedTracks(library.getTracks().values(), filter.getComparator(), limit);
 			String m3uContent = Library.getM3U(trackList);
-			String fileName = M3U_TEMP_DIRECTORY + uuid + File.separator + 
-					(limit != null && limit > 0 ? limit.toString() + " " : "") + Messages.get("filter.label." + entry.getKey())  + ".m3u";
+			String fileName = M3U_TEMP_DIRECTORY + uuid + File.separator + entry.getKey()  + ".m3u";
 			FileUtils.writeStringToFile(new File(fileName), m3uContent, "UTF-8");
 			Logger.debug("Created: " + fileName);
 		}

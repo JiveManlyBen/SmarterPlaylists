@@ -81,7 +81,11 @@ public class Application extends Controller {
     public static Result download(String uuid, String file) {
     	try {
     		if (!StringUtils.isEmpty(uuid) && uuid.equals(session("uuid"))) {
-	    		return ok(FileService.getTempPlaylistFile(uuid, file));
+    			File download = FileService.getTempPlaylistFile(uuid, file);
+    			String fileName = Messages.get("filter.label." + download.getName().replace(".m3u", "")) + ".m3u";
+    			response().setHeader("Content-Disposition", 
+    					"attachment; filename=\"" + fileName +"\"");
+	    		return ok(download);
 	    	}
 	    }
     	catch (Exception ex) {
