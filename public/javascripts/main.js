@@ -7,6 +7,8 @@ jQuery(function($){
 		var playlistUploadFile = $('#playlistUploadFile').val();
 		if (playlistUploadFile != null && playlistUploadFile !== "")
 			$(".playlistUploadButton").prop("disabled", false);
+		else
+			$(".playlistUploadButton").prop("disabled", true);
 	}
     $('#polyglotLanguageSwitcher').polyglotLanguageSwitcher({
 		effect: 'fade',
