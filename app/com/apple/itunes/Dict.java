@@ -119,6 +119,13 @@ public class Dict {
     	dictOrArrayOrData.add(valueElement);
     }
 
+    public void addKeyAndValue(String key, BigInteger value) {
+    	JAXBElement<String> keyElement = new JAXBElement<String>(new QName("key"), String.class, key);
+    	JAXBElement<BigInteger> valueElement = new JAXBElement<BigInteger>(new QName("integer"), BigInteger.class, value);
+    	getDictOrArrayOrData().add(keyElement);
+    	dictOrArrayOrData.add(valueElement);
+    }
+
     public void addKeyAndValue(String key, String value) {
     	JAXBElement<String> keyElement = new JAXBElement<String>(new QName("key"), String.class, key);
     	JAXBElement<String> valueElement = new JAXBElement<String>(new QName("string"), String.class, value);

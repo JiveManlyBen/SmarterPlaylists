@@ -18,12 +18,27 @@
 			<key>Name</key><string>Come Alive</string>
 			<key>Artist</key><string>Foo Fighters</string>
 			<key>Album</key><string>Echoes, Silence, Patience &#38; Grace</string>
+			<key>Genre</key><string>Alternative</string>
 			<key>Kind</key><string>MPEG audio file</string>
+			<key>Size</key><integer>7645402</integer>
 			<key>Total Time</key><integer>295523</integer>
+			<key>Track Number</key><integer>5</integer>
+			<key>Year</key><integer>2007</integer>
+			<key>Date Modified</key><date>2008-11-06T05:06:02Z</date>
 			<key>Date Added</key><date>2010-03-21T04:49:15Z</date>
-			<key>Play Count</key><integer>153</integer>
-			<key>Play Date UTC</key><date>2013-11-19T04:43:39Z</date>
+			<key>Bit Rate</key><integer>192</integer>
+			<key>Sample Rate</key><integer>44100</integer>
+			<key>Play Count</key><integer>155</integer>
+			<key>Play Date</key><integer>3470769760</integer>
+			<key>Play Date UTC</key><date>2013-12-25T04:42:40Z</date>
+			<key>Skip Count</key><integer>4</integer>
+			<key>Skip Date</key><date>2013-06-08T23:50:19Z</date>
+			<key>Artwork Count</key><integer>1</integer>
 			<key>Persistent ID</key><string>FEBA0A5A4AD727B0</string>
+			<key>Track Type</key><string>File</string>
+			<key>Location</key><string>file://localhost/C:/Music/Foo%20Fighters%20-%20Come%20Alive.mp3</string>
+			<key>File Folder Count</key><integer>5</integer>
+			<key>Library Folder Count</key><integer>1</integer>
 		</dict>
 		<key>11716</key>
 		<dict>
@@ -56,14 +71,32 @@
 			<key>Track ID</key><integer>15322</integer>
 			<key>Name</key><string>Pyramids</string>
 			<key>Artist</key><string>Frank Ocean</string>
+			<key>Composer</key><string>James Ho/Christopher Breaux</string>
 			<key>Album</key><string>channel ORANGE</string>
 			<key>Genre</key><string>R&#38;B</string>
 			<key>Kind</key><string>MPEG audio file</string>
+			<key>Size</key><integer>19033815</integer>
 			<key>Total Time</key><integer>593632</integer>
+			<key>Disc Number</key><integer>1</integer>
+			<key>Disc Count</key><integer>1</integer>
+			<key>Track Number</key><integer>10</integer>
+			<key>Year</key><integer>2012</integer>
+			<key>Date Modified</key><date>2013-02-20T01:06:27Z</date>
 			<key>Date Added</key><date>2012-12-25T23:33:40Z</date>
+			<key>Bit Rate</key><integer>256</integer>
+			<key>Sample Rate</key><integer>44100</integer>
 			<key>Play Count</key><integer>36</integer>
+			<key>Play Date</key><integer>3461398612</integer>
 			<key>Play Date UTC</key><date>2013-09-07T17:36:52Z</date>
+			<key>Skip Count</key><integer>1</integer>
+			<key>Skip Date</key><date>2013-02-11T03:49:07Z</date>
+			<key>Normalization</key><integer>3056</integer>
+			<key>Artwork Count</key><integer>1</integer>
 			<key>Persistent ID</key><string>7F4DCB36553A2885</string>
+			<key>Track Type</key><string>File</string>
+			<key>Location</key><string>file://localhost/C:/Music/Frank%20Ocean/channel%20ORANGE/10%20Pyramids.mp3</string>
+			<key>File Folder Count</key><integer>4</integer>
+			<key>Library Folder Count</key><integer>1</integer>
 		</dict>
 		<key>15506</key>
 		<dict>
@@ -78,6 +111,68 @@
 			<key>Play Count</key><integer>3</integer>
 			<key>Play Date UTC</key><date>2013-01-23T03:30:43Z</date>
 			<key>Persistent ID</key><string>BF1BACAA02D17B5C</string>
+		</dict>
+		<key>15998</key>
+		<dict>
+			<key>Track ID</key><integer>15998</integer>
+			<key>Name</key><string>A Heavy Abacus</string>
+			<key>Artist</key><string>The Joy Formidable</string>
+			<key>Album</key><string>The Big Roar</string>
+			<key>Genre</key><string>Indie Rock</string>
+			<key>Kind</key><string>MPEG audio file</string>
+			<key>Size</key><integer>5860214</integer>
+			<key>Total Time</key><integer>220342</integer>
+			<key>Disc Number</key><integer>1</integer>
+			<key>Disc Count</key><integer>1</integer>
+			<key>Track Number</key><integer>5</integer>
+			<key>Track Count</key><integer>12</integer>
+			<key>Year</key><integer>2011</integer>
+			<key>Date Modified</key><date>2013-03-10T01:07:13Z</date>
+			<key>Date Added</key><date>2013-03-10T01:05:21Z</date>
+			<key>Bit Rate</key><integer>192</integer>
+			<key>Sample Rate</key><integer>44100</integer>
+			<key>Play Count</key><integer>7</integer>
+			<key>Play Date</key><integer>3466337327</integer>
+			<key>Play Date UTC</key><date>2013-11-03T21:28:47Z</date>
+			<key>Skip Count</key><integer>2</integer>
+			<key>Skip Date</key><date>2013-07-27T08:10:42Z</date>
+			<key>Normalization</key><integer>12627</integer>
+			<key>Artwork Count</key><integer>1</integer>
+			<key>Sort Album</key><string>Big Roar</string>
+			<key>Sort Artist</key><string>Joy Formidable</string>
+			<key>Sort Name</key><string>Heavy Abacus</string>
+			<key>Persistent ID</key><string>IM523F629EF90USN</string>
+			<key>Track Type</key><string>File</string>
+			<key>Location</key><string>file://localhost/C:/Music/The%20Joy%20Formidable/The%20Big%20Roar/05%20A%20Heavy%20Abacus.mp3</string>
+			<key>File Folder Count</key><integer>4</integer>
+			<key>Library Folder Count</key><integer>1</integer>
+		</dict>
+		<key>45329</key>
+		<dict>
+			<key>Track ID</key><integer>45329</integer>
+			<key>Name</key><string>#484: Doppelgängers</string>
+			<key>Artist</key><string>Chicago Public Media</string>
+			<key>Album Artist</key><string>Chicago Public Media</string>
+			<key>Album</key><string>This American Life</string>
+			<key>Genre</key><string>Podcast</string>
+			<key>Kind</key><string>MPEG audio file</string>
+			<key>Size</key><integer>28629091</integer>
+			<key>Total Time</key><integer>3538494</integer>
+			<key>Year</key><integer>2014</integer>
+			<key>Date Modified</key><date>2014-01-06T03:14:24Z</date>
+			<key>Date Added</key><date>2014-01-06T03:14:23Z</date>
+			<key>Bit Rate</key><integer>64</integer>
+			<key>Sample Rate</key><integer>44100</integer>
+			<key>Comments</key><string>(C) 1995-2013 Chicago Public Media &#38; Ira Glass</string>
+			<key>Release Date</key><date>2014-01-06T01:00:00Z</date>
+			<key>Artwork Count</key><integer>1</integer>
+			<key>Persistent ID</key><string>DCC0D4EA7A0C66A6</string>
+			<key>Track Type</key><string>File</string>
+			<key>Podcast</key><true/>
+			<key>Unplayed</key><true/>
+			<key>Location</key><string>file://localhost/C:/Music/Podcasts/This%20American%20Life/%23484_%20Doppelg%C3%A4ngers.mp3</string>
+			<key>File Folder Count</key><integer>4</integer>
+			<key>Library Folder Count</key><integer>1</integer>
 		</dict>
 	</dict>
 	<key>Playlists</key>

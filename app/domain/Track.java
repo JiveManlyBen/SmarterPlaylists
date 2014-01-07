@@ -1,5 +1,6 @@
 package domain;
 
+import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,6 +27,8 @@ public class Track {
 	private static final String ALBUM = "Album";
 	private String albumArtist;
 	private static final String ALBUM_ARTIST = "Album Artist";
+	private String composer;
+	private static final String COMPOSER = "Composer";
 	private String genre;
 	private static final String GENRE = "Genre";
 	private String kind;
@@ -34,8 +37,16 @@ public class Track {
 	private static final String SIZE = "Size";
 	private Integer totalTime;
 	private static final String TOTAL_TIME = "Total Time";
+	private Integer stopTime;
+	private static final String STOP_TIME = "Stop Time";
+	private Integer discNumber;
+	private static final String DISC_NUMBER = "Disc Number";
+	private Integer discCount;
+	private static final String DISC_COUNT = "Disc Count";
 	private Integer trackNumber;
 	private static final String TRACK_NUMBER = "Track Number";
+	private Integer trackCount;
+	private static final String TRACK_COUNT = "Track Count";
 	private Integer year;
 	private static final String YEAR = "Year";
 	private Date dateModified;
@@ -46,20 +57,46 @@ public class Track {
 	private static final String BIT_RATE = "Bit Rate";
 	private Integer sampleRate;
 	private static final String SAMPLE_RATE = "Sample Rate";
+	private Integer volumeAdjustment;
+	private static final String VOLUME_ADJUSTMENT = "Volume Adjustment";
+	private Boolean gaplessAlbum;
+	private static final String GAPLESS_ALBUM = "Part Of Gapless Album";
+	private String comments;
+	private static final String COMMENTS = "Comments";
+	private Date releaseDate;
+	private static final String RELEASE_DATE = "Release Date";
 	private Integer playCount;
 	private static final String PLAY_COUNT = "Play Count";
-	private Date playDate;
-	private static final String PLAY_DATE = "Play Date UTC";
+	private BigInteger playDate;
+	private static final String PLAY_DATE = "Play Date";
+	private Date playDateUTC;
+	private static final String PLAY_DATE_UTC = "Play Date UTC";
 	private Integer skipCount;
 	private static final String SKIP_COUNT = "Skip Count";
 	private Date skipDate;
 	private static final String SKIP_DATE = "Skip Date";
+	private Integer normalization;
+	private static final String NORMALIZATION = "Normalization";
+	private Boolean compilation;
+	private static final String COMPILATION = "Compilation";
 	private Integer artworkCount;
 	private static final String ARTWORK_COUNT = "Artwork Count";
+	private String sortAlbum;
+	private static final String SORT_ALBUM = "Sort Album";
+	private String sortAlbumArtist;
+	private static final String SORT_ALBUM_ARTIST = "Sort Album Artist";
+	private String sortArtist;
+	private static final String SORT_ARTIST = "Sort Artist";
+	private String sortName;
+	private static final String SORT_NAME = "Sort Name";
 	private String persistentID;
 	private static final String PERSISTENT_ID = "Persistent ID";
 	private String trackType;
 	private static final String TRACK_TYPE = "Track Type";
+	private Boolean podcast;
+	private static final String PODCAST = "Podcast";
+	private Boolean unplayed;
+	private static final String UNPLAYED = "Unplayed";
 	private String location;
 	private static final String LOCATION = "Location";
 	private Integer fileFolderCount;
@@ -71,7 +108,7 @@ public class Track {
 	
 	public Track(int trackId, String name, String artist, String album, 
 			String kind, Integer totalTime, Date dateAdded, Integer playCount, 
-			Date playDate, String persistentID, String location) {
+			Date playDateUTC, String persistentID, String location) {
 		this.trackId = trackId;
 		this.name = name;
 		this.artist = artist;
@@ -80,58 +117,84 @@ public class Track {
 		this.totalTime = totalTime;
 		this.dateAdded = dateAdded;
 		this.playCount = playCount;
-		this.playDate = playDate;
+		this.playDateUTC = playDateUTC;
 		this.persistentID = persistentID;
 		this.location = location;
 	}
 	
-	public Track(int trackId, String name, String artist, String albumArtist,
-			String album, String genre, String kind, Integer size, Integer totalTime,
-			Integer trackNumber, Integer year, Date dateModified, Date dateAdded,
-			Integer bitRate, Integer sampleRate, Integer playCount, Date playDate,
-			Integer skipCount, Date skipDate, Integer artworkCount,
-			String persistentID, String trackType, String location,
+	public Track(int trackId, String name, String artist, String albumArtist, String composer,
+			String album, String genre, String kind, Integer size, Integer totalTime, Integer stopTime, 
+			Integer discNumber, Integer discCount, Integer trackNumber, Integer trackCount, Integer year, 
+			Date dateModified, Date dateAdded, Integer bitRate, Integer sampleRate, Integer volumeAdjustment, 
+			Boolean gaplessAlbum, String comments, Date releaseDate, Integer playCount, BigInteger playDate, 
+			Date playDateUTC, Integer skipCount, Date skipDate, Integer normalization, Boolean compilation,
+			Integer artworkCount, String sortAlbum, String sortAlbumArtist, String sortArtist, String sortName,
+			String persistentID, String trackType, Boolean podcast, Boolean unplayed, String location, 
 			Integer fileFolderCount, Integer libraryFolderCount) {
 		this.trackId = trackId;
 		this.name = name;
 		this.artist = artist;
 		this.albumArtist = albumArtist;
+		this.composer = composer;
 		this.album = album;
 		this.genre = genre;
 		this.kind = kind;
 		this.size = size;
 		this.totalTime = totalTime;
+		this.stopTime = stopTime;
+		this.discNumber = discNumber;
+		this.discCount = discCount;
 		this.trackNumber = trackNumber;
+		this.trackCount = trackCount;
 		this.year = year;
 		this.dateModified = dateModified;
 		this.dateAdded = dateAdded;
 		this.bitRate = bitRate;
 		this.sampleRate = sampleRate;
+		this.volumeAdjustment = volumeAdjustment;
+		this.gaplessAlbum = gaplessAlbum;
+		this.comments = comments;
+		this.releaseDate = releaseDate;
 		this.playCount = playCount;
 		this.playDate = playDate;
+		this.playDateUTC = playDateUTC;
 		this.skipCount = skipCount;
 		this.skipDate = skipDate;
+		this.normalization = normalization;
+		this.compilation = compilation;
 		this.artworkCount = artworkCount;
+		this.sortAlbum = sortAlbum;
+		this.sortAlbumArtist = sortAlbumArtist;
+		this.sortArtist = sortArtist;
+		this.sortName = sortName;
 		this.persistentID = persistentID;
 		this.trackType = trackType;
+		this.podcast = podcast;
+		this.unplayed = unplayed;
 		this.location = location;
 		this.fileFolderCount = fileFolderCount;
 		this.libraryFolderCount = libraryFolderCount;
 	}
 	
 	public Track(Map<String, String> trackMap) throws NumberFormatException, ParseException {
-		this(Integer.parseInt(trackMap.get(TRACK_ID)), trackMap.get(NAME), 
-				trackMap.get(ARTIST), trackMap.get(ALBUM_ARTIST), trackMap.get(ALBUM), 
+		this(Integer.parseInt(trackMap.get(TRACK_ID)), trackMap.get(NAME), trackMap.get(ARTIST), 
+				trackMap.get(ALBUM_ARTIST), trackMap.get(COMPOSER), trackMap.get(ALBUM), 
 				trackMap.get(GENRE), trackMap.get(KIND), getInteger(trackMap.get(SIZE)), 
-				getInteger(trackMap.get(TOTAL_TIME)), getInteger(trackMap.get(TRACK_NUMBER)), 
+				getInteger(trackMap.get(TOTAL_TIME)), getInteger(trackMap.get(STOP_TIME)), 
+				getInteger(trackMap.get(DISC_NUMBER)), getInteger(trackMap.get(DISC_COUNT)),
+				getInteger(trackMap.get(TRACK_NUMBER)), getInteger(trackMap.get(TRACK_COUNT)),
 				getInteger(trackMap.get(YEAR)), getDate(trackMap.get(DATE_MODIFIED)), 
 				dateFormat.parse(trackMap.get(DATE_ADDED)), getInteger(trackMap.get(BIT_RATE)), 
-				getInteger(trackMap.get(SAMPLE_RATE)), getInteger(trackMap.get(PLAY_COUNT)), 
-				getDate(trackMap.get(PLAY_DATE)), getInteger(trackMap.get(SKIP_COUNT)), 
-				getDate(trackMap.get(SKIP_DATE)), getInteger(trackMap.get(ARTWORK_COUNT)),
-				trackMap.get(PERSISTENT_ID), trackMap.get(TRACK_TYPE), trackMap.get(LOCATION),
-				getInteger(trackMap.get(FILE_FOLDER_COUNT)), 
-				getInteger(trackMap.get(LIBRARY_FOLDER_COUNT)));
+				getInteger(trackMap.get(SAMPLE_RATE)), getInteger(trackMap.get(VOLUME_ADJUSTMENT)),
+				getBoolean(trackMap.get(GAPLESS_ALBUM)), trackMap.get(COMMENTS), getDate(trackMap.get(RELEASE_DATE)),
+				getInteger(trackMap.get(PLAY_COUNT)), getBigInteger(trackMap.get(PLAY_DATE)), 
+				getDate(trackMap.get(PLAY_DATE_UTC)), getInteger(trackMap.get(SKIP_COUNT)), 
+				getDate(trackMap.get(SKIP_DATE)), getInteger(trackMap.get(NORMALIZATION)),
+				getBoolean(trackMap.get(COMPILATION)), getInteger(trackMap.get(ARTWORK_COUNT)), 
+				trackMap.get(SORT_ALBUM), trackMap.get(SORT_ALBUM_ARTIST), trackMap.get(SORT_ARTIST), 
+				trackMap.get(SORT_NAME), trackMap.get(PERSISTENT_ID), trackMap.get(TRACK_TYPE), 
+				getBoolean(trackMap.get(PODCAST)), getBoolean(trackMap.get(UNPLAYED)), trackMap.get(LOCATION),
+				getInteger(trackMap.get(FILE_FOLDER_COUNT)), getInteger(trackMap.get(LIBRARY_FOLDER_COUNT)));
 	}
 
 	public int getTrackId() {
@@ -262,12 +325,20 @@ public class Track {
 		this.playCount = playCount;
 	}
 
-	public Date getPlayDate() {
+	public BigInteger getPlayDate() {
 		return playDate;
 	}
 
-	public void setPlayDate(Date playDate) {
+	public void setPlayDate(BigInteger playDate) {
 		this.playDate = playDate;
+	}
+	
+	public Date getPlayDateUTC() {
+		return playDateUTC;
+	}
+	
+	public void setPlayDateUTC(Date playDateUTC) {
+		this.playDateUTC = playDateUTC;
 	}
 
 	public Integer getSkipCount() {
@@ -351,14 +422,162 @@ public class Track {
 				+ libraryFolderCount + "]";
 	}
 	
+	private static Boolean getBoolean(String strValue) {
+		return strValue != null ? Boolean.parseBoolean(strValue) : null;
+	}
+
 	private static Integer getInteger(String strValue) {
 		return strValue != null ? Integer.parseInt(strValue) : null;
+	}
+	
+	private static BigInteger getBigInteger(String strValue) {
+		return strValue != null ? BigInteger.valueOf(Long.parseLong(strValue)) : null;
 	}
 	
 	private static Date getDate(String strValue) throws ParseException {
 		return strValue != null ? dateFormat.parse(strValue) : null;
 	}
 	
+	public String getComposer() {
+		return composer;
+	}
+
+	public void setComposer(String composer) {
+		this.composer = composer;
+	}
+
+	public Integer getStopTime() {
+		return stopTime;
+	}
+
+	public void setStopTime(Integer stopTime) {
+		this.stopTime = stopTime;
+	}
+
+	public Integer getDiscNumber() {
+		return discNumber;
+	}
+
+	public void setDiscNumber(Integer discNumber) {
+		this.discNumber = discNumber;
+	}
+
+	public Integer getDiscCount() {
+		return discCount;
+	}
+
+	public void setDiscCount(Integer discCount) {
+		this.discCount = discCount;
+	}
+
+	public Integer getTrackCount() {
+		return trackCount;
+	}
+
+	public void setTrackCount(Integer trackCount) {
+		this.trackCount = trackCount;
+	}
+
+	public Integer getVolumeAdjustment() {
+		return volumeAdjustment;
+	}
+
+	public void setVolumeAdjustment(Integer volumeAdjustment) {
+		this.volumeAdjustment = volumeAdjustment;
+	}
+
+	public Boolean getGaplessAlbum() {
+		return gaplessAlbum;
+	}
+
+	public void setGaplessAlbum(Boolean gaplessAlbum) {
+		this.gaplessAlbum = gaplessAlbum;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	public Date getReleaseDate() {
+		return releaseDate;
+	}
+
+	public void setReleaseDate(Date releaseDate) {
+		this.releaseDate = releaseDate;
+	}
+
+	public Integer getNormalization() {
+		return normalization;
+	}
+
+	public void setNormalization(Integer normalization) {
+		this.normalization = normalization;
+	}
+
+	public Boolean getCompilation() {
+		return compilation;
+	}
+
+	public void setCompilation(Boolean compilation) {
+		this.compilation = compilation;
+	}
+
+	public String getSortAlbum() {
+		return sortAlbum;
+	}
+
+	public void setSortAlbum(String sortAlbum) {
+		this.sortAlbum = sortAlbum;
+	}
+
+	public String getSortAlbumArtist() {
+		return sortAlbumArtist;
+	}
+
+	public void setSortAlbumArtist(String sortAlbumArtist) {
+		this.sortAlbumArtist = sortAlbumArtist;
+	}
+
+	public String getSortArtist() {
+		return sortArtist;
+	}
+
+	public void setSortArtist(String sortArtist) {
+		this.sortArtist = sortArtist;
+	}
+
+	public String getSortName() {
+		return sortName;
+	}
+
+	public void setSortName(String sortName) {
+		this.sortName = sortName;
+	}
+
+	public Boolean getPodcast() {
+		return podcast;
+	}
+
+	public void setPodcast(Boolean podcast) {
+		this.podcast = podcast;
+	}
+
+	public Boolean getUnplayed() {
+		return unplayed;
+	}
+
+	public void setUnplayed(Boolean unplayed) {
+		this.unplayed = unplayed;
+	}
+
+	public void setArtworkCount(Integer artworkCount) {
+		this.artworkCount = artworkCount;
+	}
+
 	public Double getPlaysPerDay() {
 		Calendar calendarDate = Calendar.getInstance();
 		return getPlaysPerDay(calendarDate);
@@ -400,31 +619,44 @@ public class Track {
 		Dict dict = new Dict();
 		dict.addKeyAndValue(TRACK_ID, trackId);
 		dict.addKeyAndValue(NAME, name);
-		dict.addKeyAndValue(ARTIST, artist);
+		if (artist != null) dict.addKeyAndValue(ARTIST, artist);
 		if (albumArtist != null) dict.addKeyAndValue(ALBUM_ARTIST, albumArtist);
-		//Composer
-		dict.addKeyAndValue(ALBUM, album);
+		if (composer != null) dict.addKeyAndValue(COMPOSER, composer);
+		if (album != null) dict.addKeyAndValue(ALBUM, album);
 		if (genre != null) dict.addKeyAndValue(GENRE, genre);
 		if (kind != null) dict.addKeyAndValue(KIND, kind);
-		//Size
-		dict.addKeyAndValue(TOTAL_TIME, totalTime);
-		//Disc Number
-		//Disc Count
+		if (size != null) dict.addKeyAndValue(SIZE, size);
+		if (totalTime != null) dict.addKeyAndValue(TOTAL_TIME, totalTime);
+		if (stopTime != null) dict.addKeyAndValue(STOP_TIME, stopTime);
+		if (discNumber != null) dict.addKeyAndValue(DISC_NUMBER, discNumber);
+		if (discCount != null) dict.addKeyAndValue(DISC_COUNT, discCount);
 		if (trackNumber != null) dict.addKeyAndValue(TRACK_NUMBER, trackNumber);
-		//Track Count
+		if (trackCount != null) dict.addKeyAndValue(TRACK_COUNT, trackCount);
 		if (year != null) dict.addKeyAndValue(YEAR, year);
 		if (dateModified != null) dict.addKeyAndValue(DATE_MODIFIED, dateModified, dateFormat);
 		if (dateAdded != null) dict.addKeyAndValue(DATE_ADDED, dateAdded, dateFormat);
-		//Bit Rate
-		//Sample Rate
-		dict.addKeyAndValue(PLAY_COUNT, playCount);
-		//Play Date
-		dict.addKeyAndValue(PLAY_DATE, playDate, dateFormat);
-		//Normalization
-		//Compilation
-		//Artwork Count
+		if (bitRate != null) dict.addKeyAndValue(BIT_RATE, bitRate);
+		if (sampleRate != null) dict.addKeyAndValue(SAMPLE_RATE, sampleRate);
+		if (volumeAdjustment != null) dict.addKeyAndValue(VOLUME_ADJUSTMENT, volumeAdjustment);
+		if (gaplessAlbum != null) dict.addKeyAndValue(GAPLESS_ALBUM, gaplessAlbum);
+		if (comments != null) dict.addKeyAndValue(COMMENTS, comments);
+		if (releaseDate != null) dict.addKeyAndValue(RELEASE_DATE, releaseDate, dateFormat);
+		if (playCount != null) dict.addKeyAndValue(PLAY_COUNT, playCount);
+		if (playDate != null) dict.addKeyAndValue(PLAY_DATE, playDate);
+		if (playDateUTC != null) dict.addKeyAndValue(PLAY_DATE_UTC, playDateUTC, dateFormat);
+		if (skipCount != null) dict.addKeyAndValue(SKIP_COUNT, skipCount);
+		if (skipDate != null) dict.addKeyAndValue(SKIP_DATE, skipDate, dateFormat);
+		if (normalization != null) dict.addKeyAndValue(NORMALIZATION, normalization);
+		if (compilation != null) dict.addKeyAndValue(COMPILATION, compilation);
+		if (artworkCount != null) dict.addKeyAndValue(ARTWORK_COUNT, artworkCount);
+		if (sortAlbum != null) dict.addKeyAndValue(SORT_ALBUM, sortAlbum);
+		if (sortAlbumArtist != null) dict.addKeyAndValue(SORT_ALBUM_ARTIST, sortAlbumArtist);
+		if (sortArtist != null) dict.addKeyAndValue(SORT_ARTIST, sortArtist);
+		if (sortName != null) dict.addKeyAndValue(SORT_NAME, sortName);
 		dict.addKeyAndValue(PERSISTENT_ID, persistentID);
 		if (trackType != null) dict.addKeyAndValue(TRACK_TYPE, trackType);
+		if (podcast != null) dict.addKeyAndValue(PODCAST, podcast);
+		if (unplayed != null) dict.addKeyAndValue(UNPLAYED, unplayed);
 		if (location != null) dict.addKeyAndValue(LOCATION, location);
 		if (fileFolderCount != null) dict.addKeyAndValue(FILE_FOLDER_COUNT, fileFolderCount);
 		if (libraryFolderCount != null) dict.addKeyAndValue(LIBRARY_FOLDER_COUNT, libraryFolderCount);
