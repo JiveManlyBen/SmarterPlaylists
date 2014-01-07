@@ -112,31 +112,48 @@ public class Dict {
         return this.dictOrArrayOrData;
     }
 
-    public void addKeyAndValue(String key, int value) {
-    	JAXBElement<String> keyElement = new JAXBElement<String>(new QName("key"), String.class, key);
-    	JAXBElement<BigInteger> valueElement = new JAXBElement<BigInteger>(new QName("integer"), BigInteger.class, BigInteger.valueOf(value));
-    	getDictOrArrayOrData().add(keyElement);
-    	dictOrArrayOrData.add(valueElement);
+    public void addKeyAndValue(String key, Integer value) {
+    	if (value != null) {
+	    	JAXBElement<String> keyElement = new JAXBElement<String>(new QName("key"), String.class, key);
+	    	JAXBElement<BigInteger> valueElement = new JAXBElement<BigInteger>(new QName("integer"), BigInteger.class, BigInteger.valueOf(value));
+	    	getDictOrArrayOrData().add(keyElement);
+	    	dictOrArrayOrData.add(valueElement);
+    	}
+    }
+
+    public void addKeyAndValue(String key, BigInteger value) {
+    	if (value != null) {
+	    	JAXBElement<String> keyElement = new JAXBElement<String>(new QName("key"), String.class, key);
+	    	JAXBElement<BigInteger> valueElement = new JAXBElement<BigInteger>(new QName("integer"), BigInteger.class, value);
+	    	getDictOrArrayOrData().add(keyElement);
+	    	dictOrArrayOrData.add(valueElement);
+    	}
     }
 
     public void addKeyAndValue(String key, String value) {
-    	JAXBElement<String> keyElement = new JAXBElement<String>(new QName("key"), String.class, key);
-    	JAXBElement<String> valueElement = new JAXBElement<String>(new QName("string"), String.class, value);
-    	getDictOrArrayOrData().add(keyElement);
-    	dictOrArrayOrData.add(valueElement);
+    	if (value != null) {
+	    	JAXBElement<String> keyElement = new JAXBElement<String>(new QName("key"), String.class, key);
+	    	JAXBElement<String> valueElement = new JAXBElement<String>(new QName("string"), String.class, value);
+	    	getDictOrArrayOrData().add(keyElement);
+	    	dictOrArrayOrData.add(valueElement);
+    	}
     }
     
-    public void addKeyAndValue(String key, boolean value) {
-    	JAXBElement<String> keyElement = new JAXBElement<String>(new QName("key"), String.class, key);
-    	getDictOrArrayOrData().add(keyElement);
-    	dictOrArrayOrData.add(value ? new True() : new False());
+    public void addKeyAndValue(String key, Boolean value) {
+    	if (value != null) {
+	    	JAXBElement<String> keyElement = new JAXBElement<String>(new QName("key"), String.class, key);
+	    	getDictOrArrayOrData().add(keyElement);
+	    	dictOrArrayOrData.add(value ? new True() : new False());
+    	}
     }
     
     public void addKeyAndValue(String key, Date value, DateFormat dateFormat) {
-    	JAXBElement<String> keyElement = new JAXBElement<String>(new QName("key"), String.class, key);
-    	JAXBElement<String> valueElement = new JAXBElement<String>(new QName("date"), String.class, dateFormat.format(value));
-    	getDictOrArrayOrData().add(keyElement);
-    	dictOrArrayOrData.add(valueElement);
+    	if (value != null) {
+	    	JAXBElement<String> keyElement = new JAXBElement<String>(new QName("key"), String.class, key);
+	    	JAXBElement<String> valueElement = new JAXBElement<String>(new QName("date"), String.class, dateFormat.format(value));
+	    	getDictOrArrayOrData().add(keyElement);
+	    	dictOrArrayOrData.add(valueElement);
+    	}
     }
     
     public void addKeyAndValue(String key, Dict value) {

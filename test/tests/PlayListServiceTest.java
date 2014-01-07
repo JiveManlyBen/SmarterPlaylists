@@ -141,7 +141,7 @@ public class PlayListServiceTest {
 		assertThat(track.getDateAdded()).isEqualTo(calendarDate.getTime());
 		assertThat(track.getPlayCount()).isEqualTo(117);
 		calendarDate.set(2013, 9, 16, 16, 8, 59);
-		assertThat(track.getPlayDate()).isEqualTo(calendarDate.getTime());
+		assertThat(track.getPlayDateUTC()).isEqualTo(calendarDate.getTime());
 		assertThat(track.getSkipCount()).isEqualTo(3);
 		assertThat(track.getPersistentID()).isEqualTo("023DDE089E93FEF0");
 		assertThat(track.getTrackType()).isEqualTo("File");
@@ -215,7 +215,7 @@ public class PlayListServiceTest {
 	public void checkGeneratingXML() throws NumberFormatException, SAXException, JAXBException, ParseException {
 		File file = new File("test/assets/Generated.xml");
 		Library returnedLibrary = PlayListService.getLibrary(file);
-		assertThat(returnedLibrary.getPlist()).isEqualTo(PlayListService.getPlist(file)); 
+		assertThat(returnedLibrary.getPlist()).isEqualTo(PlayListService.getPlist(file));
 	}
 
 	@Test
