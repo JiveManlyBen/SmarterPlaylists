@@ -14,3 +14,6 @@ upload.label.limit=Limitar el número de canciones
 filter.label.mostoftenplayed=Mayoría de las veces jugado
 download.error.notfound=No se encuentra el archivo especificado.
 download.label.link=Bajar vínculos
+about.page.label=¿Qué es este sitio?
+about.page.description=iTunes ofrece listas, pero son canciones imperfectas y desaparecidos.  Este sitio genera listas que hacer un mejor trabajo que incluye las canciones que usted realmente desea escuchar.
+about.page.disclaimer=Estos listas cuentan con ninguna garantía. Úselos bajo su propio riesgo.

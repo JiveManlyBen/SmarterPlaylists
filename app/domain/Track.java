@@ -29,6 +29,8 @@ public class Track {
 	private static final String ALBUM_ARTIST = "Album Artist";
 	private String composer;
 	private static final String COMPOSER = "Composer";
+	private String grouping;
+	private static final String GROUPING = "Grouping";
 	private String genre;
 	private static final String GENRE = "Genre";
 	private String kind;
@@ -37,6 +39,8 @@ public class Track {
 	private static final String SIZE = "Size";
 	private Integer totalTime;
 	private static final String TOTAL_TIME = "Total Time";
+	private Integer startTime;
+	private static final String START_TIME = "Start Time";
 	private Integer stopTime;
 	private static final String STOP_TIME = "Stop Time";
 	private Integer discNumber;
@@ -49,6 +53,8 @@ public class Track {
 	private static final String TRACK_COUNT = "Track Count";
 	private Integer year;
 	private static final String YEAR = "Year";
+	private Integer bpm;
+	private static final String BPM = "BPM";
 	private Date dateModified;
 	private static final String DATE_MODIFIED = "Date Modified";
 	private Date dateAdded;
@@ -81,12 +87,22 @@ public class Track {
 	private static final String COMPILATION = "Compilation";
 	private Integer artworkCount;
 	private static final String ARTWORK_COUNT = "Artwork Count";
+	private String series;
+	private static final String SERIES = "Series";
+	private Integer season;
+	private static final String SEASON = "Season";
+	private String episode;
+	private static final String EPISODE = "Episode";
+	private String episodeOrder;
+	private static final String EPISODE_ORDER = "Episode Order";
 	private String sortAlbum;
 	private static final String SORT_ALBUM = "Sort Album";
 	private String sortAlbumArtist;
 	private static final String SORT_ALBUM_ARTIST = "Sort Album Artist";
 	private String sortArtist;
 	private static final String SORT_ARTIST = "Sort Artist";
+	private String sortComposer;
+	private static final String SORT_COMPOSER = "Sort Composer";
 	private String sortName;
 	private static final String SORT_NAME = "Sort Name";
 	private String persistentID;
@@ -123,30 +139,35 @@ public class Track {
 	}
 	
 	public Track(int trackId, String name, String artist, String albumArtist, String composer,
-			String album, String genre, String kind, Integer size, Integer totalTime, Integer stopTime, 
-			Integer discNumber, Integer discCount, Integer trackNumber, Integer trackCount, Integer year, 
-			Date dateModified, Date dateAdded, Integer bitRate, Integer sampleRate, Integer volumeAdjustment, 
+			String album, String grouping, String genre, String kind, Integer size, Integer totalTime, 
+			Integer startTime, Integer stopTime, Integer discNumber, Integer discCount, 
+			Integer trackNumber, Integer trackCount, Integer year, Integer bpm, Date dateModified, 
+			Date dateAdded, Integer bitRate, Integer sampleRate, Integer volumeAdjustment, 
 			Boolean gaplessAlbum, String comments, Date releaseDate, Integer playCount, BigInteger playDate, 
 			Date playDateUTC, Integer skipCount, Date skipDate, Integer normalization, Boolean compilation,
-			Integer artworkCount, String sortAlbum, String sortAlbumArtist, String sortArtist, String sortName,
-			String persistentID, String trackType, Boolean podcast, Boolean unplayed, String location, 
-			Integer fileFolderCount, Integer libraryFolderCount) {
+			Integer artworkCount, String series, Integer season, String episode, Integer episodeOrder,
+			String sortAlbum, String sortAlbumArtist, String sortArtist, String sortComposer,
+			String sortName, String persistentID, String trackType, Boolean podcast, Boolean unplayed, 
+			String location, Integer fileFolderCount, Integer libraryFolderCount) {
 		this.trackId = trackId;
 		this.name = name;
 		this.artist = artist;
 		this.albumArtist = albumArtist;
 		this.composer = composer;
 		this.album = album;
+		this.grouping = grouping;
 		this.genre = genre;
 		this.kind = kind;
 		this.size = size;
 		this.totalTime = totalTime;
+		this.startTime = startTime;
 		this.stopTime = stopTime;
 		this.discNumber = discNumber;
 		this.discCount = discCount;
 		this.trackNumber = trackNumber;
 		this.trackCount = trackCount;
 		this.year = year;
+		this.bpm = bpm;
 		this.dateModified = dateModified;
 		this.dateAdded = dateAdded;
 		this.bitRate = bitRate;
@@ -163,9 +184,13 @@ public class Track {
 		this.normalization = normalization;
 		this.compilation = compilation;
 		this.artworkCount = artworkCount;
+		this.series = series;
+		this.season = season;
+		this.episode = episode;
 		this.sortAlbum = sortAlbum;
 		this.sortAlbumArtist = sortAlbumArtist;
 		this.sortArtist = sortArtist;
+		this.sortComposer = sortComposer;
 		this.sortName = sortName;
 		this.persistentID = persistentID;
 		this.trackType = trackType;
@@ -179,11 +204,12 @@ public class Track {
 	public Track(Map<String, String> trackMap) throws NumberFormatException, ParseException {
 		this(Integer.parseInt(trackMap.get(TRACK_ID)), trackMap.get(NAME), trackMap.get(ARTIST), 
 				trackMap.get(ALBUM_ARTIST), trackMap.get(COMPOSER), trackMap.get(ALBUM), 
-				trackMap.get(GENRE), trackMap.get(KIND), getInteger(trackMap.get(SIZE)), 
-				getInteger(trackMap.get(TOTAL_TIME)), getInteger(trackMap.get(STOP_TIME)), 
-				getInteger(trackMap.get(DISC_NUMBER)), getInteger(trackMap.get(DISC_COUNT)),
-				getInteger(trackMap.get(TRACK_NUMBER)), getInteger(trackMap.get(TRACK_COUNT)),
-				getInteger(trackMap.get(YEAR)), getDate(trackMap.get(DATE_MODIFIED)), 
+				trackMap.get(GROUPING), trackMap.get(GENRE), trackMap.get(KIND), getInteger(trackMap.get(SIZE)), 
+				getInteger(trackMap.get(TOTAL_TIME)), getInteger(trackMap.get(START_TIME)),
+				getInteger(trackMap.get(STOP_TIME)), getInteger(trackMap.get(DISC_NUMBER)), 
+				getInteger(trackMap.get(DISC_COUNT)), getInteger(trackMap.get(TRACK_NUMBER)), 
+				getInteger(trackMap.get(TRACK_COUNT)), getInteger(trackMap.get(YEAR)), 
+				getInteger(trackMap.get(BPM)), getDate(trackMap.get(DATE_MODIFIED)), 
 				dateFormat.parse(trackMap.get(DATE_ADDED)), getInteger(trackMap.get(BIT_RATE)), 
 				getInteger(trackMap.get(SAMPLE_RATE)), getInteger(trackMap.get(VOLUME_ADJUSTMENT)),
 				getBoolean(trackMap.get(GAPLESS_ALBUM)), trackMap.get(COMMENTS), getDate(trackMap.get(RELEASE_DATE)),
@@ -191,7 +217,9 @@ public class Track {
 				getDate(trackMap.get(PLAY_DATE_UTC)), getInteger(trackMap.get(SKIP_COUNT)), 
 				getDate(trackMap.get(SKIP_DATE)), getInteger(trackMap.get(NORMALIZATION)),
 				getBoolean(trackMap.get(COMPILATION)), getInteger(trackMap.get(ARTWORK_COUNT)), 
-				trackMap.get(SORT_ALBUM), trackMap.get(SORT_ALBUM_ARTIST), trackMap.get(SORT_ARTIST), 
+				trackMap.get(SERIES), getInteger(trackMap.get(SEASON)), trackMap.get(EPISODE), 
+				getInteger(trackMap.get(EPISODE_ORDER)), trackMap.get(SORT_ALBUM), 
+				trackMap.get(SORT_ALBUM_ARTIST), trackMap.get(SORT_ARTIST), trackMap.get(SORT_COMPOSER), 
 				trackMap.get(SORT_NAME), trackMap.get(PERSISTENT_ID), trackMap.get(TRACK_TYPE), 
 				getBoolean(trackMap.get(PODCAST)), getBoolean(trackMap.get(UNPLAYED)), trackMap.get(LOCATION),
 				getInteger(trackMap.get(FILE_FOLDER_COUNT)), getInteger(trackMap.get(LIBRARY_FOLDER_COUNT)));
@@ -623,16 +651,19 @@ public class Track {
 		dict.addKeyAndValue(ALBUM_ARTIST, albumArtist);
 		dict.addKeyAndValue(COMPOSER, composer);
 		dict.addKeyAndValue(ALBUM, album);
+		dict.addKeyAndValue(GROUPING, grouping);
 		dict.addKeyAndValue(GENRE, genre);
 		dict.addKeyAndValue(KIND, kind);
 		dict.addKeyAndValue(SIZE, size);
 		dict.addKeyAndValue(TOTAL_TIME, totalTime);
+		dict.addKeyAndValue(START_TIME, startTime);
 		dict.addKeyAndValue(STOP_TIME, stopTime);
 		dict.addKeyAndValue(DISC_NUMBER, discNumber);
 		dict.addKeyAndValue(DISC_COUNT, discCount);
 		dict.addKeyAndValue(TRACK_NUMBER, trackNumber);
 		dict.addKeyAndValue(TRACK_COUNT, trackCount);
 		dict.addKeyAndValue(YEAR, year);
+		dict.addKeyAndValue(BPM, bpm);
 		dict.addKeyAndValue(DATE_MODIFIED, dateModified, dateFormat);
 		dict.addKeyAndValue(DATE_ADDED, dateAdded, dateFormat);
 		dict.addKeyAndValue(BIT_RATE, bitRate);
@@ -649,9 +680,14 @@ public class Track {
 		dict.addKeyAndValue(NORMALIZATION, normalization);
 		dict.addKeyAndValue(COMPILATION, compilation);
 		dict.addKeyAndValue(ARTWORK_COUNT, artworkCount);
+		dict.addKeyAndValue(SERIES, series);
+		dict.addKeyAndValue(SEASON, season);
+		dict.addKeyAndValue(EPISODE, episode);
+		dict.addKeyAndValue(EPISODE_ORDER, episodeOrder);
 		dict.addKeyAndValue(SORT_ALBUM, sortAlbum);
 		dict.addKeyAndValue(SORT_ALBUM_ARTIST, sortAlbumArtist);
 		dict.addKeyAndValue(SORT_ARTIST, sortArtist);
+		dict.addKeyAndValue(SORT_COMPOSER, sortComposer);
 		dict.addKeyAndValue(SORT_NAME, sortName);
 		dict.addKeyAndValue(PERSISTENT_ID, persistentID);
 		dict.addKeyAndValue(TRACK_TYPE, trackType);
