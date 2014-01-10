@@ -19,10 +19,18 @@ public class Playlist {
 	private static String MASTER = "Master";
 	private Boolean visible;
 	private static String VISIBLE = "Visible";
+	private Boolean purchasedMusic;
+	private static String PURCHASED_MUSIC = "Purchased Music";
+	private Boolean audiobooks;
+	private static String AUDIOBOOKS = "Audiobooks";
+	private Boolean books;
+	private static String BOOKS = "Books";
 	private Boolean movies;
 	private static String MOVIES = "Movies";
 	private Boolean music;
 	private static String MUSIC = "Music";
+	private Boolean podcasts;
+	private static String PODCASTS = "Podcasts";
 	private Boolean tvShows;
 	private static String TV_SHOWS = "TV Shows";
 	private boolean allItems;
@@ -34,10 +42,10 @@ public class Playlist {
 	private List<Integer> playlistItems;
 	public static String PLAYLIST_ITEMS = "Playlist Items";
 
-	public Playlist(int playlistId, String name, String persistentID,
-			Integer distinguishedKind, Boolean master, Boolean visible,
-			Boolean music, Boolean movies, Boolean tvShows, boolean allItems,
-			byte[] smartInfo, byte[] smartCriteria,
+	public Playlist(int playlistId, String name, String persistentID, Integer distinguishedKind, 
+			Boolean master, Boolean visible, Boolean purchasedMusic, Boolean audiobooks, 
+			Boolean books, Boolean music, Boolean movies, Boolean podcasts, Boolean tvShows, 
+			boolean allItems, byte[] smartInfo, byte[] smartCriteria, 
 			List<Integer> playlistItems) {
 		this.playlistId = playlistId;
 		this.name = name;
@@ -45,8 +53,12 @@ public class Playlist {
 		this.distinguishedKind = distinguishedKind;
 		this.master = master;
 		this.visible = visible;
+		this.purchasedMusic = purchasedMusic;
+		this.audiobooks = audiobooks;
+		this.books = books;
 		this.music = music;
 		this.movies = movies;
+		this.podcasts = podcasts;
 		this.tvShows = tvShows;
 		this.allItems = allItems;
 		this.smartInfo = smartInfo;
@@ -55,14 +67,13 @@ public class Playlist {
 	}
 	
 	public Playlist(Map<String, String> playlistMap) {
-		this(Integer.parseInt(playlistMap.get(PLAYLIST_ID)), playlistMap.get(NAME), 
-				playlistMap.get(PERSISTENT_ID), 
+		this(Integer.parseInt(playlistMap.get(PLAYLIST_ID)), playlistMap.get(NAME), playlistMap.get(PERSISTENT_ID), 
 				(playlistMap.get(DISTINGUISHED_KIND) != null ? Integer.parseInt(playlistMap.get(DISTINGUISHED_KIND)) : null), 
-				getBooleanValue(playlistMap.get(MASTER)), getBooleanValue(playlistMap.get(VISIBLE)),
-				getBooleanValue(playlistMap.get(MUSIC)), getBooleanValue(playlistMap.get(MOVIES)), 
-				getBooleanValue(playlistMap.get(TV_SHOWS)), getBooleanValue(playlistMap.get(ALL_ITEMS)),
-				null, null,
-				null);
+				getBooleanValue(playlistMap.get(MASTER)), getBooleanValue(playlistMap.get(VISIBLE)), 
+				getBooleanValue(playlistMap.get(PURCHASED_MUSIC)), getBooleanValue(playlistMap.get(AUDIOBOOKS)), 
+				getBooleanValue(playlistMap.get(BOOKS)), getBooleanValue(playlistMap.get(MUSIC)), 
+				getBooleanValue(playlistMap.get(MOVIES)), getBooleanValue(playlistMap.get(PODCASTS)), 
+				getBooleanValue(playlistMap.get(TV_SHOWS)), getBooleanValue(playlistMap.get(ALL_ITEMS)), null, null, null);
 	}
 
 	public int getPlaylistId() {
@@ -169,6 +180,38 @@ public class Playlist {
 		this.playlistItems = playlistItems;
 	}
 	
+	public Boolean getPurchasedMusic() {
+		return purchasedMusic;
+	}
+
+	public void setPurchasedMusic(Boolean purchasedMusic) {
+		this.purchasedMusic = purchasedMusic;
+	}
+
+	public Boolean getAudiobooks() {
+		return audiobooks;
+	}
+
+	public void setAudiobooks(Boolean audiobooks) {
+		this.audiobooks = audiobooks;
+	}
+
+	public Boolean getBooks() {
+		return books;
+	}
+
+	public void setBooks(Boolean books) {
+		this.books = books;
+	}
+
+	public Boolean getPodcasts() {
+		return podcasts;
+	}
+
+	public void setPodcasts(Boolean podcasts) {
+		this.podcasts = podcasts;
+	}
+
 	@Override
 	public String toString() {
 		return "Playlist [playlistId=" + playlistId + ", name=" + name
@@ -182,12 +225,17 @@ public class Playlist {
 	public Dict getDict() {
 		Dict dict = new Dict();
 		dict.addKeyAndValue(NAME, name);
+		if (master != null) dict.addKeyAndValue(MASTER, master);
 		dict.addKeyAndValue(PLAYLIST_ID, playlistId);
 		dict.addKeyAndValue(PERSISTENT_ID, persistentID);
 		if (distinguishedKind != null) dict.addKeyAndValue(DISTINGUISHED_KIND, distinguishedKind);
-		if (master != null) dict.addKeyAndValue(MASTER, master);
+		if (visible != null) dict.addKeyAndValue(VISIBLE, visible);
+		if (purchasedMusic != null) dict.addKeyAndValue(PURCHASED_MUSIC, purchasedMusic);
+		if (audiobooks != null) dict.addKeyAndValue(AUDIOBOOKS, audiobooks);
+		if (books != null) dict.addKeyAndValue(BOOKS, books);
 		if (music != null) dict.addKeyAndValue(MUSIC, music);
 		if (movies != null) dict.addKeyAndValue(MOVIES, movies);
+		if (podcasts != null) dict.addKeyAndValue(PODCASTS, podcasts);
 		if (tvShows != null) dict.addKeyAndValue(TV_SHOWS, tvShows);
 		dict.addKeyAndValue(ALL_ITEMS, allItems);
 		if (smartInfo != null) dict.addKeyAndValue(SMART_INFO, smartInfo);
