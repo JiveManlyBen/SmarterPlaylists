@@ -22,7 +22,7 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import services.PlayListService;
+import services.PlaylistService;
 
 import com.apple.itunes.Plist;
 
@@ -31,7 +31,7 @@ import domain.Playlist;
 import domain.Track;
 import enums.TrackFilterType;
 
-public class PlayListServiceTest {
+public class PlaylistServiceTest {
 
 	private List<Track> getTrackList() {
         Calendar calendarDate = Calendar.getInstance();
@@ -109,7 +109,7 @@ public class PlayListServiceTest {
 
 	@Test
 	public void checkLibraryParsing() throws NumberFormatException, JAXBException, ParseException, SAXException, IOException {
-		Library returnedLibrary = PlayListService.getLibrary(new File("test/assets/Well_Formed.xml"));
+		Library returnedLibrary = PlaylistService.getLibrary(new File("test/assets/Well_Formed.xml"));
 		assertThat(returnedLibrary.getMajorVersion()).isEqualTo(1);
 		assertThat(returnedLibrary.getMinorVersion()).isEqualTo(2);
         Calendar calendarDate = Calendar.getInstance();
@@ -125,7 +125,7 @@ public class PlayListServiceTest {
 
 	@Test
 	public void checkTrackParsing() throws NumberFormatException, JAXBException, ParseException, SAXException, IOException {
-		Library returnedLibrary = PlayListService.getLibrary(new File("test/assets/Well_Formed.xml"));
+		Library returnedLibrary = PlaylistService.getLibrary(new File("test/assets/Well_Formed.xml"));
         Calendar calendarDate = Calendar.getInstance();
         calendarDate.clear();
 		assertThat(returnedLibrary.getTracks().size()).isEqualTo(25);
@@ -146,13 +146,13 @@ public class PlayListServiceTest {
 		assertThat(track.getPersistentID()).isEqualTo("023DDE089E93FEF0");
 		assertThat(track.getTrackType()).isEqualTo("File");
 		
-		returnedLibrary = PlayListService.getLibrary(new File("test/assets/Empty.xml"));
+		returnedLibrary = PlaylistService.getLibrary(new File("test/assets/Empty.xml"));
 		assertThat(returnedLibrary.getTracks().size()).isEqualTo(0);
 	}
 	
 	@Test
 	public void checkPlaylistParsing() throws NumberFormatException, JAXBException, ParseException, SAXException, IOException {
-		Library returnedLibrary = PlayListService.getLibrary(new File("test/assets/Well_Formed.xml"));
+		Library returnedLibrary = PlaylistService.getLibrary(new File("test/assets/Well_Formed.xml"));
 		assertThat(returnedLibrary.getPlaylists()).isNotNull();
 		assertThat(returnedLibrary.getPlaylists().size()).isEqualTo(2);
 		Playlist firstPlaylist = returnedLibrary.getPlaylists().get(0);
@@ -168,7 +168,7 @@ public class PlayListServiceTest {
 	@Test
 	public void checkBadPlaylistXML() throws Exception {
 		try {
-			PlayListService.getLibrary(new File("test/assets/Bad_Format.xml"));
+			PlaylistService.getLibrary(new File("test/assets/Bad_Format.xml"));
 			throw new Exception("Test should fail because of the format of the XML file.");
 		} catch (UnmarshalException e) {
 		}
@@ -214,8 +214,8 @@ public class PlayListServiceTest {
 	@Test
 	public void checkGeneratingXML() throws NumberFormatException, SAXException, JAXBException, ParseException {
 		File file = new File("test/assets/Generated.xml");
-		Library returnedLibrary = PlayListService.getLibrary(file);
-		assertThat(returnedLibrary.getPlist()).isEqualTo(PlayListService.getPlist(file));
+		Library returnedLibrary = PlaylistService.getLibrary(file);
+		assertThat(returnedLibrary.getPlist()).isEqualTo(PlaylistService.getPlist(file));
 	}
 
 	@Test

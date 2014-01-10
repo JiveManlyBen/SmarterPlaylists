@@ -31,7 +31,7 @@ import domain.Library;
 import domain.Playlist;
 import domain.Track;
 
-public class PlayListService {
+public class PlaylistService {
 	public static Library parseXMLFile(File file) throws NumberFormatException, JAXBException, ParseException, SAXException, IOException {
 		Library library = getLibrary(file);
 		Logger.debug(library.toString());

@@ -25,7 +25,7 @@ public class FileService {
 
 	public static void createTempPlaylistFiles(File file, Map<String, String> codeMap, String uuid) throws NumberFormatException, 
 		JAXBException, ParseException, SAXException, IOException {
-		Library library = PlayListService.parseXMLFile(file);
+		Library library = PlaylistService.parseXMLFile(file);
 		for (Map.Entry<String, String> entry : codeMap.entrySet()) {
 			TrackFilterType filter = TrackFilterType.get(entry.getKey());
 			Integer limit = StringUtils.isEmpty(entry.getValue().trim()) ? null : new Integer(entry.getValue().trim());
