@@ -69,8 +69,6 @@ public class Track {
 	private static final String GAPLESS_ALBUM = "Part Of Gapless Album";
 	private String comments;
 	private static final String COMMENTS = "Comments";
-	private Date releaseDate;
-	private static final String RELEASE_DATE = "Release Date";
 	private Integer playCount;
 	private static final String PLAY_COUNT = "Play Count";
 	private BigInteger playDate;
@@ -81,6 +79,8 @@ public class Track {
 	private static final String SKIP_COUNT = "Skip Count";
 	private Date skipDate;
 	private static final String SKIP_DATE = "Skip Date";
+	private Date releaseDate;
+	private static final String RELEASE_DATE = "Release Date";
 	private Integer normalization;
 	private static final String NORMALIZATION = "Normalization";
 	private Boolean compilation;
@@ -93,7 +93,7 @@ public class Track {
 	private static final String SEASON = "Season";
 	private String episode;
 	private static final String EPISODE = "Episode";
-	private String episodeOrder;
+	private Integer episodeOrder;
 	private static final String EPISODE_ORDER = "Episode Order";
 	private String sortAlbum;
 	private static final String SORT_ALBUM = "Sort Album";
@@ -105,12 +105,36 @@ public class Track {
 	private static final String SORT_COMPOSER = "Sort Composer";
 	private String sortName;
 	private static final String SORT_NAME = "Sort Name";
+	private String sortSeries;
+	private static final String SORT_SERIES = "Sort Series";
 	private String persistentID;
 	private static final String PERSISTENT_ID = "Persistent ID";
+	private Boolean clean;
+	private static final String CLEAN = "Clean";
+	private Boolean explicit;
+	private static final String EXPLICIT = "Explicit";
 	private String trackType;
 	private static final String TRACK_TYPE = "Track Type";
+	private Boolean isProtected;
+	private static final String PROTECTED = "Protected";
+	private Boolean purchased;
+	private static final String PURCHASED = "Purchased";
 	private Boolean podcast;
 	private static final String PODCAST = "Podcast";
+	private Boolean hasVideo;
+	private static final String HAS_VIDEO = "Has Video";
+	private Boolean hd;
+	private static final String HD = "HD";
+	private Integer videoWidth;
+	private static final String VIDEO_WIDTH = "Video Width";
+	private Integer videoHeight;
+	private static final String VIDEO_HEIGHT = "Video Height";
+	private Boolean movie;
+	private static final String MOVIE = "Movie";
+	private Boolean musicVideo;
+	private static final String MUSIC_VIDEO = "Music Video";
+	private Boolean tvShow;
+	private static final String TV_SHOW = "TV Show";
 	private Boolean unplayed;
 	private static final String UNPLAYED = "Unplayed";
 	private String location;
@@ -143,12 +167,14 @@ public class Track {
 			Integer startTime, Integer stopTime, Integer discNumber, Integer discCount, 
 			Integer trackNumber, Integer trackCount, Integer year, Integer bpm, Date dateModified, 
 			Date dateAdded, Integer bitRate, Integer sampleRate, Integer volumeAdjustment, 
-			Boolean gaplessAlbum, String comments, Date releaseDate, Integer playCount, BigInteger playDate, 
-			Date playDateUTC, Integer skipCount, Date skipDate, Integer normalization, Boolean compilation,
+			Boolean gaplessAlbum, String comments, Integer playCount, BigInteger playDate, 
+			Date playDateUTC, Integer skipCount, Date skipDate, Date releaseDate, Integer normalization, Boolean compilation,
 			Integer artworkCount, String series, Integer season, String episode, Integer episodeOrder,
 			String sortAlbum, String sortAlbumArtist, String sortArtist, String sortComposer,
-			String sortName, String persistentID, String trackType, Boolean podcast, Boolean unplayed, 
-			String location, Integer fileFolderCount, Integer libraryFolderCount) {
+			String sortName, String sortSeries, String persistentID, Boolean clean, Boolean explicit, 
+			String trackType, Boolean isProtected, Boolean purchased, Boolean hasVideo, Boolean hd, Boolean podcast, 
+			Integer videoWidth, Integer videoHeight, Boolean movie, Boolean musicVideo, Boolean tvShow,
+			Boolean unplayed, String location, Integer fileFolderCount, Integer libraryFolderCount) {
 		this.trackId = trackId;
 		this.name = name;
 		this.artist = artist;
@@ -175,26 +201,39 @@ public class Track {
 		this.volumeAdjustment = volumeAdjustment;
 		this.gaplessAlbum = gaplessAlbum;
 		this.comments = comments;
-		this.releaseDate = releaseDate;
 		this.playCount = playCount;
 		this.playDate = playDate;
 		this.playDateUTC = playDateUTC;
 		this.skipCount = skipCount;
 		this.skipDate = skipDate;
+		this.releaseDate = releaseDate;
 		this.normalization = normalization;
 		this.compilation = compilation;
 		this.artworkCount = artworkCount;
 		this.series = series;
 		this.season = season;
 		this.episode = episode;
+		this.episodeOrder = episodeOrder;
 		this.sortAlbum = sortAlbum;
 		this.sortAlbumArtist = sortAlbumArtist;
 		this.sortArtist = sortArtist;
 		this.sortComposer = sortComposer;
 		this.sortName = sortName;
+		this.sortSeries = sortSeries;
 		this.persistentID = persistentID;
+		this.clean = clean;
+		this.explicit = explicit;
 		this.trackType = trackType;
+		this.isProtected = isProtected;
+		this.purchased = purchased;
+		this.hasVideo = hasVideo;
+		this.hd = hd;
 		this.podcast = podcast;
+		this.videoWidth = videoWidth;
+		this.videoHeight = videoHeight;
+		this.movie = movie;
+		this.musicVideo = musicVideo;
+		this.tvShow = tvShow;
 		this.unplayed = unplayed;
 		this.location = location;
 		this.fileFolderCount = fileFolderCount;
@@ -212,16 +251,21 @@ public class Track {
 				getInteger(trackMap.get(BPM)), getDate(trackMap.get(DATE_MODIFIED)), 
 				dateFormat.parse(trackMap.get(DATE_ADDED)), getInteger(trackMap.get(BIT_RATE)), 
 				getInteger(trackMap.get(SAMPLE_RATE)), getInteger(trackMap.get(VOLUME_ADJUSTMENT)),
-				getBoolean(trackMap.get(GAPLESS_ALBUM)), trackMap.get(COMMENTS), getDate(trackMap.get(RELEASE_DATE)),
+				getBoolean(trackMap.get(GAPLESS_ALBUM)), trackMap.get(COMMENTS),
 				getInteger(trackMap.get(PLAY_COUNT)), getBigInteger(trackMap.get(PLAY_DATE)), 
 				getDate(trackMap.get(PLAY_DATE_UTC)), getInteger(trackMap.get(SKIP_COUNT)), 
-				getDate(trackMap.get(SKIP_DATE)), getInteger(trackMap.get(NORMALIZATION)),
-				getBoolean(trackMap.get(COMPILATION)), getInteger(trackMap.get(ARTWORK_COUNT)), 
-				trackMap.get(SERIES), getInteger(trackMap.get(SEASON)), trackMap.get(EPISODE), 
-				getInteger(trackMap.get(EPISODE_ORDER)), trackMap.get(SORT_ALBUM), 
+				getDate(trackMap.get(SKIP_DATE)), getDate(trackMap.get(RELEASE_DATE)), 
+				getInteger(trackMap.get(NORMALIZATION)), getBoolean(trackMap.get(COMPILATION)), 
+				getInteger(trackMap.get(ARTWORK_COUNT)), trackMap.get(SERIES), getInteger(trackMap.get(SEASON)), 
+				trackMap.get(EPISODE), getInteger(trackMap.get(EPISODE_ORDER)), trackMap.get(SORT_ALBUM), 
 				trackMap.get(SORT_ALBUM_ARTIST), trackMap.get(SORT_ARTIST), trackMap.get(SORT_COMPOSER), 
-				trackMap.get(SORT_NAME), trackMap.get(PERSISTENT_ID), trackMap.get(TRACK_TYPE), 
-				getBoolean(trackMap.get(PODCAST)), getBoolean(trackMap.get(UNPLAYED)), trackMap.get(LOCATION),
+				trackMap.get(SORT_NAME), trackMap.get(SORT_SERIES), trackMap.get(PERSISTENT_ID), 
+				getBoolean(trackMap.get(CLEAN)), getBoolean(trackMap.get(EXPLICIT)), trackMap.get(TRACK_TYPE), 
+				getBoolean(trackMap.get(PROTECTED)), getBoolean(trackMap.get(PURCHASED)),
+				getBoolean(trackMap.get(HAS_VIDEO)), getBoolean(trackMap.get(HD)), getBoolean(trackMap.get(PODCAST)), 
+				getInteger(trackMap.get(VIDEO_WIDTH)), getInteger(trackMap.get(VIDEO_HEIGHT)), 
+				getBoolean(trackMap.get(MOVIE)), getBoolean(trackMap.get(MUSIC_VIDEO)), 
+				getBoolean(trackMap.get(TV_SHOW)), getBoolean(trackMap.get(UNPLAYED)), trackMap.get(LOCATION), 
 				getInteger(trackMap.get(FILE_FOLDER_COUNT)), getInteger(trackMap.get(LIBRARY_FOLDER_COUNT)));
 	}
 
@@ -606,6 +650,166 @@ public class Track {
 		this.artworkCount = artworkCount;
 	}
 
+	public String getGrouping() {
+		return grouping;
+	}
+
+	public void setGrouping(String grouping) {
+		this.grouping = grouping;
+	}
+
+	public Integer getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Integer startTime) {
+		this.startTime = startTime;
+	}
+
+	public Integer getBpm() {
+		return bpm;
+	}
+
+	public void setBpm(Integer bpm) {
+		this.bpm = bpm;
+	}
+
+	public String getSeries() {
+		return series;
+	}
+
+	public void setSeries(String series) {
+		this.series = series;
+	}
+
+	public Integer getSeason() {
+		return season;
+	}
+
+	public void setSeason(Integer season) {
+		this.season = season;
+	}
+
+	public String getEpisode() {
+		return episode;
+	}
+
+	public void setEpisode(String episode) {
+		this.episode = episode;
+	}
+
+	public Integer getEpisodeOrder() {
+		return episodeOrder;
+	}
+
+	public void setEpisodeOrder(Integer episodeOrder) {
+		this.episodeOrder = episodeOrder;
+	}
+
+	public String getSortComposer() {
+		return sortComposer;
+	}
+
+	public void setSortComposer(String sortComposer) {
+		this.sortComposer = sortComposer;
+	}
+
+	public String getSortSeries() {
+		return sortSeries;
+	}
+
+	public void setSortSeries(String sortSeries) {
+		this.sortSeries = sortSeries;
+	}
+
+	public Boolean getClean() {
+		return clean;
+	}
+
+	public void setClean(Boolean clean) {
+		this.clean = clean;
+	}
+
+	public Boolean getExplicit() {
+		return explicit;
+	}
+
+	public void setExplicit(Boolean explicit) {
+		this.explicit = explicit;
+	}
+
+	public Boolean isProtected() {
+		return isProtected;
+	}
+
+	public void setProtected(Boolean isProtected) {
+		this.isProtected = isProtected;
+	}
+
+	public Boolean getPurchased() {
+		return purchased;
+	}
+
+	public void setPurchased(Boolean purchased) {
+		this.purchased = purchased;
+	}
+
+	public Boolean getHasVideo() {
+		return hasVideo;
+	}
+
+	public void setHasVideo(Boolean hasVideo) {
+		this.hasVideo = hasVideo;
+	}
+
+	public Boolean getHd() {
+		return hd;
+	}
+
+	public void setHd(Boolean hd) {
+		this.hd = hd;
+	}
+
+	public Integer getVideoWidth() {
+		return videoWidth;
+	}
+
+	public void setVideoWidth(Integer videoWidth) {
+		this.videoWidth = videoWidth;
+	}
+
+	public Integer getVideoHeight() {
+		return videoHeight;
+	}
+
+	public void setVideoHeight(Integer videoHeight) {
+		this.videoHeight = videoHeight;
+	}
+
+	public Boolean getMovie() {
+		return movie;
+	}
+
+	public void setMovie(Boolean movie) {
+		this.movie = movie;
+	}
+
+	public Boolean getMusicVideo() {
+		return musicVideo;
+	}
+
+	public void setMusicVideo(Boolean musicVideo) {
+		this.musicVideo = musicVideo;
+	}
+
+	public Boolean getTvShow() {
+		return tvShow;
+	}
+
+	public void setTvShow(Boolean tvShow) {
+		this.tvShow = tvShow;
+	}
+
 	public Double getPlaysPerDay() {
 		Calendar calendarDate = Calendar.getInstance();
 		return getPlaysPerDay(calendarDate);
@@ -671,12 +875,12 @@ public class Track {
 		dict.addKeyAndValue(VOLUME_ADJUSTMENT, volumeAdjustment);
 		dict.addKeyAndValue(GAPLESS_ALBUM, gaplessAlbum);
 		dict.addKeyAndValue(COMMENTS, comments);
-		dict.addKeyAndValue(RELEASE_DATE, releaseDate, dateFormat);
 		dict.addKeyAndValue(PLAY_COUNT, playCount);
 		dict.addKeyAndValue(PLAY_DATE, playDate);
 		dict.addKeyAndValue(PLAY_DATE_UTC, playDateUTC, dateFormat);
 		dict.addKeyAndValue(SKIP_COUNT, skipCount);
 		dict.addKeyAndValue(SKIP_DATE, skipDate, dateFormat);
+		dict.addKeyAndValue(RELEASE_DATE, releaseDate, dateFormat);
 		dict.addKeyAndValue(NORMALIZATION, normalization);
 		dict.addKeyAndValue(COMPILATION, compilation);
 		dict.addKeyAndValue(ARTWORK_COUNT, artworkCount);
@@ -689,8 +893,20 @@ public class Track {
 		dict.addKeyAndValue(SORT_ARTIST, sortArtist);
 		dict.addKeyAndValue(SORT_COMPOSER, sortComposer);
 		dict.addKeyAndValue(SORT_NAME, sortName);
+		dict.addKeyAndValue(SORT_SERIES, sortSeries);
 		dict.addKeyAndValue(PERSISTENT_ID, persistentID);
+		dict.addKeyAndValue(CLEAN, clean);
+		dict.addKeyAndValue(EXPLICIT, explicit);
 		dict.addKeyAndValue(TRACK_TYPE, trackType);
+		dict.addKeyAndValue(PROTECTED, isProtected);
+		dict.addKeyAndValue(PURCHASED, purchased);
+		dict.addKeyAndValue(HAS_VIDEO, hasVideo);
+		dict.addKeyAndValue(HD, hd);
+		dict.addKeyAndValue(VIDEO_WIDTH, videoWidth);
+		dict.addKeyAndValue(VIDEO_HEIGHT, videoHeight);
+		dict.addKeyAndValue(MOVIE, movie);
+		dict.addKeyAndValue(MUSIC_VIDEO, musicVideo);
+		dict.addKeyAndValue(TV_SHOW, tvShow);
 		dict.addKeyAndValue(PODCAST, podcast);
 		dict.addKeyAndValue(UNPLAYED, unplayed);
 		dict.addKeyAndValue(LOCATION, location);
