@@ -238,8 +238,10 @@ public class Playlist {
 		dict.addKeyAndValue(PODCASTS, podcasts);
 		dict.addKeyAndValue(TV_SHOWS, tvShows);
 		dict.addKeyAndValue(ALL_ITEMS, allItems);
-		dict.addKeyAndValue(SMART_INFO, smartInfo);
-		dict.addKeyAndValue(SMART_CRITERIA, smartCriteria);
+		if (smartCriteria != null && smartInfo != null) {
+			dict.addKeyAndValue(SMART_INFO, smartInfo);
+			dict.addKeyAndValue(SMART_CRITERIA, smartCriteria);
+		}
 		if (playlistItems != null && playlistItems.size() > 0) {
 			Array itemsArray = new Array();
 			for (Integer i : playlistItems) {
