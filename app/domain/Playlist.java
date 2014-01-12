@@ -225,21 +225,21 @@ public class Playlist {
 	public Dict getDict() {
 		Dict dict = new Dict();
 		dict.addKeyAndValue(NAME, name);
-		if (master != null) dict.addKeyAndValue(MASTER, master);
+		dict.addKeyAndValue(MASTER, master);
 		dict.addKeyAndValue(PLAYLIST_ID, playlistId);
 		dict.addKeyAndValue(PERSISTENT_ID, persistentID);
-		if (distinguishedKind != null) dict.addKeyAndValue(DISTINGUISHED_KIND, distinguishedKind);
-		if (visible != null) dict.addKeyAndValue(VISIBLE, visible);
-		if (purchasedMusic != null) dict.addKeyAndValue(PURCHASED_MUSIC, purchasedMusic);
-		if (audiobooks != null) dict.addKeyAndValue(AUDIOBOOKS, audiobooks);
-		if (books != null) dict.addKeyAndValue(BOOKS, books);
-		if (music != null) dict.addKeyAndValue(MUSIC, music);
-		if (movies != null) dict.addKeyAndValue(MOVIES, movies);
-		if (podcasts != null) dict.addKeyAndValue(PODCASTS, podcasts);
-		if (tvShows != null) dict.addKeyAndValue(TV_SHOWS, tvShows);
+		dict.addKeyAndValue(DISTINGUISHED_KIND, distinguishedKind);
+		dict.addKeyAndValue(VISIBLE, visible);
+		dict.addKeyAndValue(PURCHASED_MUSIC, purchasedMusic);
+		dict.addKeyAndValue(AUDIOBOOKS, audiobooks);
+		dict.addKeyAndValue(BOOKS, books);
+		dict.addKeyAndValue(MUSIC, music);
+		dict.addKeyAndValue(MOVIES, movies);
+		dict.addKeyAndValue(PODCASTS, podcasts);
+		dict.addKeyAndValue(TV_SHOWS, tvShows);
 		dict.addKeyAndValue(ALL_ITEMS, allItems);
-		if (smartInfo != null) dict.addKeyAndValue(SMART_INFO, smartInfo);
-		if (smartCriteria != null) dict.addKeyAndValue(SMART_CRITERIA, smartCriteria);
+		dict.addKeyAndValue(SMART_INFO, smartInfo);
+		dict.addKeyAndValue(SMART_CRITERIA, smartCriteria);
 		if (playlistItems != null && playlistItems.size() > 0) {
 			Array itemsArray = new Array();
 			for (Integer i : playlistItems) {
