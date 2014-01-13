@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -7,7 +8,7 @@ import com.apple.itunes.Array;
 import com.apple.itunes.Dict;
 
 public class Playlist {
-	private int playlistId;
+	private Integer playlistId;
 	private static String PLAYLIST_ID = "Playlist ID";
 	private String name;
 	private static String NAME = "Name";
@@ -42,7 +43,7 @@ public class Playlist {
 	private List<Integer> playlistItems;
 	public static String PLAYLIST_ITEMS = "Playlist Items";
 
-	public Playlist(int playlistId, String name, String persistentID, Integer distinguishedKind, 
+	public Playlist(Integer playlistId, String name, String persistentID, Integer distinguishedKind, 
 			Boolean master, Boolean visible, Boolean purchasedMusic, Boolean audiobooks, 
 			Boolean books, Boolean music, Boolean movies, Boolean podcasts, Boolean tvShows, 
 			boolean allItems, byte[] smartInfo, byte[] smartCriteria, 
@@ -67,8 +68,8 @@ public class Playlist {
 	}
 	
 	public Playlist(Map<String, String> playlistMap) {
-		this(Integer.parseInt(playlistMap.get(PLAYLIST_ID)), playlistMap.get(NAME), playlistMap.get(PERSISTENT_ID), 
-				(playlistMap.get(DISTINGUISHED_KIND) != null ? Integer.parseInt(playlistMap.get(DISTINGUISHED_KIND)) : null), 
+		this(getIntegerValue(playlistMap.get(PLAYLIST_ID)), playlistMap.get(NAME), 
+				playlistMap.get(PERSISTENT_ID), getIntegerValue(playlistMap.get(DISTINGUISHED_KIND)), 
 				getBooleanValue(playlistMap.get(MASTER)), getBooleanValue(playlistMap.get(VISIBLE)), 
 				getBooleanValue(playlistMap.get(PURCHASED_MUSIC)), getBooleanValue(playlistMap.get(AUDIOBOOKS)), 
 				getBooleanValue(playlistMap.get(BOOKS)), getBooleanValue(playlistMap.get(MUSIC)), 
@@ -173,11 +174,9 @@ public class Playlist {
 	}
 
 	public List<Integer> getPlaylistItems() {
+		if (playlistItems == null)
+			playlistItems = new ArrayList<Integer>();
 		return playlistItems;
-	}
-
-	public void setPlaylistItems(List<Integer> playlistItems) {
-		this.playlistItems = playlistItems;
 	}
 	
 	public Boolean getPurchasedMusic() {
@@ -260,5 +259,11 @@ public class Playlist {
 		if (value == null)
 			return null;
 		return Boolean.valueOf(value);
+	}
+	
+	private static Integer getIntegerValue(String value) {
+		if (value == null)
+			return null;
+		return Integer.parseInt(value);
 	}
 }

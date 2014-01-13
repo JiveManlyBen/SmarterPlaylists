@@ -141,7 +141,7 @@ public class PlaylistService {
 							trackList.add(new Integer(((JAXBElement<?>) trackObj).getValue().toString()));
 					}
 				}
-				playlist.setPlaylistItems(trackList);
+				playlist.getPlaylistItems().addAll(trackList);
 				Map<String, byte[]> byteMap = getKeysAndByteValues(dictElement);
 				playlist.setSmartInfo(byteMap.get(Playlist.SMART_INFO));
 				playlist.setSmartCriteria(byteMap.get(Playlist.SMART_CRITERIA));
