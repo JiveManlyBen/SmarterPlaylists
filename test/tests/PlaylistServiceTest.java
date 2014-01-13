@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -212,8 +213,8 @@ public class PlaylistServiceTest {
 	}
 
 	@Test
-	public void checkGeneratingXML() throws NumberFormatException, SAXException, JAXBException, ParseException {
-		File file = new File("test/assets/Generated.xml");
+	public void checkGeneratingLibraryExportXML() throws NumberFormatException, SAXException, JAXBException, ParseException {
+		File file = new File("test/assets/GeneratedLibrary.xml");
 		Library returnedLibrary = PlaylistService.getLibrary(file);
 		assertThat(returnedLibrary.getPlist()).isEqualTo(PlaylistService.getPlist(file));
 	}
