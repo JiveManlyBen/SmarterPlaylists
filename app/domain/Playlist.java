@@ -11,7 +11,7 @@ public class Playlist {
 	private Integer playlistId;
 	private static String PLAYLIST_ID = "Playlist ID";
 	private String name;
-	private static String NAME = "Name";
+	public static String NAME = "Name";
 	private String persistentID;
 	private static String PERSISTENT_ID = "Playlist Persistent ID";
 	private Integer distinguishedKind;
@@ -35,7 +35,7 @@ public class Playlist {
 	private Boolean tvShows;
 	private static String TV_SHOWS = "TV Shows";
 	private boolean allItems;
-	private static String ALL_ITEMS = "All Items";
+	public static String ALL_ITEMS = "All Items";
 	private byte[] smartInfo;
 	public static String SMART_INFO = "Smart Info";
 	private byte[] smartCriteria;

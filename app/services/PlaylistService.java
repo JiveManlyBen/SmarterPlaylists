@@ -93,7 +93,7 @@ public class PlaylistService {
         Plist plist = getPlist(file);
 		Library library = new Library(getKeysAndStringValues(plist.getDict()));
 		library.setTracks(getTracks(plist.getDict()));
-		library.setPlaylists(getPlaylists(plist.getDict()));
+		library.getPlaylists().addAll(getPlaylists(plist.getDict()));
 		return library;
 	}
 	private static Object getKeyElement(String key, Dict dict) {

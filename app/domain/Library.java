@@ -4,14 +4,22 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import play.i18n.Messages;
+
 import com.apple.itunes.Array;
 import com.apple.itunes.Dict;
 import com.apple.itunes.Plist;
+import com.apple.itunes.True;
+
+import enums.TrackFilterType;
 
 public class Library {
 	private int majorVersion;
@@ -59,6 +67,17 @@ public class Library {
 				Boolean.parseBoolean(keyMap.get(SHOW_CONTENT_RATINGS)),
 				keyMap.get(MUSIC_FOLDER),
 				keyMap.get(LIBRARY_PERSISTENT_ID));
+	}
+
+	public Library(Library oldLibrary) {
+		this.majorVersion = oldLibrary.majorVersion;
+		this.minorVersion = oldLibrary.minorVersion;
+		this.date = oldLibrary.date;
+		this.applicationVersion = oldLibrary.applicationVersion;
+		this.features = oldLibrary.features;
+		this.showContentRatings = oldLibrary.showContentRatings;
+		this.musicFolder = oldLibrary.musicFolder;
+		this.libraryPersistentId = oldLibrary.libraryPersistentId;
 	}
 
 	public int getMajorVersion() {
@@ -134,11 +153,9 @@ public class Library {
 	}
 
 	public List<Playlist> getPlaylists() {
+		if (playlists == null)
+			playlists = new ArrayList<Playlist>();
 		return playlists;
-	}
-
-	public void setPlaylists(List<Playlist> playlists) {
-		this.playlists = playlists;
 	}
 
 	public Plist getPlist() {
@@ -166,7 +183,26 @@ public class Library {
 		plist.setDict(libraryDict);
 		return plist;
 	}
-	
+
+	public Library getCustomPlaylist(TrackFilterType filterType, Integer limit) {
+		List<Track> trackList = Track.getSortedTracks(getTracks().values(), filterType.getComparator(), limit);
+		Map<Integer, Track> map = new LinkedHashMap<Integer, Track>();
+		Library newLibrary = new Library(this);
+		newLibrary.getPlaylists().clear();
+		Map<String, String> playlistMap = new HashMap<String, String>();
+		playlistMap.put(Playlist.NAME, (limit == null ? "" : limit + " ") + Messages.get(filterType.getCode()));
+		playlistMap.put(Playlist.ALL_ITEMS, new True().name());
+		Playlist playlist = new Playlist(playlistMap);
+		for (Track track : trackList) {
+			map.put(track.getTrackId(), track);
+			playlist.setAllItems(true);
+			playlist.getPlaylistItems().add(track.getTrackId());
+		}
+		newLibrary.setTracks(map);
+		newLibrary.getPlaylists().add(playlist);
+		return newLibrary;
+	}
+
 	public static String getM3U(List<Track> trackList) {
 		String m3uContents = "#EXTM3U";
 		for (Track track : trackList) {
