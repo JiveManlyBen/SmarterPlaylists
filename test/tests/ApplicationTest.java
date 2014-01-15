@@ -85,7 +85,7 @@ public class ApplicationTest {
   	  running(fakeApplication(), new Runnable() {
 		    public void run() {
     	Result result = callAction(
-    			controllers.routes.ref.Application.download("stuff", "file.m3u")
+    			controllers.routes.ref.Application.download("stuff", "file.xml")
     	);
     	assertThat(status(result)).isEqualTo(303);
 		    }

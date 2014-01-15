@@ -60,7 +60,7 @@ public class Application extends Controller {
 						codeMap.put(code, body.asFormUrlEncoded().get(code + "_limit")[0]);
 					}
 					FileService.deleteTempPlaylistFiles(uuid);
-					FileService.createTempM3uPlaylistFiles(file, codeMap, uuid);
+					FileService.createTempXmlPlaylistFiles(file, codeMap, uuid);
 					return redirect(routes.Application.downloads());
 				}
 				catch (Exception ex) {
@@ -75,14 +75,14 @@ public class Application extends Controller {
 	}
 
     public static Result downloads() {
-    	return ok(download.render(session("uuid"), FileService.getTempM3uPlaylistFiles(session("uuid")), FileService.M3U_EXTENSION));
+    	return ok(download.render(session("uuid"), FileService.getTempXmlPlaylistFiles(session("uuid")), FileService.XML_EXTENSION));
     }
 
     public static Result download(String uuid, String file) {
     	try {
     		if (!StringUtils.isEmpty(uuid) && uuid.equals(session("uuid"))) {
-    			File download = FileService.getTempM3uPlaylistFile(uuid, file);
-    			String fileName = Messages.get("filter.label." + download.getName().replace(FileService.M3U_EXTENSION, "")) + FileService.M3U_EXTENSION;
+    			File download = FileService.getTempXmlPlaylistFile(uuid, file);
+    			String fileName = Messages.get("filter.label." + download.getName().replace(FileService.XML_EXTENSION, "")) + FileService.XML_EXTENSION;
     			response().setHeader("Content-Disposition", 
     					"attachment; filename=\"" + fileName +"\"");
 	    		return ok(download);
