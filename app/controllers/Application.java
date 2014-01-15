@@ -75,14 +75,14 @@ public class Application extends Controller {
 	}
 
     public static Result downloads() {
-    	return ok(download.render(session("uuid"), FileService.getTempPlaylistFiles(session("uuid"))));
+    	return ok(download.render(session("uuid"), FileService.getTempPlaylistFiles(session("uuid")), FileService.M3U_EXTENSION));
     }
 
     public static Result download(String uuid, String file) {
     	try {
     		if (!StringUtils.isEmpty(uuid) && uuid.equals(session("uuid"))) {
     			File download = FileService.getTempPlaylistFile(uuid, file);
-    			String fileName = Messages.get("filter.label." + download.getName().replace(".m3u", "")) + ".m3u";
+    			String fileName = Messages.get("filter.label." + download.getName().replace(FileService.M3U_EXTENSION, "")) + FileService.M3U_EXTENSION;
     			response().setHeader("Content-Disposition", 
     					"attachment; filename=\"" + fileName +"\"");
 	    		return ok(download);

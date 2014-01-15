@@ -48,7 +48,7 @@ public class FileServiceTest {
 					FileService.createTempPlaylistFiles(file, getCodeMap("5"), "uuid_1");
 					for (String code : TrackFilterType.getCodes()) {
 						File output = new File(FileService.M3U_TEMP_DIRECTORY + "uuid_1" + File.separator + 
-								code + ".m3u");
+								code + FileService.M3U_EXTENSION);
 						assertThat(output.exists()).isTrue();
 					}
 				} catch (Exception e) {
@@ -66,7 +66,7 @@ public class FileServiceTest {
 		FileService.createTempPlaylistFiles(file, getCodeMap("5"), uuid);
 		List<String> downloadFiles = new ArrayList<String>();
 		for (String code : TrackFilterType.getCodes()) {
-			downloadFiles.add(code + ".m3u");
+			downloadFiles.add(code + FileService.M3U_EXTENSION);
 		}
 		assertThat(FileService.getTempPlaylistFiles(uuid)).isEqualTo(downloadFiles);
 	}

@@ -1,4 +1,4 @@
-@(uuid: String, fileNames: List[String])
+@(uuid: String, fileNames: List[String], extention: String)
 
 @main("download") {
 
@@ -12,7 +12,7 @@
 																}
 																	<h2>@Messages("download.label.link")</h2>
 																	@for(fileName <- fileNames) {
-																		<span><a href="/download/@(uuid)/@(fileName)">@Messages("filter.label." + fileName.replace(".m3u",""))</a></span>
+																		<span><a href="/download/@(uuid)/@(fileName)">@Messages("filter.label." + fileName.replace(extention,""))</a></span>
 																	}
                                                                 </div>
                                                         </div>
