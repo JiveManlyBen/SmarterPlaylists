@@ -37,7 +37,8 @@ public class PlaylistServiceTest {
         Calendar calendarDate = Calendar.getInstance();
         calendarDate.clear();
 
-        calendarDate.set(2010, 2, 21, 5, 0, 27);
+		calendarDate = Calendar.getInstance();
+		calendarDate.add(Calendar.MONTH, -36);
         Date dateAdded = calendarDate.getTime();
         calendarDate.set(2013, 7, 8, 21, 5, 7);
         Date playDate = calendarDate.getTime();
@@ -46,7 +47,8 @@ public class PlaylistServiceTest {
 			"MPEG audio file", 242886, dateAdded, 36, playDate, "58129546BE036721", 
 			"file://localhost/C:/Music/Red%20Hot%20Chili%20Peppers%20-%20My%20Friends.mp3"));
 		
-	    calendarDate.set(2010, 2, 21, 4, 49, 15);
+		calendarDate = Calendar.getInstance();
+		calendarDate.add(Calendar.MONTH, -34);
 	    dateAdded = calendarDate.getTime();
 	    calendarDate.set(2013, 10, 19, 4, 43, 39);
 	    playDate = calendarDate.getTime();
@@ -54,13 +56,15 @@ public class PlaylistServiceTest {
 			"MPEG audio file", 310674, dateAdded, 153, playDate, "FEBA0A5A4AD727B0",
 			"file://localhost/C:/Music/Foo%20Fighters%20-%20Come%20Alive.mp3"));
 	
-	    calendarDate.set(2013, 11, 11, 6, 12, 24);
+		calendarDate = Calendar.getInstance();
+		calendarDate.add(Calendar.MONTH, -2);
 	    dateAdded = calendarDate.getTime();
 		trackList.add(new Track(54321, "Losing My Edge", "LCD Soundsystem", "LCD Soundsystem", 
 			"MPEG audio file", 268225, dateAdded, null, null, "HDF9EJDU7HEKDNEU",
 			"file://localhost/C:/Music/LCD%20Soundsystem%20-%20Losing%20My%20Edge.mp3"));
 		
-	    calendarDate.set(2010, 6, 5, 22, 46, 19);
+		calendarDate = Calendar.getInstance();
+		calendarDate.add(Calendar.MONTH, -42);
 	    dateAdded = calendarDate.getTime();
 	    calendarDate.set(2013, 8, 18, 5, 11, 31);
 	    playDate = calendarDate.getTime();
@@ -68,7 +72,8 @@ public class PlaylistServiceTest {
 			"MPEG audio file", 308349, dateAdded, 106, playDate, "64CEC1404A7F5071",
 			"file://localhost/C:/Music/Soundgarden%20-%204th%20Of%20July.mp3"));
 		
-		calendarDate.set(2012, 11, 25, 23, 33, 40);
+		calendarDate = Calendar.getInstance();
+		calendarDate.add(Calendar.MONTH, -12);
 		dateAdded = calendarDate.getTime();
 		calendarDate.set(2013, 8, 7, 17, 36, 52);
 		playDate = calendarDate.getTime();
