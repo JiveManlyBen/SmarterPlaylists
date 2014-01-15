@@ -43,4 +43,7 @@ public class True {
 	    }
 	    return true;
 	}
+	public String name() {
+		return "True";
+	}
 }

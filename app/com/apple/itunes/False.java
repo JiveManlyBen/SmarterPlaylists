@@ -43,4 +43,7 @@ public class False {
 	    }
 	    return true;
 	}
+	public String name() {
+		return "False";
+	}
 }
