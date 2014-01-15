@@ -37,15 +37,15 @@ public class FileServiceTest {
 			public void run() {
 				File file = new File("test/assets/Well_Formed.xml");
 				try {
-					FileService.createTempPlaylistFiles(file, getCodeMap("5"), "uuid_1");
-					FileService.createTempPlaylistFiles(file, getCodeMap(""), "uuid_2");
-					FileService.createTempPlaylistFiles(file, getCodeMap(" 5"), "uuid_3");
-					FileService.createTempPlaylistFiles(file, getCodeMap("   "), "uuid_4");
-					FileService.createTempPlaylistFiles(file, getCodeMap("0"), "uuid_5");
-					FileService.createTempPlaylistFiles(file, getCodeMap("-1"), "uuid_6");
-					FileService.createTempPlaylistFiles(file, getCodeMap((Integer.MAX_VALUE + 1) + ""), "uuid_7");
+					FileService.createTempM3uPlaylistFiles(file, getCodeMap("5"), "uuid_1");
+					FileService.createTempM3uPlaylistFiles(file, getCodeMap(""), "uuid_2");
+					FileService.createTempM3uPlaylistFiles(file, getCodeMap(" 5"), "uuid_3");
+					FileService.createTempM3uPlaylistFiles(file, getCodeMap("   "), "uuid_4");
+					FileService.createTempM3uPlaylistFiles(file, getCodeMap("0"), "uuid_5");
+					FileService.createTempM3uPlaylistFiles(file, getCodeMap("-1"), "uuid_6");
+					FileService.createTempM3uPlaylistFiles(file, getCodeMap((Integer.MAX_VALUE + 1) + ""), "uuid_7");
 					
-					FileService.createTempPlaylistFiles(file, getCodeMap("5"), "uuid_1");
+					FileService.createTempM3uPlaylistFiles(file, getCodeMap("5"), "uuid_1");
 					for (String code : TrackFilterType.getCodes()) {
 						File output = new File(FileService.M3U_TEMP_DIRECTORY + "uuid_1" + File.separator + 
 								code + FileService.M3U_EXTENSION);
@@ -63,12 +63,12 @@ public class FileServiceTest {
 	public void checkTempPlaylistFilesExist() throws NumberFormatException, JAXBException, ParseException, SAXException, IOException {
 		File file = new File("test/assets/Well_Formed.xml");
 		String uuid = "uuid_1";
-		FileService.createTempPlaylistFiles(file, getCodeMap("5"), uuid);
+		FileService.createTempM3uPlaylistFiles(file, getCodeMap("5"), uuid);
 		List<String> downloadFiles = new ArrayList<String>();
 		for (String code : TrackFilterType.getCodes()) {
 			downloadFiles.add(code + FileService.M3U_EXTENSION);
 		}
-		assertThat(FileService.getTempPlaylistFiles(uuid)).isEqualTo(downloadFiles);
+		assertThat(FileService.getTempM3uPlaylistFiles(uuid)).isEqualTo(downloadFiles);
 	}
 	
 	@Test
@@ -78,7 +78,7 @@ public class FileServiceTest {
 				File file = new File("test/assets/Well_Formed.xml");
 				String uuid = "uuid_1";
 				try {
-					FileService.createTempPlaylistFiles(file, getCodeMap("5"), uuid);
+					FileService.createTempM3uPlaylistFiles(file, getCodeMap("5"), uuid);
 					FileService.deleteTempPlaylistFiles("uuid_1");
 					File dir = new File(FileService.M3U_TEMP_DIRECTORY + uuid);
 					assertThat(dir.exists()).isFalse();

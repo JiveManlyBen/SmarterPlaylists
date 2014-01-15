@@ -24,7 +24,7 @@ public class FileService {
 	public static final String M3U_TEMP_DIRECTORY = Play.application().path() + File.separator + "tmp" + File.separator + "m3u" + File.separator;
 	public static final String M3U_EXTENSION = ".m3u";
 
-	public static void createTempPlaylistFiles(File file, Map<String, String> codeMap, String uuid) throws NumberFormatException, 
+	public static void createTempM3uPlaylistFiles(File file, Map<String, String> codeMap, String uuid) throws NumberFormatException, 
 		JAXBException, ParseException, SAXException, IOException {
 		Library library = PlaylistService.parseXMLFile(file);
 		for (Map.Entry<String, String> entry : codeMap.entrySet()) {
@@ -32,19 +32,23 @@ public class FileService {
 			Integer limit = StringUtils.isEmpty(entry.getValue().trim()) ? null : new Integer(entry.getValue().trim());
 			List<Track> trackList = Track.getSortedTracks(library.getTracks().values(), filter.getComparator(), limit);
 			String m3uContent = Library.getM3U(trackList);
-			String fileName = M3U_TEMP_DIRECTORY + uuid + File.separator + entry.getKey()  + FileService.M3U_EXTENSION;
+			String fileName = M3U_TEMP_DIRECTORY + uuid + File.separator + entry.getKey()  + M3U_EXTENSION;
 			FileUtils.writeStringToFile(new File(fileName), m3uContent, "UTF-8");
 			Logger.debug("Created: " + fileName);
 		}
 	}
 
-	public static List<String> getTempPlaylistFiles(String uuid) {
-		File downloadDir = new File(M3U_TEMP_DIRECTORY + uuid + File.separator);
+	public static List<String> getTempM3uPlaylistFiles(String uuid) {
+		return getTempPlaylistFiles(M3U_TEMP_DIRECTORY, uuid, M3U_EXTENSION);
+	}
+
+	private static List<String> getTempPlaylistFiles(String directory, String uuid, final String extension) {
+		File downloadDir = new File(directory + uuid + File.separator);
 		List<String> files = new ArrayList<String>();
 		for (File file : downloadDir.listFiles(new FilenameFilter() {
-		    public boolean accept(File dir, String name) {
-		        return name.toLowerCase().endsWith(FileService.M3U_EXTENSION);
-		    }
+			public boolean accept(File dir, String name) {
+				return name.toLowerCase().endsWith(extension);
+			}
 		})) {
 			if (file.isFile())
 				files.add(file.getName());
@@ -52,7 +56,7 @@ public class FileService {
 		return files;
 	}
 
-	public static File getTempPlaylistFile(String uuid, String file) {
+	public static File getTempM3uPlaylistFile(String uuid, String file) {
 		return new File(M3U_TEMP_DIRECTORY + uuid + File.separator + file);
 	}
 
