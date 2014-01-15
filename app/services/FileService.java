@@ -1,14 +1,19 @@
 package services;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -16,6 +21,9 @@ import org.xml.sax.SAXException;
 
 import play.Logger;
 import play.Play;
+
+import com.apple.itunes.Plist;
+
 import domain.Library;
 import domain.Track;
 import enums.TrackFilterType;
@@ -23,6 +31,8 @@ import enums.TrackFilterType;
 public class FileService {
 	public static final String M3U_TEMP_DIRECTORY = Play.application().path() + File.separator + "tmp" + File.separator + "m3u" + File.separator;
 	public static final String M3U_EXTENSION = ".m3u";
+	public static final String XML_TEMP_DIRECTORY = Play.application().path() + File.separator + "tmp" + File.separator + "xml" + File.separator;
+	public static final String XML_EXTENSION = ".xml";
 
 	public static void createTempM3uPlaylistFiles(File file, Map<String, String> codeMap, String uuid) throws NumberFormatException, 
 		JAXBException, ParseException, SAXException, IOException {
@@ -38,8 +48,37 @@ public class FileService {
 		}
 	}
 
+	public static void createTempXmlPlaylistFiles(File file, Map<String, String> codeMap, String uuid) throws IOException, NumberFormatException, JAXBException, ParseException, SAXException {
+		Library library = PlaylistService.parseXMLFile(file);
+		for (Map.Entry<String, String> entry : codeMap.entrySet()) {
+			TrackFilterType filter = TrackFilterType.get(entry.getKey());
+			Integer limit = StringUtils.isEmpty(entry.getValue().trim()) ? null : new Integer(entry.getValue().trim());
+			Plist exportPlist = library.getCustomPlaylist(filter, limit).getPlist();
+			new File(XML_TEMP_DIRECTORY + uuid + File.separator).mkdirs();
+			String fileName = XML_TEMP_DIRECTORY + uuid + File.separator + entry.getKey()  + XML_EXTENSION;
+			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName),"UTF-8"));			
+			try {
+				JAXBContext context = JAXBContext.newInstance(Plist.class);
+				Marshaller marshaller = context.createMarshaller();
+				marshaller.marshal(exportPlist, out);
+				Logger.debug("Created: " + fileName);
+			}
+			catch (JAXBException e) {
+				Logger.error("Error occured while unmarshalling generated playlist.", e);
+				throw e;
+			}
+			finally {
+				out.close();
+			}
+		}
+	}
+
 	public static List<String> getTempM3uPlaylistFiles(String uuid) {
 		return getTempPlaylistFiles(M3U_TEMP_DIRECTORY, uuid, M3U_EXTENSION);
+	}
+	
+	public static List<String> getTempXmlPlaylistFiles(String uuid) {
+		return getTempPlaylistFiles(XML_TEMP_DIRECTORY, uuid, XML_EXTENSION);
 	}
 
 	private static List<String> getTempPlaylistFiles(String directory, String uuid, final String extension) {
@@ -59,9 +98,15 @@ public class FileService {
 	public static File getTempM3uPlaylistFile(String uuid, String file) {
 		return new File(M3U_TEMP_DIRECTORY + uuid + File.separator + file);
 	}
+	
+	public static File getTempXmlPlaylistFile(String uuid, String file) {
+		return new File(XML_TEMP_DIRECTORY + uuid + File.separator + file);
+	}
 
 	public static void deleteTempPlaylistFiles(String uuid) throws IOException {
 		File dir = new File(M3U_TEMP_DIRECTORY + uuid + File.separator);
+		FileUtils.deleteDirectory(dir);
+		dir = new File(XML_TEMP_DIRECTORY + uuid + File.separator);
 		FileUtils.deleteDirectory(dir);
 	}
 }
