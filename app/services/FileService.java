@@ -21,7 +21,6 @@ import org.xml.sax.SAXException;
 
 import play.Logger;
 import play.Play;
-import play.i18n.Lang;
 
 import com.apple.itunes.Plist;
 

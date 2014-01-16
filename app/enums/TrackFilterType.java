@@ -11,6 +11,8 @@ public enum TrackFilterType {
 	private String code;
 	private Comparator<Track> comparator;
 	
+	private static final String messagePrefix = "filter.label.";
+	
 	private TrackFilterType (String code, Comparator<Track> comparator) {
 		this.code = code;
 		this.comparator = comparator;
@@ -29,6 +31,10 @@ public enum TrackFilterType {
 
 	public Comparator<Track> getComparator() {
 		return comparator;
+	}
+	
+	public String getMessageCode() {
+		return messagePrefix + code;
 	}
 	
 	public static List<String> getCodes() {

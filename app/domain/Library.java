@@ -190,7 +190,7 @@ public class Library {
 		Library newLibrary = new Library(this);
 		newLibrary.getPlaylists().clear();
 		Map<String, String> playlistMap = new HashMap<String, String>();
-		playlistMap.put(Playlist.NAME, (limit == null ? "" : limit + " ") + Messages.get(filterType.getCode()));
+		playlistMap.put(Playlist.NAME, (limit == null ? "" : limit + " ") + Messages.get(filterType.getMessageCode()));
 		playlistMap.put(Playlist.ALL_ITEMS, new True().name());
 		Playlist playlist = new Playlist(playlistMap);
 		for (Track track : trackList) {
