@@ -816,7 +816,9 @@ public class Track {
 	}
 	
 	private Double getPlaysPerDay(Calendar calendarDate) {
-		return new Double((double)this.getPlayCount()/ ( (calendarDate.getTimeInMillis() - this.getDateAdded().getTime()) / (1000*60*60*24)) );
+		Double plays =  new Double((double)this.getPlayCount()/ ( (calendarDate.getTimeInMillis() - this.getDateAdded().getTime()) / (1000*60*60*24)) );
+		plays = plays.equals(Double.NaN) ? Double.MIN_VALUE : plays;
+		return plays;
 	}
 	
     public static class MostOftenPlayedComparator implements Comparator<Track> {

@@ -57,7 +57,7 @@ public class PlaylistServiceTest {
 			"file://localhost/C:/Music/Foo%20Fighters%20-%20Come%20Alive.mp3"));
 	
 		calendarDate = Calendar.getInstance();
-		calendarDate.add(Calendar.MONTH, -2);
+		calendarDate.add(Calendar.DATE, -1);
 	    dateAdded = calendarDate.getTime();
 		trackList.add(new Track(54321, "Losing My Edge", "LCD Soundsystem", "LCD Soundsystem", 
 			"MPEG audio file", 268225, dateAdded, null, null, "HDF9EJDU7HEKDNEU",
@@ -227,7 +227,8 @@ public class PlaylistServiceTest {
 	public void checkGeneratingPlaylistExportXML() throws NumberFormatException, SAXException, JAXBException, ParseException {
 		Library returnedLibrary = PlaylistService.getLibrary(new File("test/assets/Well_Formed.xml"));
 		File file = new File("test/assets/GeneratedPlaylist.xml");
-		assertThat(returnedLibrary.getCustomPlaylist(TrackFilterType.MOST_OFTEN_PLAYED, 3).getPlist()).isEqualTo(PlaylistService.getPlist(file));
+		assertThat(returnedLibrary.getCustomPlaylist(TrackFilterType.MOST_OFTEN_PLAYED, 3).getPlist())
+			.isEqualTo(PlaylistService.getPlist(file));
 	}
 
 	@Test
