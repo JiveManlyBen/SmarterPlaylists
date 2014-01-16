@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
+import play.Logger;
 import play.i18n.Lang;
 import play.i18n.Messages;
 import play.mvc.BodyParser;
@@ -64,6 +65,7 @@ public class Application extends Controller {
 					return redirect(routes.Application.downloads());
 				}
 				catch (Exception ex) {
+					Logger.error("Error when parsing XML file", ex);
 					flash("error", Messages.get("upload.error.parse"));
 					return redirect(routes.Application.index());
 				}
@@ -89,7 +91,7 @@ public class Application extends Controller {
 	    	}
 	    }
     	catch (Exception ex) {
-    		ex.printStackTrace();
+    		Logger.error("Error when downloading playlist file", ex);
     	}
 		flash("error", Messages.get("download.error.notfound"));
 		return redirect(routes.Application.downloads());
