@@ -255,6 +255,14 @@
 			border-top: none;
 		}
 
+	.helper-image
+	{
+		padding: 0px 20px 0px 20px;
+	}
+	.helper-offset
+	{
+		padding-right: 60px;
+	}
 	.error
 	{
 		color: red;
