@@ -28,6 +28,6 @@ jQuery(function($){
     	  return false;
     });
     if (navigator.platform.toUpperCase().indexOf('MAC')>=0)
-    	$('#exportExample').attr('href', $('#exportExample').attr('href').replace("windows", "mac", "gi") );
-    $('#exportExample').magnificPopup({type:'image'});
+    	$('.helper-image').attr('href', $('.helper-image').attr('href').replace("\.windows\.", ".mac.", "gi") );
+    $('.helper-image').magnificPopup({type:'image'});
 });
