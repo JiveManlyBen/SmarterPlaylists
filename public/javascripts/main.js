@@ -1,4 +1,4 @@
-jQuery(function($){
+jQuery(function($) {
 	enableUploadButton();
 	$('#playlistUploadFile').on("change", function() {
 		enableUploadButton();
