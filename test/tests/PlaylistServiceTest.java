@@ -181,7 +181,7 @@ public class PlaylistServiceTest {
 
 	@Test
 	public void checkTrackOrdering() {
-		List<Track> trackList = Track.getSortedTracks((Collection<Track>) getTrackList(), TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), null);
+		List<Track> trackList = Track.getSortedTracksByCount((Collection<Track>) getTrackList(), TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), null);
 		assertThat(trackList.get(0).getTrackId()).isEqualTo(8844);
 		assertThat(trackList.get(2).getTrackId()).isEqualTo(19938);
 		assertThat(trackList.get(3).getTrackId()).isEqualTo(12326);
@@ -195,10 +195,10 @@ public class PlaylistServiceTest {
 	}
 	
 	@Test
-	public void checkTrackOrderingWithLimit() {
+	public void checkTrackOrderingWithLimitByCount() {
 		List<Track> trackList = getTrackList();
 		int listSize = trackList.size() - 2;
-		trackList = Track.getSortedTracks((Collection<Track>) trackList, TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), listSize);
+		trackList = Track.getSortedTracksByCount((Collection<Track>) trackList, TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), listSize);
 		assertThat(trackList.size()).isEqualTo(listSize);
 		assertThat(trackList.get(0).getTrackId()).isEqualTo(8844);
 		assertThat(trackList.get(2).getTrackId()).isEqualTo(19938);
@@ -208,11 +208,33 @@ public class PlaylistServiceTest {
 		trackList = getTrackList();
 		int initialCount = trackList.size();
 		int limit = 100 + initialCount;
-		trackList = Track.getSortedTracks((Collection<Track>) getTrackList(), TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), limit);
+		trackList = Track.getSortedTracksByCount((Collection<Track>) getTrackList(), TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), limit);
 		assertThat(trackList.size()).isEqualTo(initialCount);
 		
 		trackList = getTrackList();
-		trackList = Track.getSortedTracks((Collection<Track>) getTrackList(), TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), 0);
+		trackList = Track.getSortedTracksByCount((Collection<Track>) getTrackList(), TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), 0);
+		assertThat(trackList.size()).isEqualTo(0);
+	}
+	
+	@Test
+	public void checkTrackOrderingWithLimitByTime() {
+		List<Track> trackList = getTrackList();
+		int minutes = 22;
+		trackList = Track.getSortedTracksByTime((Collection<Track>) trackList, TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), minutes);
+		assertThat(trackList.size()).isEqualTo(3);
+		assertThat(trackList.get(0).getTrackId()).isEqualTo(8844);
+		assertThat(trackList.get(1).getTrackId()).isEqualTo(15322);
+		assertThat(trackList.get(2).getTrackId()).isEqualTo(19938);
+		
+		trackList = getTrackList();
+		int initialCount = trackList.size();
+		int limit = 60000;
+		trackList = Track.getSortedTracksByTime((Collection<Track>) getTrackList(), TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), limit);
+		assertThat(trackList.size()).isEqualTo(initialCount);
+		assertThat(trackList.get(trackList.size() - 1).getTrackId()).isEqualTo(54321);
+		
+		trackList = getTrackList();
+		trackList = Track.getSortedTracksByTime((Collection<Track>) getTrackList(), TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), 0);
 		assertThat(trackList.size()).isEqualTo(0);
 	}
 

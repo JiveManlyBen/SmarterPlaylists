@@ -832,7 +832,7 @@ public class Track {
     	}
     }
 
-	public static List<Track> getSortedTracks(Collection<Track> tracks, Comparator<Track> comparator, Integer limit) {
+	public static List<Track> getSortedTracksByCount(Collection<Track> tracks, Comparator<Track> comparator, Integer limit) {
 		List<Track> trackList = new ArrayList<Track>(tracks);
 		Collections.sort(trackList, comparator);
 		try {
@@ -847,6 +847,23 @@ public class Track {
 		catch(IllegalArgumentException ex) {
 			return trackList;
 		}
+	}
+	
+	public static List<Track> getSortedTracksByTime(Collection<Track> tracks, Comparator<Track> comparator, Integer minutes) {
+		int limit = 0;
+		BigInteger maxMinutes = BigInteger.valueOf(minutes).multiply(BigInteger.valueOf(60 * 999));
+		BigInteger totalTime = BigInteger.ZERO;
+		List<Track> trackList = new ArrayList<Track>(tracks);
+		Collections.sort(trackList, comparator);
+		
+		for (Track track : trackList) {
+			totalTime = totalTime.add(BigInteger.valueOf(track.totalTime));
+			if (totalTime.compareTo(maxMinutes) > -1)
+				break;
+			limit++;
+		}
+		
+		return trackList.subList(0, limit);
 	}
 	
 	public Dict getDict() {

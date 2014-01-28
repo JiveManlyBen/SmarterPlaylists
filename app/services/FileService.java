@@ -40,7 +40,7 @@ public class FileService {
 		for (Map.Entry<String, String> entry : codeMap.entrySet()) {
 			TrackFilterType filter = TrackFilterType.get(entry.getKey());
 			Integer limit = StringUtils.isEmpty(entry.getValue().trim()) ? null : new Integer(entry.getValue().trim());
-			List<Track> trackList = Track.getSortedTracks(library.getTracks().values(), filter.getComparator(), limit);
+			List<Track> trackList = Track.getSortedTracksByCount(library.getTracks().values(), filter.getComparator(), limit);
 			String m3uContent = Library.getM3U(trackList);
 			String fileName = M3U_TEMP_DIRECTORY + uuid + File.separator + entry.getKey()  + M3U_EXTENSION;
 			FileUtils.writeStringToFile(new File(fileName), m3uContent, "UTF-8");

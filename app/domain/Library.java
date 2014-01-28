@@ -185,7 +185,7 @@ public class Library {
 	}
 
 	public Library getCustomPlaylist(TrackFilterType filterType, Integer limit) {
-		List<Track> trackList = Track.getSortedTracks(getTracks().values(), filterType.getComparator(), limit);
+		List<Track> trackList = Track.getSortedTracksByCount(getTracks().values(), filterType.getComparator(), limit);
 		Map<Integer, Track> map = new LinkedHashMap<Integer, Track>();
 		Library newLibrary = new Library(this);
 		newLibrary.getPlaylists().clear();
