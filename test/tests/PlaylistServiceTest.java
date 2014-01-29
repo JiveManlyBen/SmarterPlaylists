@@ -199,7 +199,7 @@ public class PlaylistServiceTest {
 		List<Track> trackList = getTrackList();
 		int listSize = trackList.size() - 2;
 		trackList = Track.getSortedTracksByCount((Collection<Track>) trackList, TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), listSize);
-		assertThat(trackList.size()).isEqualTo(listSize);
+		assertThat(trackList.size()).describedAs("limit to " + listSize + " tracks").isEqualTo(listSize);
 		assertThat(trackList.get(0).getTrackId()).isEqualTo(8844);
 		assertThat(trackList.get(2).getTrackId()).isEqualTo(19938);
 		assertThat(trackList.get(3).getTrackId()).isEqualTo(12326);
@@ -209,11 +209,19 @@ public class PlaylistServiceTest {
 		int initialCount = trackList.size();
 		int limit = 100 + initialCount;
 		trackList = Track.getSortedTracksByCount((Collection<Track>) getTrackList(), TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), limit);
-		assertThat(trackList.size()).isEqualTo(initialCount);
+		assertThat(trackList.size()).as("limit by more than available tracks").isEqualTo(initialCount);
 		
 		trackList = getTrackList();
 		trackList = Track.getSortedTracksByCount((Collection<Track>) getTrackList(), TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), 0);
-		assertThat(trackList.size()).isEqualTo(0);
+		assertThat(trackList.size()).as("limit to 0 tracks").isEqualTo(0);
+		
+		trackList = getTrackList();
+		trackList = Track.getSortedTracksByCount((Collection<Track>) getTrackList(), TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), null);
+		assertThat(trackList.size()).as("limit with null track count").isEqualTo(initialCount);
+		
+		trackList = getTrackList();
+		trackList = Track.getSortedTracksByCount((Collection<Track>) getTrackList(), TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), -1);
+		assertThat(trackList.size()).as("limit with negative track count").isEqualTo(0);
 	}
 	
 	@Test
@@ -221,7 +229,7 @@ public class PlaylistServiceTest {
 		List<Track> trackList = getTrackList();
 		int minutes = 22;
 		trackList = Track.getSortedTracksByTime((Collection<Track>) trackList, TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), minutes);
-		assertThat(trackList.size()).isEqualTo(3);
+		assertThat(trackList.size()).as("limit to " + minutes + " minutes").isEqualTo(3);
 		assertThat(trackList.get(0).getTrackId()).isEqualTo(8844);
 		assertThat(trackList.get(1).getTrackId()).isEqualTo(15322);
 		assertThat(trackList.get(2).getTrackId()).isEqualTo(19938);
@@ -230,12 +238,20 @@ public class PlaylistServiceTest {
 		int initialCount = trackList.size();
 		int limit = 60000;
 		trackList = Track.getSortedTracksByTime((Collection<Track>) getTrackList(), TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), limit);
-		assertThat(trackList.size()).isEqualTo(initialCount);
+		assertThat(trackList.size()).as("limit to " + (limit / 60) + " hours").isEqualTo(initialCount);
 		assertThat(trackList.get(trackList.size() - 1).getTrackId()).isEqualTo(54321);
 		
 		trackList = getTrackList();
 		trackList = Track.getSortedTracksByTime((Collection<Track>) getTrackList(), TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), 0);
-		assertThat(trackList.size()).isEqualTo(0);
+		assertThat(trackList.size()).as("limit to 0 minutes").isEqualTo(0);
+		
+		trackList = getTrackList();
+		trackList = Track.getSortedTracksByTime((Collection<Track>) getTrackList(), TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), null);
+		assertThat(trackList.size()).as("limit with a null value for minutes").isEqualTo(initialCount);
+		
+		trackList = getTrackList();
+		trackList = Track.getSortedTracksByTime((Collection<Track>) getTrackList(), TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), -1);
+		assertThat(trackList.size()).as("limit to a negative amount of minutes").isEqualTo(0);
 	}
 
 	@Test
