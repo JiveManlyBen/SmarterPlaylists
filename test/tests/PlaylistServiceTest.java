@@ -230,6 +230,10 @@ public class PlaylistServiceTest {
 		int minutes = 22;
 		trackList = Track.getSortedTracksByTime((Collection<Track>) trackList, TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), minutes);
 		assertThat(trackList.size()).as("limit to " + minutes + " minutes").isEqualTo(3);
+		trackList = getTrackList();
+		minutes = 26;
+		trackList = Track.getSortedTracksByTime((Collection<Track>) trackList, TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), minutes);
+		assertThat(trackList.size()).as("limit to " + minutes + " minutes").isEqualTo(4);
 		assertThat(trackList.get(0).getTrackId()).isEqualTo(8844);
 		assertThat(trackList.get(1).getTrackId()).isEqualTo(15322);
 		assertThat(trackList.get(2).getTrackId()).isEqualTo(19938);
@@ -254,6 +258,33 @@ public class PlaylistServiceTest {
 		assertThat(trackList.size()).as("limit to a negative amount of minutes").isEqualTo(0);
 	}
 
+	@Test
+	public void checkTrackOrderingWithLimitByCountAndTime() {
+		List<Track> trackList = getTrackList();
+		Integer listSize = trackList.size() - 3;
+		Integer minutes = null;
+		trackList = Track.getSortedTracksByCountAndTime((Collection<Track>) trackList, TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), listSize, minutes);
+		assertThat(trackList.size()).describedAs("limit by count: " + listSize + ", time: " + minutes).isEqualTo(listSize);
+		
+		trackList = getTrackList();
+		listSize = null;
+		minutes = 26;
+		trackList = Track.getSortedTracksByCountAndTime((Collection<Track>) trackList, TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), listSize, minutes);
+		assertThat(trackList.size()).as("limit by count: " +  listSize + ", time: " + minutes).isEqualTo(4);
+		
+		trackList = getTrackList();
+		listSize = 2;
+		minutes = 26;
+		trackList = Track.getSortedTracksByCountAndTime((Collection<Track>) trackList, TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), listSize, minutes);
+		assertThat(trackList.size()).as("limit by count: " + listSize + ", time: " + minutes).isEqualTo(2);
+		
+		trackList = getTrackList();
+		listSize = trackList.size();
+		minutes = 26;
+		trackList = Track.getSortedTracksByCountAndTime((Collection<Track>) trackList, TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), listSize, minutes);
+		assertThat(trackList.size()).as("limit by count: " + listSize + ", time: " + minutes).isEqualTo(4);
+	}
+	
 	@Test
 	public void checkGeneratingLibraryExportXML() throws NumberFormatException, SAXException, JAXBException, ParseException {
 		File file = new File("test/assets/GeneratedLibrary.xml");

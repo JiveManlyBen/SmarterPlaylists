@@ -850,6 +850,12 @@ public class Track {
 	}
 	
 	public static List<Track> getSortedTracksByTime(Collection<Track> tracks, Comparator<Track> comparator, Integer minutes) {
+		return getSortedTracksByCountAndTime(tracks, comparator, null, minutes);
+	}
+
+	public static List<Track> getSortedTracksByCountAndTime(Collection<Track> tracks, Comparator<Track> comparator, Integer count, Integer minutes) {
+		if (minutes == null)
+			return getSortedTracksByCount(tracks, comparator, count);
 		List<Track> trackList = new ArrayList<Track>(tracks);
 		Collections.sort(trackList, comparator);
 		try {
@@ -863,6 +869,9 @@ public class Track {
 					break;
 				limit++;
 			}
+			
+			if (count != null && count.compareTo(Integer.valueOf(limit)) < 0)
+				limit = count;
 			
 			return trackList.subList(0, limit);
 		}
