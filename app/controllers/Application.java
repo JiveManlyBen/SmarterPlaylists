@@ -58,7 +58,7 @@ public class Application extends Controller {
 					}
 					Map<String, String> codeMap = new LinkedHashMap<String, String>();
 					for (String code : codes) {
-						codeMap.put(code, body.asFormUrlEncoded().get(code + "_limit")[0]);
+						codeMap.put(code, body.asFormUrlEncoded().get(code + "_count")[0]);
 					}
 					FileService.deleteTempPlaylistFiles(uuid);
 					FileService.createTempXmlPlaylistFiles(file, codeMap, uuid);
