@@ -2,6 +2,7 @@ package services;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.StringReader;
 import java.text.ParseException;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -13,13 +14,17 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.UnmarshalException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
+import org.apache.commons.io.FileUtils;
 import org.xml.sax.SAXException;
 
 import play.Logger;
+import play.Play;
 
 import com.apple.itunes.Array;
 import com.apple.itunes.Dict;
@@ -89,9 +94,39 @@ public class PlaylistService {
 		Plist plist = (Plist) unmarshaller.unmarshal(file);
 		return plist;
 	}
+	public static Plist getPlistWithLocalDTD(File file) throws SAXException, JAXBException, NumberFormatException, ParseException, IOException {
+		String xml = FileUtils.readFileToString(file);
+		String dtdFile = "PropertyList-1.0.dtd";
+		xml = xml.replace("http://www.apple.com/DTDs/" + dtdFile, 
+				"file://" + Play.application().path() + File.separator + "conf" + File.separator  + dtdFile);
+		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		Schema schema = schemaFactory.newSchema(new File("conf"+File.separator+"iTunes.xsd"));
+		JAXBContext jc = JAXBContext.newInstance(Plist.class);
+		Unmarshaller unmarshaller = jc.createUnmarshaller();
+		unmarshaller.setSchema(schema);
+		Plist plist = (Plist) unmarshaller.unmarshal((new StreamSource(new StringReader(xml))));
+		return plist;
+	}
 	public static Library getLibrary(File file) throws SAXException, JAXBException, NumberFormatException, ParseException {
-        Plist plist = getPlist(file);
-		Library library = new Library(getKeysAndStringValues(plist.getDict()));
+		Plist plist = null;
+		try {
+			plist = getPlist(file);
+		}
+		catch (UnmarshalException e) {
+			if (e.getCause() != null && 
+				(e.getCause().getMessage().equals("www.apple.com") || 
+				e.getCause().getMessage().equals("Network is down"))) {
+				try {
+					plist = getPlistWithLocalDTD(file);
+				} catch (IOException ex) {
+					Logger.error(ex.getMessage(), ex);
+					throw new ParseException(ex.getMessage(), 0);
+				}
+        	}
+			else
+				throw e;
+        }
+        Library library = new Library(getKeysAndStringValues(plist.getDict()));
 		library.setTracks(getTracks(plist.getDict()));
 		library.getPlaylists().addAll(getPlaylists(plist.getDict()));
 		return library;
