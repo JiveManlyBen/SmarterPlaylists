@@ -5,10 +5,12 @@ jQuery(function($) {
 	});
 	function enableUploadButton() {
 		var playlistUploadFile = $('#playlistUploadFile').val();
-		if (playlistUploadFile != null && playlistUploadFile !== "")
+		if (playlistUploadFile !== undefined && playlistUploadFile !== "") {
 			$(".playlistUploadButton").prop("disabled", false);
-		else
+		}
+		else {
 			$(".playlistUploadButton").prop("disabled", true);
+		}
 	}
     $('#polyglotLanguageSwitcher').polyglotLanguageSwitcher({
 		effect: 'fade',
@@ -27,7 +29,8 @@ jQuery(function($) {
     $("a.polyglot").click(function() {
     	  return false;
     });
-    if (navigator.platform.toUpperCase().indexOf('MAC')>=0)
+    if (navigator.platform.toUpperCase().indexOf('MAC')>=0) {
     	$('.helper-image').attr('href', $('.helper-image').attr('href').replace("\.windows\.", ".mac.", "gi") );
+    }
     $('.helper-image').magnificPopup({type:'image'});
 });
