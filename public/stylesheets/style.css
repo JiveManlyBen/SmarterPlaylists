@@ -160,22 +160,32 @@
 		{
 			font-size: .8em;
 		}
-		
-		.cta-box .input-row input[type=number]
-		{
-			width: 90px;
-		}
-		
+
 		.cta-box .input-row input[type=file]
 		{
 			width: 280px;
 		}
-		
+			
 	.row-option
 	{
 		font-weight: bold;
 		margin-right: 20px;
 	}
+
+	.row-count
+	{
+		margin-right: 20px;
+	}
+
+		.row-count input
+		{
+			width:90px;
+		}
+
+		.row-time input
+		{
+			width: 50px;
+		}
 
 	.highlight-box
 	{

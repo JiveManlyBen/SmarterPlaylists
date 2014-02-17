@@ -19,7 +19,11 @@
 																	<div class="input-row">
 																	@for(code <- codes) {
 																		<label class="row-option"><input type="checkbox" id="@code" name="@code" value="most" checked> @Messages("filter.label." + code)</label>
-																		<label>@Messages("upload.label.count") <input type="number" id="@code.concat("_count")" maxlength="5" min="0" name="@code.concat("_count")" size="5"></label>
+																		<label class="row-count">@Messages("upload.label.count") <input type="number" id="@code.concat("_count")" maxlength="5" min="0" name="@code.concat("_count")" size="5"></label>
+																		<label class="row-time">@Messages("upload.label.time") 
+																			<input type="number" id="@code.concat("_hours")" maxlength="2" min="0" name="@code.concat("_hours")" size="2"> @Messages("upload.label.hours")
+																			<input type="number" id="@code.concat("_minutes")" maxlength="2" min="0" name="@code.concat("_minutes")" size="2"> @Messages("upload.label.minutes")
+																		</label>
 																	}
 																	</div>
                                                                 </div>
