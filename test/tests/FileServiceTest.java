@@ -19,14 +19,16 @@ import org.junit.After;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
+import domain.PlaylistLimit;
+
 import services.FileService;
 import enums.TrackFilterType;
 
 public class FileServiceTest {
-	private Map<String, String> getCodeMap(String limit){
-		Map<String, String> codeMap = new LinkedHashMap<String, String>();
+	private Map<String, PlaylistLimit> getCodeMap(String count){
+		Map<String, PlaylistLimit> codeMap = new LinkedHashMap<String, PlaylistLimit>();
 		for (String code : TrackFilterType.getCodes()) {
-			codeMap.put(code, limit);
+			codeMap.put(code, new PlaylistLimit(count, null, null));
 		}
 		return codeMap;
 	}

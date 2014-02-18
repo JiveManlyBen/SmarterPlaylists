@@ -16,7 +16,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.SAXException;
 
 import play.Logger;
@@ -25,6 +24,7 @@ import play.Play;
 import com.apple.itunes.Plist;
 
 import domain.Library;
+import domain.PlaylistLimit;
 import domain.Track;
 import enums.TrackFilterType;
 
@@ -34,13 +34,13 @@ public class FileService {
 	public static final String XML_TEMP_DIRECTORY = Play.application().path() + File.separator + "tmp" + File.separator + "xml" + File.separator;
 	public static final String XML_EXTENSION = ".xml";
 
-	public static void createTempM3uPlaylistFiles(File file, Map<String, String> codeMap, String uuid) throws NumberFormatException, 
+	public static void createTempM3uPlaylistFiles(File file, Map<String, PlaylistLimit> codeMap, String uuid) throws NumberFormatException, 
 		JAXBException, ParseException, SAXException, IOException {
 		Library library = PlaylistService.parseXMLFile(file);
-		for (Map.Entry<String, String> entry : codeMap.entrySet()) {
+		for (Map.Entry<String, PlaylistLimit> entry : codeMap.entrySet()) {
 			TrackFilterType filter = TrackFilterType.get(entry.getKey());
-			Integer limit = StringUtils.isEmpty(entry.getValue().trim()) ? null : new Integer(entry.getValue().trim());
-			List<Track> trackList = Track.getSortedTracksByCount(library.getTracks().values(), filter.getComparator(), limit);
+			Integer count = entry.getValue().getCount();
+			List<Track> trackList = Track.getSortedTracksByCount(library.getTracks().values(), filter.getComparator(), count);
 			String m3uContent = Library.getM3U(trackList);
 			String fileName = M3U_TEMP_DIRECTORY + uuid + File.separator + entry.getKey()  + M3U_EXTENSION;
 			FileUtils.writeStringToFile(new File(fileName), m3uContent, "UTF-8");
@@ -48,12 +48,12 @@ public class FileService {
 		}
 	}
 
-	public static void createTempXmlPlaylistFiles(File file, Map<String, String> codeMap, String uuid) throws 
+	public static void createTempXmlPlaylistFiles(File file, Map<String, PlaylistLimit> codeMap, String uuid) throws 
 	IOException, NumberFormatException, JAXBException, ParseException, SAXException {
 		Library library = PlaylistService.parseXMLFile(file);
-		for (Map.Entry<String, String> entry : codeMap.entrySet()) {
+		for (Map.Entry<String, PlaylistLimit> entry : codeMap.entrySet()) {
 			TrackFilterType filter = TrackFilterType.get(entry.getKey());
-			Integer count = StringUtils.isEmpty(entry.getValue().trim()) ? null : new Integer(entry.getValue().trim());
+			Integer count = entry.getValue().getCount();
 			Plist exportPlist = library.getCustomPlaylist(filter, count).getPlist();
 			new File(XML_TEMP_DIRECTORY + uuid + File.separator).mkdirs();
 			String fileName = XML_TEMP_DIRECTORY + uuid + File.separator + entry.getKey()  + XML_EXTENSION;

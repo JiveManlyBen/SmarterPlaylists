@@ -8,6 +8,8 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
+import domain.PlaylistLimit;
+
 import play.Logger;
 import play.i18n.Lang;
 import play.i18n.Messages;
@@ -25,7 +27,8 @@ import enums.TrackFilterType;
 public class Application extends Controller {
 
     public static Result index() {
-        return ok(index.render(TrackFilterType.getCodes()));
+        return ok(index.render(TrackFilterType.getCodes(), PlaylistLimit.countSuffix, 
+        		PlaylistLimit.hoursSuffix, PlaylistLimit.minutesSuffix));
     }
 
 	@BodyParser.Of(value = BodyParser.MultipartFormData.class, maxLength = 25 * 1024 * 1024)
@@ -56,9 +59,13 @@ public class Application extends Controller {
 					    uuid = java.util.UUID.randomUUID().toString();
 					    session("uuid", uuid);
 					}
-					Map<String, String> codeMap = new LinkedHashMap<String, String>();
+					Map<String, PlaylistLimit> codeMap = new LinkedHashMap<String, PlaylistLimit>();
 					for (String code : codes) {
-						codeMap.put(code, body.asFormUrlEncoded().get(code + "_count")[0]);
+						String count = body.asFormUrlEncoded().get(code + PlaylistLimit.countSuffix)[0];
+						String hours = body.asFormUrlEncoded().get(code + PlaylistLimit.hoursSuffix)[0];
+						String minutes = body.asFormUrlEncoded().get(code + PlaylistLimit.minutesSuffix)[0];
+						PlaylistLimit limits = new PlaylistLimit(count, hours, minutes);
+						codeMap.put(code, limits);
 					}
 					FileService.deleteTempPlaylistFiles(uuid);
 					FileService.createTempXmlPlaylistFiles(file, codeMap, uuid);

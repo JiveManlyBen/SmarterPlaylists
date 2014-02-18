@@ -1,4 +1,4 @@
-@(codes: List[String])
+@(codes: List[String], countSuffix: String, hoursSuffix: String, minutesSuffix: String)
 
 @main("home") {
 
@@ -19,10 +19,10 @@
 																	<div class="input-row">
 																	@for(code <- codes) {
 																		<label class="row-option"><input type="checkbox" id="@code" name="@code" value="most" checked> @Messages("filter.label." + code)</label>
-																		<label class="row-count">@Messages("upload.label.count") <input type="number" id="@code.concat("_count")" maxlength="5" min="0" name="@code.concat("_count")" size="5"></label>
+																		<label class="row-count">@Messages("upload.label.count") <input type="number" id="@code.concat(countSuffix)" maxlength="5" min="0" name="@code.concat(countSuffix)" size="5"></label>
 																		<label class="row-time">@Messages("upload.label.time") 
-																			<input type="number" id="@code.concat("_hours")" maxlength="2" min="0" name="@code.concat("_hours")" size="2"> @Messages("upload.label.hours")
-																			<input type="number" id="@code.concat("_minutes")" maxlength="2" min="0" name="@code.concat("_minutes")" size="2"> @Messages("upload.label.minutes")
+																			<input type="number" id="@code.concat(hoursSuffix)" maxlength="2" min="0" name="@code.concat(hoursSuffix)" size="2"> @Messages("upload.label.hours")
+																			<input type="number" id="@code.concat(minutesSuffix)" maxlength="2" min="0" name="@code.concat(minutesSuffix)" size="2"> @Messages("upload.label.minutes")
 																		</label>
 																	}
 																	</div>
