@@ -40,6 +40,16 @@ public class PlaylistLimit {
 	public void setMinutes(Integer minutes) {
 		this.minutes = minutes;
 	}
+	public Integer getTotalMinutes() {
+		if (this.hours == null && this.minutes == null)
+			return null;
+		else if (this.hours == null)
+			return this.minutes;
+		else if (this.minutes == null)
+			return this.hours * 60;
+		else
+			return (this.hours * 60) + this.minutes;
+	}
 	
 	private Integer getIntegerValue(String value) {
 		return StringUtils.isEmpty(value) || StringUtils.isEmpty(value.trim()) ? null : new Integer(value.trim());
