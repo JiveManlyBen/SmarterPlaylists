@@ -28,6 +28,7 @@ import com.apple.itunes.Plist;
 
 import domain.Library;
 import domain.Playlist;
+import domain.PlaylistLimit;
 import domain.Track;
 import enums.TrackFilterType;
 
@@ -201,8 +202,9 @@ public class PlaylistServiceTest {
 		trackList = Track.getSortedTracksByCount((Collection<Track>) trackList, TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), listSize);
 		assertThat(trackList.size()).describedAs("limit to " + listSize + " tracks").isEqualTo(listSize);
 		assertThat(trackList.get(0).getTrackId()).isEqualTo(8844);
-		assertThat(trackList.get(2).getTrackId()).isEqualTo(19938);
-		assertThat(trackList.get(3).getTrackId()).isEqualTo(12326);
+		assertThat(trackList.get(1).getTrackId()).isEqualTo(15322);
+		assertThat(trackList.get(2).getTrackId()).isEqualTo(12326);
+		assertThat(trackList.get(3).getTrackId()).isEqualTo(19938);
 		assertThat(trackList.get(trackList.size() - 1).getTrackId()).isEqualTo(214121);
 		
 		trackList = getTrackList();
@@ -296,7 +298,8 @@ public class PlaylistServiceTest {
 	public void checkGeneratingPlaylistExportXML() throws NumberFormatException, SAXException, JAXBException, ParseException {
 		Library returnedLibrary = PlaylistService.getLibrary(new File("test/assets/Well_Formed.xml"));
 		File file = new File("test/assets/GeneratedPlaylist.xml");
-		assertThat(returnedLibrary.getCustomPlaylist(TrackFilterType.MOST_OFTEN_PLAYED, 3).getPlist())
+		PlaylistLimit limit = new PlaylistLimit(3, null, null);
+		assertThat(returnedLibrary.getCustomPlaylist(TrackFilterType.MOST_OFTEN_PLAYED, limit).getPlist())
 			.isEqualTo(PlaylistService.getPlist(file));
 	}
 

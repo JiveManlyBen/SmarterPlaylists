@@ -864,7 +864,9 @@ public class Track {
 			BigInteger totalTime = BigInteger.ZERO;
 			
 			for (Track track : trackList) {
-				totalTime = totalTime.add(BigInteger.valueOf(track.totalTime));
+				//TODO: filter out things like podcasts
+				int trackTime = track.totalTime == null ? 0 : track.totalTime;
+				totalTime = totalTime.add(BigInteger.valueOf(trackTime));
 				if (totalTime.compareTo(maxMinutes) > -1)
 					break;
 				limit++;
@@ -876,9 +878,11 @@ public class Track {
 			return trackList.subList(0, limit);
 		}
 		catch(NullPointerException ex) {
+			ex.printStackTrace();
 			return trackList;
 		}
 		catch(IllegalArgumentException ex) {
+			ex.printStackTrace();
 			return trackList;
 		}
 	}

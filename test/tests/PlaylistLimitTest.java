@@ -34,5 +34,8 @@ public class PlaylistLimitTest {
 		limit = new PlaylistLimit(null, 2, null);
 		assertThat(limit.getMinutes()).isNull();
 		assertThat(limit.getTotalMinutes()).as("Total minutes when minutes are null").isEqualTo(120);
+		limit = new PlaylistLimit(30, 3, null);
+		assertThat(limit.getTotalMinutes()).isEqualTo(180);
+		assertThat(limit.getCount()).isEqualTo(30);
 	}
 }

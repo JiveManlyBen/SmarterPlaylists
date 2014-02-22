@@ -184,13 +184,15 @@ public class Library {
 		return plist;
 	}
 
-	public Library getCustomPlaylist(TrackFilterType filterType, Integer count) {
-		List<Track> trackList = Track.getSortedTracksByCount(getTracks().values(), filterType.getComparator(), count);
+	public Library getCustomPlaylist(TrackFilterType filterType, PlaylistLimit limit) {
+		List<Track> trackList = Track.getSortedTracksByCountAndTime(getTracks().values(), filterType.getComparator(), 
+				limit.getCount(), limit.getTotalMinutes());
 		Map<Integer, Track> map = new LinkedHashMap<Integer, Track>();
 		Library newLibrary = new Library(this);
 		newLibrary.getPlaylists().clear();
 		Map<String, String> playlistMap = new HashMap<String, String>();
-		playlistMap.put(Playlist.NAME, (count == null ? "" : count + " ") + Messages.get(filterType.getMessageCode()));
+		playlistMap.put(Playlist.NAME, (limit.getCount() == null || limit.getCount() != trackList.size() ? 
+				"" : limit.getCount() + " ") + Messages.get(filterType.getMessageCode()));
 		playlistMap.put(Playlist.ALL_ITEMS, new True().name());
 		Playlist playlist = new Playlist(playlistMap);
 		for (Track track : trackList) {

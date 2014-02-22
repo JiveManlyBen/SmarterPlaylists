@@ -53,8 +53,7 @@ public class FileService {
 		Library library = PlaylistService.parseXMLFile(file);
 		for (Map.Entry<String, PlaylistLimit> entry : codeMap.entrySet()) {
 			TrackFilterType filter = TrackFilterType.get(entry.getKey());
-			Integer count = entry.getValue().getCount();
-			Plist exportPlist = library.getCustomPlaylist(filter, count).getPlist();
+			Plist exportPlist = library.getCustomPlaylist(filter, entry.getValue()).getPlist();
 			new File(XML_TEMP_DIRECTORY + uuid + File.separator).mkdirs();
 			String fileName = XML_TEMP_DIRECTORY + uuid + File.separator + entry.getKey()  + XML_EXTENSION;
 			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName),"UTF-8"));			
