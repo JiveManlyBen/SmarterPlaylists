@@ -15,6 +15,9 @@ import java.util.Map;
 
 import com.apple.itunes.Dict;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Predicate;
+
 public class Track {
 
 	private int trackId;
@@ -831,9 +834,26 @@ public class Track {
 			return - playCount1.compareTo(playCount2);
     	}
     }
+    
+    private static Predicate getMusicPredicate() {
+        Predicate predicate = new Predicate() {
+            public boolean evaluate(Object object) {
+            	if (object.getClass() != Track.class) {
+            		return false;
+            	}
+            	Track track = (Track) object;
+            	if (track.getPodcast() != null && track.getPodcast()) {
+            		return false;
+            	}
+                return true;
+            }
+        };
+        return predicate;
+    }
 
 	public static List<Track> getSortedTracksByCount(Collection<Track> tracks, Comparator<Track> comparator, Integer limit) {
 		List<Track> trackList = new ArrayList<Track>(tracks);
+		CollectionUtils.filter(trackList, getMusicPredicate());
 		Collections.sort(trackList, comparator);
 		try {
 			return trackList.subList(0, limit);
@@ -857,6 +877,7 @@ public class Track {
 		if (minutes == null)
 			return getSortedTracksByCount(tracks, comparator, count);
 		List<Track> trackList = new ArrayList<Track>(tracks);
+		CollectionUtils.filter(trackList, getMusicPredicate());
 		Collections.sort(trackList, comparator);
 		try {
 			int limit = 0;
