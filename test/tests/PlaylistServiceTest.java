@@ -18,6 +18,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.UnmarshalException;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.xml.sax.SAXException;
@@ -98,7 +99,7 @@ public class PlaylistServiceTest {
 		playDate = null;
 		Track podcast = new Track(26760, "RT Podcast #259", "Rooster Teeth Podcast", "Rooster Teeth Podcast", 
 				"AAC audio file", null, dateAdded, null, playDate, "A32F51E87EAF2A84",
-		"file://localhost/Users/blevy/Music/iTunes/iTunes%20Media/Music/Daft%20Punk/Random%20Access%20Memories/Instant%20Crush.mp3");
+				"file://localhost/Users/blevy/Music/iTunes/Podcasts/Rooster%20Teeth%20Podcast/RT%20Podcast%20%23259.m4a");
 		podcast.setPodcast(true);
 		trackList.add(podcast);
 		
@@ -112,10 +113,36 @@ public class PlaylistServiceTest {
 				"MPEG audio file", 210703, dateAdded, 5, playDate, "78YHFR4YU8H87FHQ",
 				"file://localhost/C:/Music/Run%20The%20Jewels%20-%20Run%20The%20Jewels.mp3"));
 		
+		calendarDate = Calendar.getInstance();
+		calendarDate.add(Calendar.MONTH, -20);
+		dateAdded = calendarDate.getTime();
+		calendarDate = Calendar.getInstance();
+		calendarDate.add(Calendar.MONTH, -3);
+		playDate = calendarDate.getTime();
+		Track tvShow = new Track(10641, "The Clipshow Wherein Dante and Randal are Locked in the Freezer and Remember Some of the Great Moments in Their Lives", "Clerks", null, 
+				"MPEG-4 video file", 1267680, dateAdded, 2, playDate, "264895B685E6A512",
+				"file://localhost/Users/blevy/Music/iTunes/iTunes%20Media/Music/Clerks/Clerks%20-%20Episode%202.mp4");
+		tvShow.setHasVideo(true);
+		tvShow.setHd(false);
+		tvShow.setTvShow(true);
+		trackList.add(tvShow);
+		
+		calendarDate = Calendar.getInstance();
+		calendarDate.add(Calendar.YEAR, -3);
+		dateAdded = calendarDate.getTime();
+		calendarDate = Calendar.getInstance();
+		calendarDate.add(Calendar.MONTH, -26);
+		playDate = calendarDate.getTime();
+		Track movie = new Track(10641, "Conan checks in on his statue", null, null, 
+				"MPEG-4 video file", 363240, dateAdded, 1, playDate, "4AC670F7D30097FF",
+				"file://localhost/Users/blevy/Music/iTunes/iTunes%20Media/Videos/Conan%20checks%20in%20on%20his%20statue.mp4");
+		movie.setMovie(true);
+		trackList.add(movie);
+		
 		return trackList;
 	}
 	
-	private int nonMusicTracks = 1;
+	private int nonMusicTracks = 3;
 	
 	@SuppressWarnings("unused")
 	private void printPlist(Plist plist) throws JAXBException {
@@ -211,16 +238,15 @@ public class PlaylistServiceTest {
 	@Test
 	public void checkTrackOrderingWithLimitByCount() {
 		List<Track> trackList = getTrackList();
-		int listSize = trackList.size() - 2;
+		int listSize = trackList.size();
 		trackList = Track.getSortedTracksByCount((Collection<Track>) trackList, TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), listSize);
-		assertThat(trackList.size()).describedAs("limit to " + listSize + " tracks").isEqualTo(listSize);
-		for (Track t : trackList)
-			System.out.println(t + "\n" + t.getPlaysPerDay());
+		assertThat(trackList.size()).describedAs("limit to " + (listSize - nonMusicTracks) + " tracks").isEqualTo(listSize - nonMusicTracks);
+
 		assertThat(trackList.get(0).getTrackId()).isEqualTo(8844);
 		assertThat(trackList.get(1).getTrackId()).isEqualTo(19938);
 		assertThat(trackList.get(2).getTrackId()).isEqualTo(15322);
 		assertThat(trackList.get(3).getTrackId()).isEqualTo(12326);
-		assertThat(trackList.get(trackList.size() - 1 - nonMusicTracks).getTrackId()).describedAs("check the second to last track").isEqualTo(214121);
+		assertThat(trackList.get(trackList.size() - 1).getTrackId()).describedAs("check the to last track").isEqualTo(54321);
 		
 		trackList = getTrackList();
 		int initialCount = trackList.size();
@@ -320,7 +346,9 @@ public class PlaylistServiceTest {
 
 	@Test
 	public void checkGeneratingM3U() throws IOException {
-		String generatedM3U = Library.getM3U(getTrackList());
+		List<Track> trackList = getTrackList();
+		CollectionUtils.filter(trackList, Track.getMusicPredicate());
+		String generatedM3U = Library.getM3U(trackList);
 		String exampleM3U = FileUtils.readFileToString(new File("test/assets/Example.m3u"));
 		assertThat(generatedM3U).isEqualTo(exampleM3U);
 	}

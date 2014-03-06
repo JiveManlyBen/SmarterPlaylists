@@ -835,7 +835,7 @@ public class Track {
     	}
     }
     
-    private static Predicate getMusicPredicate() {
+    public static Predicate getMusicPredicate() {
         Predicate predicate = new Predicate() {
             public boolean evaluate(Object object) {
             	if (object.getClass() != Track.class) {
@@ -843,6 +843,12 @@ public class Track {
             	}
             	Track track = (Track) object;
             	if (track.getPodcast() != null && track.getPodcast()) {
+            		return false;
+            	}
+            	if (track.getTvShow() != null && track.getTvShow()) {
+            		return false;
+            	}
+            	if (track.getMovie() != null && track.getMovie()) {
             		return false;
             	}
                 return true;
@@ -885,7 +891,6 @@ public class Track {
 			BigInteger totalTime = BigInteger.ZERO;
 			
 			for (Track track : trackList) {
-				//TODO: filter out things like podcasts
 				int trackTime = track.totalTime == null ? 0 : track.totalTime;
 				totalTime = totalTime.add(BigInteger.valueOf(trackTime));
 				if (totalTime.compareTo(maxMinutes) > -1)
