@@ -18,6 +18,8 @@
 
 	#header-wrapper
 	{
+		background: url('images/header.png');
+		background-position: 0px -6px;
 		box-shadow: inset 0px 10px 80px 0px rgba(0,0,0,0.2);
 		height: 102px;
 		position: relative;
@@ -35,7 +37,6 @@
 	#site-header
 	{
 		position: relative;
-		background: url('images/header.png');
 		background-size: 100% 190px;
 		height: 190px;
 		text-shadow: -1px -1px 1px rgba(0,0,0,1);
