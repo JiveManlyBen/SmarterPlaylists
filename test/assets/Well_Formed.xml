@@ -55,7 +55,7 @@
 			<key>Date Added</key><date>2010-03-21T04:49:30Z</date>
 			<key>Bit Rate</key><integer>128</integer>
 			<key>Sample Rate</key><integer>44100</integer>
-			<key>Play Count</key><integer>122</integer>
+			<key>Play Count</key><integer>124</integer>
 			<key>Play Date</key><integer>3465788970</integer>
 			<key>Play Date UTC</key><date>2013-10-28T13:09:30Z</date>
 			<key>Skip Count</key><integer>7</integer>
@@ -674,7 +674,7 @@
 			<key>Bit Rate</key><integer>256</integer>
 			<key>Sample Rate</key><integer>44100</integer>
 			<key>Part Of Gapless Album</key><true/>
-			<key>Play Count</key><integer>78</integer>
+			<key>Play Count</key><integer>120</integer>
 			<key>Play Date</key><integer>3467457275</integer>
 			<key>Play Date UTC</key><date>2013-11-16T20:34:35Z</date>
 			<key>Skip Count</key><integer>5</integer>
@@ -707,7 +707,7 @@
 			<key>Bit Rate</key><integer>256</integer>
 			<key>Sample Rate</key><integer>44100</integer>
 			<key>Part Of Gapless Album</key><true/>
-			<key>Play Count</key><integer>81</integer>
+			<key>Play Count</key><integer>91</integer>
 			<key>Play Date</key><integer>3467457877</integer>
 			<key>Play Date UTC</key><date>2013-11-16T20:44:37Z</date>
 			<key>Skip Count</key><integer>3</integer>
