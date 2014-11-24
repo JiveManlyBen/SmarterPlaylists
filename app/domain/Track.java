@@ -824,13 +824,17 @@ public class Track {
 		return plays;
 	}
 	
+	private static Double getAdjustedPlayCount(Calendar calendarDate, Track track) {
+		int days = (int) ((calendarDate.getTimeInMillis() - track.getDateAdded().getTime()) / (1000*60*60*24));
+		Double playCount = track.getPlaysPerDay(calendarDate) / (days < 30 ? 2 * (4 - (days/10)) : 1);
+		return playCount;
+	}
+
     public static class MostOftenPlayedComparator implements Comparator<Track> {
     	private static Calendar calendarDate = Calendar.getInstance();
     	public int compare(Track t1, Track t2) {
-			int days1 = (int) ((calendarDate.getTimeInMillis() - t1.getDateAdded().getTime()) / (1000*60*60*24));
-			Double playCount1 = t1.getPlaysPerDay(calendarDate) / (days1 < 30 ? 2 * (4 - (days1/10)) : 1);
-			int days2 = (int) ((calendarDate.getTimeInMillis() - t2.getDateAdded().getTime()) / (1000*60*60*24));
-			Double playCount2 = t2.getPlaysPerDay(calendarDate) / (days2 < 30 ? 2 * (4 - (days2/10)) : 1);
+			Double playCount1 = getAdjustedPlayCount(calendarDate, t1);
+			Double playCount2 = getAdjustedPlayCount(calendarDate, t2);
 			return - playCount1.compareTo(playCount2);
     	}
     }
