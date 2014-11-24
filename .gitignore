@@ -2,6 +2,7 @@
 .project
 .settings/**
 .target/**
+RUNNING_PID
 logs/application.log
 target/**
 tmp/**
