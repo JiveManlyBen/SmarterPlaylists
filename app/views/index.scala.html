@@ -17,8 +17,8 @@
 																		<input class="button playlistUploadButton" type="submit" value="@Messages("upload.button.upload")" disabled>
 																	</div>
 																	<div class="input-row">
-																	@for(code <- codes) {
 																		<table class="row-table">
+																	@for(code <- codes) {
 																			<tr>
 																				<td class="option-primary">
 																					<label class="row-option"><input type="checkbox" id="@code" name="@code" value="most" checked> @Messages("filter.label." + code)</label>
@@ -36,8 +36,8 @@
 																					</label>
 																				</td>
 																			</tr>
-																		</table>
 																	}
+																		</table>
 																	</div>
                                                                 </div>
                                                         </div>
