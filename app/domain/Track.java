@@ -17,6 +17,7 @@ import com.apple.itunes.Dict;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
+import org.apache.commons.lang3.StringUtils;
 
 public class Track {
 
@@ -916,7 +917,24 @@ public class Track {
 			return trackList;
 		}
 	}
-	
+
+	public static List<Track> getSharedTracks(Collection<Track> firstTracks, Collection<Track> secondTracks) {
+		List<Track> trackList = new ArrayList<Track>();
+		for (Track first : firstTracks) {
+			if (first != null && first.getArtist() != null && first.getName() != null) {
+				for (Track second : secondTracks) {
+					if (second != null && 
+							StringUtils.equalsIgnoreCase(first.getArtist().trim(), second.getArtist().trim()) && 
+							StringUtils.equalsIgnoreCase(first.getName().trim(), second.getName().trim())) {
+						trackList.add(first);
+						break;
+					}
+				}
+			}
+		}
+		return trackList;
+	}
+
 	public Dict getDict() {
 		Dict dict = new Dict();
 		dict.addKeyAndValue(TRACK_ID, trackId);

@@ -152,6 +152,18 @@ public class PlaylistServiceTest {
 		marshaller.marshal( plist, System.out );
 	}
 
+	private Track buildTrack(String name, String artist, String album) {
+		int trackId = 1;
+		String kind = "MPEG audio file";
+		Date date = new Date();
+		int playCount = 25;
+		String location = "file://localhost/C:/Music/file.mp3";
+		Track newTrack = new Track(trackId, name, artist, album, kind, trackId, 
+				date, playCount, date, Integer.toString(trackId), location);
+
+		return newTrack;
+	}
+
 	@Test
 	public void checkLibraryParsing() throws NumberFormatException, JAXBException, ParseException, SAXException, IOException {
 		Library returnedLibrary = PlaylistService.getLibrary(new File("test/assets/Well_Formed.xml"));
@@ -326,6 +338,56 @@ public class PlaylistServiceTest {
 		minutes = 26;
 		trackList = Track.getSortedTracksByCountAndTime((Collection<Track>) trackList, TrackFilterType.MOST_OFTEN_PLAYED.getComparator(), listSize, minutes);
 		assertThat(trackList.size()).as("limit by count: " + listSize + ", time: " + minutes).isEqualTo(4);
+	}
+	
+	@Test
+	public void checkSharedTracks() {
+		List<Track> trackList = getTrackList();
+		CollectionUtils.filter(trackList, Track.getMusicPredicate());
+		List<Track> sharedTracks = Track.getSharedTracks(trackList, trackList);
+		assertThat(trackList.size()).as("all tracks shared when checking against itself").isEqualTo(sharedTracks.size());
+
+		List<Track> newTracks = new ArrayList<Track>();
+		int i = 0;
+		for (Track track : trackList) {
+			if (i % 2 == 0) {
+				newTracks.add(buildTrack(track.getName(), track.getArtist(), track.getAlbum()));
+			}
+			if (i == 4) {
+				break;
+			}
+			i++;
+		}
+		sharedTracks = Track.getSharedTracks(trackList, newTracks);
+		assertThat(sharedTracks.size()).as("match three tracks that have exact same attributes").isEqualTo(3);
+
+		newTracks = new ArrayList<Track>();
+		i = 0;
+		for (Track track : trackList) {
+			if (i % 2 == 1) {
+				newTracks.add(buildTrack(track.getName() + " ", track.getArtist() + "	", track.getAlbum()));
+			}
+			if (i == 5) {
+				break;
+			}
+			i++;
+		}
+		sharedTracks = Track.getSharedTracks(trackList, newTracks);
+		assertThat(sharedTracks.size()).as("match three tracks that have extra whitespace").isEqualTo(3);
+		
+		newTracks = new ArrayList<Track>();
+		i = 0;
+		for (Track track : trackList) {
+			if (i % 2 == 0) {
+				newTracks.add(buildTrack(track.getName().toUpperCase(), track.getArtist().toLowerCase(), track.getAlbum()));
+			}
+			if (i == 5) {
+				break;
+			}
+			i++;
+		}
+		sharedTracks = Track.getSharedTracks(trackList, newTracks);
+		assertThat(sharedTracks.size()).as("match three tracks that have extra whitespace").isEqualTo(3);
 	}
 	
 	@Test
