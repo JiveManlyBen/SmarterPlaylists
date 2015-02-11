@@ -1,6 +1,8 @@
 package tests;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static play.test.Helpers.fakeApplication;
+import static play.test.Helpers.running;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,7 +25,12 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
+import play.Application;
+import play.GlobalSettings;
+import play.Play;
+import play.test.FakeApplication;
 import services.PlaylistService;
+import akka.actor.ActorSystem.Settings;
 
 import com.apple.itunes.Plist;
 
@@ -181,30 +188,46 @@ public class PlaylistServiceTest {
 	}	
 
 	@Test
-	public void checkTrackParsing() throws NumberFormatException, JAXBException, ParseException, SAXException, IOException {
-		Library returnedLibrary = PlaylistService.getLibrary(new File("test/assets/Well_Formed.xml"));
-        Calendar calendarDate = Calendar.getInstance();
-        calendarDate.clear();
-		assertThat(returnedLibrary.getTracks().size()).isEqualTo(25);
-		Track track = returnedLibrary.getTracks().get(10892);
-		assertThat(track).isNotNull();
-		assertThat(track.getName()).isEqualTo("World (Demo)");
-		assertThat(track.getArtist()).isEqualTo("Foo Fighters");
-		assertThat(track.getAlbum()).isEqualTo("Five Songs & A Cover");
-		assertThat(track.getKind()).isEqualTo("MPEG audio file");
-		assertThat(track.getTrackNumber()).isEqualTo(4);
-		assertThat(track.getYear()).isEqualTo(2005);
-		calendarDate.set(2010, 2, 21, 4, 50, 12);
-		assertThat(track.getDateAdded()).isEqualTo(calendarDate.getTime());
-		assertThat(track.getPlayCount()).isEqualTo(117);
-		calendarDate.set(2013, 9, 16, 16, 8, 59);
-		assertThat(track.getPlayDateUTC()).isEqualTo(calendarDate.getTime());
-		assertThat(track.getSkipCount()).isEqualTo(3);
-		assertThat(track.getPersistentID()).isEqualTo("023DDE089E93FEF0");
-		assertThat(track.getTrackType()).isEqualTo("File");
-		
-		returnedLibrary = PlaylistService.getLibrary(new File("test/assets/Empty.xml"));
-		assertThat(returnedLibrary.getTracks().size()).isEqualTo(0);
+	public void checkTrackParsing() {
+		running(fakeApplication(), new Runnable() {
+			public void run() {
+				Library returnedLibrary = null;
+				try {
+					returnedLibrary = PlaylistService.getLibrary(new File("test/assets/Well_Formed.xml"));
+				} catch (Exception e) {
+					e.printStackTrace();
+					assertThat(e).isNull();
+				}
+		        Calendar calendarDate = Calendar.getInstance();
+		        calendarDate.clear();
+		        assertThat(returnedLibrary).isNotNull();
+				assertThat(returnedLibrary.getTracks().size()).isEqualTo(25);
+				Track track = returnedLibrary.getTracks().get(10892);
+				assertThat(track).isNotNull();
+				assertThat(track.getName()).isEqualTo("World (Demo)");
+				assertThat(track.getArtist()).isEqualTo("Foo Fighters");
+				assertThat(track.getAlbum()).isEqualTo("Five Songs & A Cover");
+				assertThat(track.getKind()).isEqualTo("MPEG audio file");
+				assertThat(track.getTrackNumber()).isEqualTo(4);
+				assertThat(track.getYear()).isEqualTo(2005);
+				calendarDate.set(2010, 2, 21, 4, 50, 12);
+				assertThat(track.getDateAdded()).isEqualTo(calendarDate.getTime());
+				assertThat(track.getPlayCount()).isEqualTo(117);
+				calendarDate.set(2013, 9, 16, 16, 8, 59);
+				assertThat(track.getPlayDateUTC()).isEqualTo(calendarDate.getTime());
+				assertThat(track.getSkipCount()).isEqualTo(3);
+				assertThat(track.getPersistentID()).isEqualTo("023DDE089E93FEF0");
+				assertThat(track.getTrackType()).isEqualTo("File");
+				try {
+					returnedLibrary = PlaylistService.getLibrary(new File("test/assets/Empty.xml"));
+				} catch (Exception e) {
+					e.printStackTrace();
+					assertThat(e).isNull();
+				}
+				assertThat(returnedLibrary).isNotNull();
+				assertThat(returnedLibrary.getTracks().size()).isEqualTo(0);
+			}
+		});
 	}
 	
 	@Test
@@ -224,11 +247,18 @@ public class PlaylistServiceTest {
 	
 	@Test
 	public void checkBadPlaylistXML() throws Exception {
-		try {
-			PlaylistService.getLibrary(new File("test/assets/Bad_Format.xml"));
-			throw new Exception("Test should fail because of the format of the XML file.");
-		} catch (UnmarshalException e) {
-		}
+		running(fakeApplication(), new Runnable() {
+			public void run() {
+				try {
+					Library library = PlaylistService.getLibrary(new File("test/assets/Bad_Format.xml"));
+					assertThat(library).as("Test should fail because of the format of the XML file.").isNull();
+				} catch (UnmarshalException e) {
+				} catch (Exception e) {
+					e.printStackTrace();
+					assertThat(e).isNull();
+				}
+			}
+		});
 	}
 
 	@Test
@@ -392,9 +422,26 @@ public class PlaylistServiceTest {
 	
 	@Test
 	public void checkGeneratingLibraryExportXML() throws NumberFormatException, SAXException, JAXBException, ParseException {
-		File file = new File("test/assets/GeneratedLibrary.xml");
-		Library returnedLibrary = PlaylistService.getLibrary(file);
-		assertThat(returnedLibrary.getPlist()).isEqualTo(PlaylistService.getPlist(file));
+		running(fakeApplication(), new Runnable() {
+			@Override
+			public void run() {
+				File file = new File("test/assets/GeneratedLibrary.xml");
+				Library returnedLibrary = null;
+				try {
+					returnedLibrary = PlaylistService.getLibrary(file);
+				} catch (Exception e) {
+					e.printStackTrace();
+					assertThat(e).isNull();
+				}
+				assertThat(returnedLibrary).isNotNull();
+				try {
+					assertThat(returnedLibrary.getPlist()).isEqualTo(PlaylistService.getPlist(file));
+				} catch (Exception e) {
+					e.printStackTrace();
+					assertThat(e).isNull();
+				}
+			}
+		});
 	}
 
 	@Test
