@@ -25,12 +25,8 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import play.Application;
-import play.GlobalSettings;
 import play.Play;
-import play.test.FakeApplication;
 import services.PlaylistService;
-import akka.actor.ActorSystem.Settings;
 
 import com.apple.itunes.Plist;
 
@@ -435,7 +431,11 @@ public class PlaylistServiceTest {
 				}
 				assertThat(returnedLibrary).isNotNull();
 				try {
-					assertThat(returnedLibrary.getPlist()).isEqualTo(PlaylistService.getPlist(file));
+					try {
+						assertThat(returnedLibrary.getPlist()).isEqualTo(PlaylistService.getPlist(file));
+					} catch (UnmarshalException e) {
+						assertThat(returnedLibrary.getPlist()).isEqualTo(PlaylistService.getPlistWithLocalDTD(file));
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 					assertThat(e).isNull();
