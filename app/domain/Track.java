@@ -1,5 +1,6 @@
 package domain;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -149,6 +150,8 @@ public class Track {
 	private static final String LIBRARY_FOLDER_COUNT = "Library Folder Count";
 	
 	private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+
+	private static final BigDecimal comparisonThreshold = new BigDecimal(0.7);
 	
 	public Track(int trackId, String name, String artist, String album, 
 			String kind, Integer totalTime, Date dateAdded, Integer playCount, 
@@ -345,7 +348,7 @@ public class Track {
 		this.totalTime = totalTime;
 	}
 
-	public int getTrackNumber() {
+	public Integer getTrackNumber() {
 		return trackNumber;
 	}
 
@@ -933,6 +936,122 @@ public class Track {
 			}
 		}
 		return trackList;
+	}
+
+	public BigDecimal getComparisonScore(Track track) {
+		BigDecimal totalSum = new BigDecimal(0);
+		BigDecimal compareSum = new BigDecimal(0);
+		
+		// compare artists name
+		boolean artistName = false;
+		if (areStringsSimilar(this.getArtist(), track.getArtist())) {
+			artistName = true;
+		}
+		
+		// compare song name
+		boolean songName = false;
+		if (areStringsSimilar(this.getName(), track.getName())) {
+			songName = true;
+		}
+		
+		// compare album and song name
+		boolean albumAndSongName = false;
+		if (areStringsSimilar(this.getName(), track.getName()) && areStringsSimilar(this.getAlbum(), track.getAlbum())) {
+			albumAndSongName = true;
+		}
+		
+		// compare artist and song name
+		boolean artistAndSongName = false;
+		if (areStringsSimilar(this.getArtist(), track.getArtist()) && areStringsSimilar(this.getName(), track.getName())) {
+			artistAndSongName = true;
+		}
+		
+		// compare artist, album, and track number
+		boolean artistAlbumAndTrackNumber = false;
+		if (areStringsSimilar(this.getArtist(), track.getArtist()) && 
+				areStringsSimilar(this.getName(), track.getName()) && 
+				this.getTrackNumber() == track.getTrackNumber()) {
+			artistAlbumAndTrackNumber = true;
+		}
+
+		// compare track total time
+		boolean trackTotalTime = false;
+		if (Math.abs(this.getTotalTime().intValue() - track.getTotalTime().intValue()) < 10000) {
+			trackTotalTime = true;
+		}
+
+		// compare genres
+		boolean genresSimilar = false;
+		if (areStringsSimilar(this.getGenre(), track.getGenre())) {
+			genresSimilar = true;
+		}
+		
+		BigDecimal testValue = new BigDecimal(10);
+		BigDecimal valueMultiplier = new BigDecimal(3);
+
+		totalSum = totalSum.add(testValue.multiply(valueMultiplier));
+		if (artistName) {
+			compareSum = compareSum.add(testValue.multiply(valueMultiplier));
+		}
+
+		valueMultiplier = new BigDecimal(2);
+		totalSum = totalSum.add(testValue.multiply(valueMultiplier));
+		if (songName) {
+			compareSum = compareSum.add(testValue.multiply(valueMultiplier));
+		}
+
+		valueMultiplier = new BigDecimal(3);
+		totalSum = totalSum.add(testValue.multiply(valueMultiplier));
+		if (albumAndSongName) {
+			compareSum = compareSum.add(testValue.multiply(valueMultiplier));
+		}
+
+		valueMultiplier = new BigDecimal(3);
+		totalSum = totalSum.add(testValue.multiply(valueMultiplier));
+		if (artistAndSongName) {
+			compareSum = compareSum.add(testValue.multiply(valueMultiplier));
+		}
+
+		totalSum = totalSum.add(testValue);
+		if (artistAlbumAndTrackNumber) {
+			compareSum = compareSum.add(testValue);
+		}
+
+		totalSum = totalSum.add(testValue);
+		if (trackTotalTime) {
+			compareSum = compareSum.add(testValue);
+		}
+		
+		totalSum = totalSum.add(testValue);
+		if (genresSimilar) {
+			compareSum = compareSum.add(testValue);
+		}
+
+		// special considerations for similar tracks
+		if (artistName && songName && trackTotalTime) {
+			artistAlbumAndTrackNumber = true;
+		}
+
+		return compareSum.divide(totalSum = totalSum, 2, BigDecimal.ROUND_HALF_UP);
+	}
+
+	public boolean similar(Track track) {
+		int compareValue = getComparisonScore(track).compareTo(comparisonThreshold);
+		if (compareValue == 1 || compareValue == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private boolean areStringsSimilar(String s1, String s2) {
+		if (StringUtils.equalsIgnoreCase(s1.toLowerCase().replace("'", "").trim(), s2.toLowerCase().replace("'", "").trim())) {
+			return true;
+		} else if (s1.length() != s2.length()) {
+			int min = Math.min(s1.length(), s2.length());
+			return areStringsSimilar(s1.substring(0, min), s2.substring(0, min));
+		}
+		return false;
 	}
 
 	public Dict getDict() {
