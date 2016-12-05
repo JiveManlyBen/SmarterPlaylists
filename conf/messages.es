@@ -1,3 +1,4 @@
+site.name=Smarter Playlists
 footer.design=Diseño
 footer.rights=Todos los derechos reservados.
 nav.home=Inicio

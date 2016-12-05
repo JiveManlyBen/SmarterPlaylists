@@ -4,7 +4,7 @@
 
 <html lang="@lang.code">
     <head>
-        <title>@if(!section.equals("home")){@Messages("nav."+section) - }Smarter Playlists</title>
+        <title>@if(!section.equals("home")){@Messages("nav."+section) - }@Messages("site.name")</title>
 		<link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700" rel="stylesheet">
 		<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/style.css")">
 		<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/polyglot-language-switcher.css")">
@@ -26,7 +26,7 @@
 					<div class="row">
 						<div class="12u">
 							<div id="logo">
-								<h1>Smarter Playlists</h1>
+								<h1>@Messages("site.name")</h1>
 							</div>
 							<nav id="nav">
 								<ul>
