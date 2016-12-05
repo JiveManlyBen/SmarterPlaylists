@@ -135,69 +135,33 @@
                 <key>Library Folder Count</key>
                 <integer>1</integer>
             </dict>
-            <key>13978</key>
-            <dict>
-                <key>Track ID</key>
-                <integer>13978</integer>
-                <key>Name</key>
-                <string>Neighborhood #4 (7 Kettles)</string>
-                <key>Artist</key>
-                <string>Arcade Fire</string>
-                <key>Album</key>
-                <string>Funeral</string>
-                <key>Genre</key>
-                <string>Indie Rock</string>
-                <key>Kind</key>
-                <string>MPEG audio file</string>
-                <key>Size</key>
-                <integer>10254167</integer>
-                <key>Total Time</key>
-                <integer>289802</integer>
-                <key>Disc Number</key>
-                <integer>1</integer>
-                <key>Disc Count</key>
-                <integer>1</integer>
-                <key>Track Number</key>
-                <integer>5</integer>
-                <key>Track Count</key>
-                <integer>10</integer>
-                <key>Year</key>
-                <integer>2004</integer>
-                <key>Date Modified</key>
-                <date>2011-11-30T13:33:30Z</date>
-                <key>Date Added</key>
-                <date>2011-11-26T02:46:55Z</date>
-                <key>Bit Rate</key>
-                <integer>256</integer>
-                <key>Sample Rate</key>
-                <integer>44100</integer>
-                <key>Part Of Gapless Album</key>
-                <true/>
-                <key>Play Count</key>
-                <integer>91</integer>
-                <key>Play Date</key>
-                <integer>3467457877</integer>
-                <key>Play Date UTC</key>
-                <date>2013-11-16T20:44:37Z</date>
-                <key>Skip Count</key>
-                <integer>3</integer>
-                <key>Skip Date</key>
-                <date>2013-03-29T05:29:19Z</date>
-                <key>Normalization</key>
-                <integer>1416</integer>
-                <key>Artwork Count</key>
-                <integer>1</integer>
-                <key>Persistent ID</key>
-                <string>2F99595C5C28D2D6</string>
-                <key>Track Type</key>
-                <string>File</string>
-                <key>Location</key>
-                <string>file://localhost/C:/Music/Arcade%20Fire/Funeral/05%20Neighborhood%20%234%20(7%20Kettles).mp3</string>
-                <key>File Folder Count</key>
-                <integer>4</integer>
-                <key>Library Folder Count</key>
-                <integer>1</integer>
-            </dict>
+			<key>9528</key>
+			<dict>
+				<key>Track ID</key><integer>9528</integer>
+				<key>Name</key><string>A320</string>
+				<key>Artist</key><string>Foo Fighters</string>
+				<key>Album</key><string>Godzilla</string>
+				<key>Genre</key><string>Alternative</string>
+				<key>Kind</key><string>MPEG audio file</string>
+				<key>Size</key><integer>5529937</integer>
+				<key>Total Time</key><integer>344973</integer>
+				<key>Track Number</key><integer>9</integer>
+				<key>Date Modified</key><date>2008-03-05T02:06:32Z</date>
+				<key>Date Added</key><date>2010-03-21T04:49:30Z</date>
+				<key>Bit Rate</key><integer>128</integer>
+				<key>Sample Rate</key><integer>44100</integer>
+				<key>Play Count</key><integer>124</integer>
+				<key>Play Date</key><integer>3465788970</integer>
+				<key>Play Date UTC</key><date>2013-10-28T13:09:30Z</date>
+				<key>Skip Count</key><integer>7</integer>
+				<key>Skip Date</key><date>2013-10-10T03:53:23Z</date>
+				<key>Artwork Count</key><integer>1</integer>
+				<key>Persistent ID</key><string>381AD2E2A8E76706</string>
+				<key>Track Type</key><string>File</string>
+				<key>Location</key><string>file://localhost/C:/Music/Foo%20Fighters%20-%20A320.mp3</string>
+				<key>File Folder Count</key><integer>5</integer>
+				<key>Library Folder Count</key><integer>1</integer>
+			</dict>
         </dict>
         <key>Playlists</key>
         <array>
@@ -218,7 +182,7 @@
                     </dict>
                     <dict>
                         <key>Track ID</key>
-                        <integer>13978</integer>
+                        <integer>9528</integer>
                     </dict>
                 </array>
             </dict>
