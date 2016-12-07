@@ -461,4 +461,12 @@ public class PlaylistServiceTest {
 		String exampleM3U = FileUtils.readFileToString(new File("test/assets/Example.m3u"));
 		assertThat(generatedM3U).isEqualTo(exampleM3U);
 	}
+
+	@Test
+	public void checkGeneratingLibraryExportCSV() throws IOException, NumberFormatException, SAXException, JAXBException, ParseException {
+		File file = new File("test/assets/GeneratedLibrary.csv");
+		PlaylistLimit limit = new PlaylistLimit(3, null, null);
+		assertThat(FileUtils.readFileToString(file))
+			.isEqualTo(Track.getCSVHeader());
+	}
 }

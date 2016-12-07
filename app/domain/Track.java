@@ -1121,4 +1121,23 @@ public class Track {
 		dict.addKeyAndValue(LIBRARY_FOLDER_COUNT, libraryFolderCount);
 		return dict;
 	}
+
+	public static String getCSVHeader() {
+		return "\"" + TRACK_ID + "\",\"" + NAME + "\",\"" + ARTIST + "\",\"" + ALBUM + "\",\"" + ALBUM_ARTIST
+				+ "\",\"" + COMPOSER + "\",\"" + GROUPING + "\",\"" + GENRE + "\",\"" + KIND + "\",\"" + SIZE
+				+ "\",\"" + TOTAL_TIME + "\",\"" + START_TIME + "\",\"" + STOP_TIME + "\",\"" + DISC_NUMBER
+				+ "\",\"" + DISC_COUNT + "\",\"" + TRACK_NUMBER + "\",\"" + TRACK_COUNT + "\",\"" + YEAR
+				+ "\",\"" + BPM + "\",\"" + DATE_MODIFIED + "\",\"" + DATE_ADDED + "\",\"" + BIT_RATE
+				+ "\",\"" + SAMPLE_RATE + "\",\"" + VOLUME_ADJUSTMENT + "\",\"" + GAPLESS_ALBUM
+				+ "\",\"" + COMMENTS + "\",\"" + PLAY_COUNT + "\",\"" + PLAY_DATE + "\",\"" + PLAY_DATE_UTC
+				+ "\",\"" + SKIP_COUNT + "\",\"" + SKIP_DATE + "\",\"" + RELEASE_DATE + "\",\"" + NORMALIZATION
+				+ "\",\"" + COMPILATION + "\",\"" + ARTWORK_COUNT + "\",\"" + SERIES + "\",\"" + SEASON
+				+ "\",\"" + EPISODE + "\",\"" + EPISODE_ORDER + "\",\"" + SORT_ALBUM + "\",\"" + SORT_ALBUM_ARTIST
+				+ "\",\"" + SORT_ARTIST + "\",\"" + SORT_COMPOSER + "\",\"" + SORT_NAME + "\",\"" + SORT_SERIES
+				+ "\",\"" + PERSISTENT_ID + "\",\"" + CLEAN + "\",\"" + EXPLICIT + "\",\"" + TRACK_TYPE
+				+ "\",\"" + PROTECTED + "\",\"" + PURCHASED + "\",\"" + PODCAST + "\",\"" + HAS_VIDEO
+				+ "\",\"" + HD + "\",\"" + VIDEO_WIDTH + "\",\"" + VIDEO_HEIGHT + "\",\"" + MOVIE
+				+ "\",\"" + MUSIC_VIDEO + "\",\"" + TV_SHOW + "\",\"" + UNPLAYED + "\",\"" + LOCATION
+				+ "\",\"" + FILE_FOLDER_COUNT + "\",\"" + LIBRARY_FOLDER_COUNT + "\"";
+	}
 }
