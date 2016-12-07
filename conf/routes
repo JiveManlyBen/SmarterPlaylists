@@ -16,6 +16,10 @@ GET     /downloads/                           controllers.Application.downloads(
 GET     /download/:uuid/:file                           controllers.Application.download(uuid:String, file:String)
 
 # About page
+GET	/csv			    controllers.Application.csv()
+GET	/csv/			    controllers.Application.csv()
+
+# About page
 GET	/about			    controllers.Application.about()
 GET	/about/			    controllers.Application.about()
 

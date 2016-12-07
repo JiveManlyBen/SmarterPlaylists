@@ -19,6 +19,7 @@ upload.label.minutes=Minutes
 upload.label.export=Export an iTunes library to get started.
 upload.label.import=Save the file and import it into iTunes.
 upload.placeholder.genre=List genres separated by comma
+csv.label.header=Upload an iTunes library XML file to get a CSV version.
 filter.label.mostoftenplayed=Most often played
 download.error.notfound=The specified file was not found.
 download.label.link=Download links

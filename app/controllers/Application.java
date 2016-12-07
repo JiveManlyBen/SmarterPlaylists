@@ -20,6 +20,7 @@ import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
 import services.FileService;
 import views.html.about;
+import views.html.csv;
 import views.html.download;
 import views.html.index;
 import enums.TrackFilterType;
@@ -102,6 +103,10 @@ public class Application extends Controller {
     	}
 		flash("error", Messages.get("download.error.notfound"));
 		return redirect(routes.Application.downloads());
+    }
+
+    public static Result csv() {
+        return ok(csv.render());
     }
 
     public static Result about() {
