@@ -1140,4 +1140,59 @@ public class Track {
 				+ "\",\"" + MUSIC_VIDEO + "\",\"" + TV_SHOW + "\",\"" + UNPLAYED + "\",\"" + LOCATION
 				+ "\",\"" + FILE_FOLDER_COUNT + "\",\"" + LIBRARY_FOLDER_COUNT + "\"";
 	}
+
+	public String getCSVLine() {
+		return trackId + "," + getCSVValue(name) + "," + getCSVValue(artist) + "," + getCSVValue(album) + "," + getCSVValue(albumArtist)
+				+ "," + getCSVValue(composer) + "," + getCSVValue(grouping) + "," + getCSVValue(genre) + "," + getCSVValue(kind) + "," + getCSVValue(size)
+				+ "," + getCSVValue(totalTime) + "," + getCSVValue(startTime) + "," + getCSVValue(stopTime) + "," + getCSVValue(discNumber)
+				+ "," + getCSVValue(discCount) + "," + getCSVValue(trackNumber) + "," + getCSVValue(trackCount) + "," + getCSVValue(year)
+				+ "," + getCSVValue(bpm) + "," + getCSVValue(dateModified) + "," + getCSVValue(dateAdded) + "," + getCSVValue(bitRate)
+				+ "," + getCSVValue(sampleRate) + "," + getCSVValue(volumeAdjustment) + "," + getCSVValue(gaplessAlbum)
+				+ "," + getCSVValue(comments) + "," + getCSVValue(playCount) + "," + getCSVValue(playDate) + "," + getCSVValue(playDateUTC)
+				+ "," + getCSVValue(skipCount) + "," + getCSVValue(skipDate) + "," + getCSVValue(releaseDate) + "," + getCSVValue(normalization)
+				+ "," + getCSVValue(compilation) + "," + getCSVValue(artworkCount) + "," + getCSVValue(series) + "," + getCSVValue(season)
+				+ "," + getCSVValue(episode) + "," + getCSVValue(episodeOrder) + "," + getCSVValue(sortAlbum) + "," + getCSVValue(sortAlbumArtist)
+				+ "," + getCSVValue(sortArtist) + "," + getCSVValue(sortComposer) + "," + getCSVValue(sortName) + "," + getCSVValue(sortSeries)
+				+ "," + getCSVValue(persistentID) + "," + getCSVValue(clean) + "," + getCSVValue(explicit) + "," + getCSVValue(trackType)
+				+ "," + getCSVValue(isProtected) + "," + getCSVValue(purchased) + "," + getCSVValue(podcast) + "," + getCSVValue(hasVideo)
+				+ "," + getCSVValue(hd) + "," + getCSVValue(videoWidth) + "," + getCSVValue(videoHeight) + "," + getCSVValue(movie)
+				+ "," + getCSVValue(musicVideo) + "," + getCSVValue(tvShow) + "," + getCSVValue(unplayed) + "," + getCSVValue(location)
+				+ "," + getCSVValue(fileFolderCount) + "," + getCSVValue(libraryFolderCount);
+	}
+
+	private static String getCSVValue(BigInteger b) {
+		if (b == null) {
+			return "";
+		}
+		return b.toString();
+	}
+
+	private static String getCSVValue(Boolean b) {
+		if (b == null) {
+			return "";
+		}
+		return b.toString();
+	}
+
+	private static String getCSVValue(Date d) {
+		if (d == null) {
+			return "";
+		}
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+		return "\"" + dateFormat.format(d) + "\"";
+	}
+
+	private static String getCSVValue(Integer i) {
+		if (i == null) {
+			return "";
+		}
+		return i.toString();
+	}
+
+	private static String getCSVValue(String s) {
+		if (s == null) {
+			return "";
+		}
+		return "\"" + s + "\"";
+	}
 }

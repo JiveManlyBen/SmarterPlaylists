@@ -217,6 +217,14 @@ public class Library {
 		return m3uContents;
 	}
 
+	public static String getCSV(List<Track> trackList) {
+		String csvContents = Track.getCSVHeader();
+		for (Track track : trackList) {
+			csvContents += "\n" + track.getCSVLine();
+		}
+		return csvContents;
+	}
+
 	@Override
 	public String toString() {
 		return "Library [majorVersion=" + majorVersion + ", minorVersion="

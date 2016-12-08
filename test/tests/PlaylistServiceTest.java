@@ -464,9 +464,10 @@ public class PlaylistServiceTest {
 
 	@Test
 	public void checkGeneratingLibraryExportCSV() throws IOException, NumberFormatException, SAXException, JAXBException, ParseException {
+		Library returnedLibrary = PlaylistService.getLibrary(new File("test/assets/Well_Formed.xml"));
 		File file = new File("test/assets/GeneratedLibrary.csv");
-		PlaylistLimit limit = new PlaylistLimit(3, null, null);
-		assertThat(FileUtils.readFileToString(file))
-			.isEqualTo(Track.getCSVHeader());
+		String generatedCSV = Library.getCSV(new ArrayList(returnedLibrary.getTracks().values()));
+		String exampleCSV = FileUtils.readFileToString(file);
+		assertThat(generatedCSV).isEqualTo(exampleCSV);
 	}
 }
