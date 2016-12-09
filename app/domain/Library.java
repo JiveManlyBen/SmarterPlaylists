@@ -217,6 +217,10 @@ public class Library {
 		return m3uContents;
 	}
 
+	public String getCSV() {
+		return getCSV(new ArrayList(this.getTracks().values()));
+	}
+
 	public static String getCSV(List<Track> trackList) {
 		String csvContents = Track.getCSVHeader();
 		for (Track track : trackList) {
