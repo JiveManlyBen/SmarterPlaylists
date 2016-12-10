@@ -39,47 +39,54 @@ public class Application extends Controller {
 			flash("error", Messages.get("upload.error.maxsize"));
 			return redirect(routes.Application.index());
 		}
-		Set<String> codes = new HashSet<String>(TrackFilterType.getCodes());
-		codes.retainAll(body.asFormUrlEncoded().keySet());
-		if (codes.size() == 0) {
-			flash("error", Messages.get("upload.error.nooption"));
-			return redirect(routes.Application.index());
-		}
-		FilePart libraryFilePart = body.getFile("library");
-		if (libraryFilePart != null) {
-			String contentType = libraryFilePart.getContentType();
-			if (!contentType.equals("text/xml")) {
-				flash("error", Messages.get("upload.error.contenttype"));
+		String operation = body.asFormUrlEncoded().get("operation")[0];
+		if (operation.equals("singleplaylist")) {
+			Set<String> codes = new HashSet<String>(TrackFilterType.getCodes());
+			codes.retainAll(body.asFormUrlEncoded().keySet());
+			if (codes.size() == 0) {
+				flash("error", Messages.get("upload.error.nooption"));
 				return redirect(routes.Application.index());
 			}
-			else {
-				try {
-					File file = libraryFilePart.getFile();
-					String uuid = session("uuid");
-					if (uuid == null) {
-					    uuid = java.util.UUID.randomUUID().toString();
-					    session("uuid", uuid);
-					}
-					Map<String, PlaylistLimit> codeMap = new LinkedHashMap<String, PlaylistLimit>();
-					for (String code : codes) {
-						String count = body.asFormUrlEncoded().get(code + PlaylistLimit.countSuffix)[0];
-						String hours = body.asFormUrlEncoded().get(code + PlaylistLimit.hoursSuffix)[0];
-						String minutes = body.asFormUrlEncoded().get(code + PlaylistLimit.minutesSuffix)[0];
-						PlaylistLimit limits = new PlaylistLimit(count, hours, minutes);
-						codeMap.put(code, limits);
-					}
-					FileService.deleteTempPlaylistFiles(uuid);
-					FileService.createTempXmlPlaylistFiles(file, codeMap, uuid);
-					return redirect(routes.Application.downloads());
-				}
-				catch (Exception ex) {
-					Logger.error("Error when parsing XML file", ex);
-					flash("error", Messages.get("upload.error.parse"));
+			FilePart libraryFilePart = body.getFile("library");
+			if (libraryFilePart != null) {
+				String contentType = libraryFilePart.getContentType();
+				if (!contentType.equals("text/xml")) {
+					flash("error", Messages.get("upload.error.contenttype"));
 					return redirect(routes.Application.index());
 				}
+				else {
+					try {
+						File file = libraryFilePart.getFile();
+						String uuid = session("uuid");
+						if (uuid == null) {
+						    uuid = java.util.UUID.randomUUID().toString();
+						    session("uuid", uuid);
+						}
+						Map<String, PlaylistLimit> codeMap = new LinkedHashMap<String, PlaylistLimit>();
+						for (String code : codes) {
+							String count = body.asFormUrlEncoded().get(code + PlaylistLimit.countSuffix)[0];
+							String hours = body.asFormUrlEncoded().get(code + PlaylistLimit.hoursSuffix)[0];
+							String minutes = body.asFormUrlEncoded().get(code + PlaylistLimit.minutesSuffix)[0];
+							PlaylistLimit limits = new PlaylistLimit(count, hours, minutes);
+							codeMap.put(code, limits);
+						}
+						FileService.deleteTempPlaylistFiles(uuid);
+						FileService.createTempXmlPlaylistFiles(file, codeMap, uuid);
+						return redirect(routes.Application.downloads());
+					}
+					catch (Exception ex) {
+						Logger.error("Error when parsing XML file", ex);
+						flash("error", Messages.get("upload.error.parse"));
+						return redirect(routes.Application.index());
+					}
+				}
+			} else {
+				flash("error", Messages.get("upload.error.missing"));
+				return redirect(routes.Application.index());
 			}
 		} else {
-			flash("error", Messages.get("upload.error.missing"));
+			//TODO: add an error type for missing operation
+			flash("error", Messages.get("upload.error.invalid"));
 			return redirect(routes.Application.index());
 		}
 	}

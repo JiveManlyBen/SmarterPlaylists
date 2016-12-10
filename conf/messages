@@ -9,6 +9,7 @@ upload.button.upload=Upload
 upload.error.contenttype=The uploaded file needs to be an iTunes library XML file.
 upload.error.maxsize=The uploaded file exceeded the 25MB upload limit.
 upload.error.missing=The iTunes library XML file was missing from the upload.
+upload.error.invalid=The request was invalid.  Please try again.
 upload.error.nooption=Please select at least one playlist option.
 upload.error.parse=The iTunes library file could not be parsed.
 upload.label.header=Upload an iTunes library XML file to generate a better playlist!

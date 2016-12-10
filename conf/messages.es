@@ -8,6 +8,7 @@ upload.button.upload=Subir
 upload.error.contenttype=El archivo subido debe ser un XML archivo biblioteca de iTunes.
 upload.error.maxsize=El archivo subido excede el límite de subida de 25 MB.
 upload.error.missing=El XML archivo de la biblioteca de iTunes no estaba en la subida.
+upload.error.invalid=La solicitud no es válida.  Inténtelo otra vez.
 upload.error.nooption=Por favor seleccione al menos una opción de reproducción.
 upload.error.parse=El XML archivo biblioteca de iTunes no se pudo analizar.
 upload.label.header=¡Subes un XML archivo biblioteca de iTunes para generar una mejor lista de reproducción!
