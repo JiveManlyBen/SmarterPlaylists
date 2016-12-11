@@ -466,7 +466,7 @@ public class PlaylistServiceTest {
 	public void checkGeneratingLibraryExportCSV() throws IOException, NumberFormatException, SAXException, JAXBException, ParseException {
 		Library returnedLibrary = PlaylistService.getLibrary(new File("test/assets/Well_Formed.xml"));
 		File file = new File("test/assets/GeneratedLibrary.csv");
-		String generatedCSV = returnedLibrary.getCSV();
+		String generatedCSV = returnedLibrary.getCsv();
 		String exampleCSV = FileUtils.readFileToString(file);
 		assertThat(generatedCSV).isEqualTo(exampleCSV);
 	}
