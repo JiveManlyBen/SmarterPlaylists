@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import domain.PlaylistLimit;
@@ -84,24 +85,62 @@ public class Application extends Controller {
 				flash("error", Messages.get("upload.error.missing"));
 				return redirect(routes.Application.index());
 			}
+		} else if (operation.equals("converttocsv")) {
+			FilePart libraryFilePart = body.getFile("library");
+			if (libraryFilePart != null) {
+				String contentType = libraryFilePart.getContentType();
+				if (!contentType.equals("text/xml")) {
+					flash("error", Messages.get("upload.error.contenttype"));
+					return redirect(routes.Application.index());
+				}
+				else {
+					try {
+						File file = libraryFilePart.getFile();
+						String uuid = session("uuid");
+						if (uuid == null) {
+						    uuid = java.util.UUID.randomUUID().toString();
+						    session("uuid", uuid);
+						}
+						FileService.deleteTempPlaylistFiles(uuid);
+						FileService.createTempCsvPlaylistFiles(file, uuid);
+						return redirect(routes.Application.downloads());
+					}
+					catch (Exception ex) {
+						Logger.error("Error when parsing XML file", ex);
+						flash("error", Messages.get("upload.error.parse"));
+						return redirect(routes.Application.index());
+					}
+				}
+			} else {
+				flash("error", Messages.get("upload.error.missing"));
+				return redirect(routes.Application.index());
+			}
 		} else {
-			//TODO: add an error type for missing operation
 			flash("error", Messages.get("upload.error.invalid"));
 			return redirect(routes.Application.index());
 		}
 	}
 
     public static Result downloads() {
-    	return ok(download.render(session("uuid"), FileService.getTempXmlPlaylistFiles(session("uuid")), FileService.XML_EXTENSION));
+    	return ok(download.render(session("uuid"), FileService.getTempPlaylistFiles(session("uuid"))));
     }
 
     public static Result download(String uuid, String file) {
     	try {
     		if (!StringUtils.isEmpty(uuid) && uuid.equals(session("uuid"))) {
-    			File download = FileService.getTempXmlPlaylistFile(uuid, file);
-    			String fileName = Messages.get("filter.label." + download.getName().replace(FileService.XML_EXTENSION, "")) + FileService.XML_EXTENSION;
-    			response().setHeader("Content-Disposition", 
-    					"attachment; filename=\"" + fileName +"\"");
+    			String fileExtention = "." + FilenameUtils.getExtension(file);
+    			File download = null;
+    			if (fileExtention.equals(FileService.CSV_EXTENSION)) {
+    				download = FileService.getTempCsvPlaylistFile(uuid, file);
+    			} else if (fileExtention.equals(FileService.M3U_EXTENSION)) {
+    				download = FileService.getTempM3uPlaylistFile(uuid, file);
+    			} else if (fileExtention.equals(FileService.XML_EXTENSION)) {
+    				download = FileService.getTempXmlPlaylistFile(uuid, file);
+    			} else {
+    				throw new Exception("Invalid file extension (file: '" + file + "', extension: '" + fileExtention + "')");
+    			}
+    			String fileName = Messages.get("filter.label." + download.getName().replace(fileExtention, "")) + fileExtention;
+    			response().setHeader("Content-Disposition", "attachment; filename=\"" + fileName +"\"");
 	    		return ok(download);
 	    	}
 	    }

@@ -1122,7 +1122,7 @@ public class Track {
 		return dict;
 	}
 
-	public static String getCSVHeader() {
+	public static String getCsvHeader() {
 		return "\"" + TRACK_ID + "\",\"" + NAME + "\",\"" + ARTIST + "\",\"" + ALBUM + "\",\"" + ALBUM_ARTIST
 				+ "\",\"" + COMPOSER + "\",\"" + GROUPING + "\",\"" + GENRE + "\",\"" + KIND + "\",\"" + SIZE
 				+ "\",\"" + TOTAL_TIME + "\",\"" + START_TIME + "\",\"" + STOP_TIME + "\",\"" + DISC_NUMBER
@@ -1141,40 +1141,40 @@ public class Track {
 				+ "\",\"" + FILE_FOLDER_COUNT + "\",\"" + LIBRARY_FOLDER_COUNT + "\"";
 	}
 
-	public String getCSVLine() {
-		return trackId + "," + getCSVValue(name) + "," + getCSVValue(artist) + "," + getCSVValue(album) + "," + getCSVValue(albumArtist)
-				+ "," + getCSVValue(composer) + "," + getCSVValue(grouping) + "," + getCSVValue(genre) + "," + getCSVValue(kind) + "," + getCSVValue(size)
-				+ "," + getCSVValue(totalTime) + "," + getCSVValue(startTime) + "," + getCSVValue(stopTime) + "," + getCSVValue(discNumber)
-				+ "," + getCSVValue(discCount) + "," + getCSVValue(trackNumber) + "," + getCSVValue(trackCount) + "," + getCSVValue(year)
-				+ "," + getCSVValue(bpm) + "," + getCSVValue(dateModified) + "," + getCSVValue(dateAdded) + "," + getCSVValue(bitRate)
-				+ "," + getCSVValue(sampleRate) + "," + getCSVValue(volumeAdjustment) + "," + getCSVValue(gaplessAlbum)
-				+ "," + getCSVValue(comments) + "," + getCSVValue(playCount) + "," + getCSVValue(playDate) + "," + getCSVValue(playDateUTC)
-				+ "," + getCSVValue(skipCount) + "," + getCSVValue(skipDate) + "," + getCSVValue(releaseDate) + "," + getCSVValue(normalization)
-				+ "," + getCSVValue(compilation) + "," + getCSVValue(artworkCount) + "," + getCSVValue(series) + "," + getCSVValue(season)
-				+ "," + getCSVValue(episode) + "," + getCSVValue(episodeOrder) + "," + getCSVValue(sortAlbum) + "," + getCSVValue(sortAlbumArtist)
-				+ "," + getCSVValue(sortArtist) + "," + getCSVValue(sortComposer) + "," + getCSVValue(sortName) + "," + getCSVValue(sortSeries)
-				+ "," + getCSVValue(persistentID) + "," + getCSVValue(clean) + "," + getCSVValue(explicit) + "," + getCSVValue(trackType)
-				+ "," + getCSVValue(isProtected) + "," + getCSVValue(purchased) + "," + getCSVValue(podcast) + "," + getCSVValue(hasVideo)
-				+ "," + getCSVValue(hd) + "," + getCSVValue(videoWidth) + "," + getCSVValue(videoHeight) + "," + getCSVValue(movie)
-				+ "," + getCSVValue(musicVideo) + "," + getCSVValue(tvShow) + "," + getCSVValue(unplayed) + "," + getCSVValue(location)
-				+ "," + getCSVValue(fileFolderCount) + "," + getCSVValue(libraryFolderCount);
+	public String getCsvLine() {
+		return trackId + "," + getCsvValue(name) + "," + getCsvValue(artist) + "," + getCsvValue(album) + "," + getCsvValue(albumArtist)
+				+ "," + getCsvValue(composer) + "," + getCsvValue(grouping) + "," + getCsvValue(genre) + "," + getCsvValue(kind) + "," + getCsvValue(size)
+				+ "," + getCsvValue(totalTime) + "," + getCsvValue(startTime) + "," + getCsvValue(stopTime) + "," + getCsvValue(discNumber)
+				+ "," + getCsvValue(discCount) + "," + getCsvValue(trackNumber) + "," + getCsvValue(trackCount) + "," + getCsvValue(year)
+				+ "," + getCsvValue(bpm) + "," + getCsvValue(dateModified) + "," + getCsvValue(dateAdded) + "," + getCsvValue(bitRate)
+				+ "," + getCsvValue(sampleRate) + "," + getCsvValue(volumeAdjustment) + "," + getCsvValue(gaplessAlbum)
+				+ "," + getCsvValue(comments) + "," + getCsvValue(playCount) + "," + getCsvValue(playDate) + "," + getCsvValue(playDateUTC)
+				+ "," + getCsvValue(skipCount) + "," + getCsvValue(skipDate) + "," + getCsvValue(releaseDate) + "," + getCsvValue(normalization)
+				+ "," + getCsvValue(compilation) + "," + getCsvValue(artworkCount) + "," + getCsvValue(series) + "," + getCsvValue(season)
+				+ "," + getCsvValue(episode) + "," + getCsvValue(episodeOrder) + "," + getCsvValue(sortAlbum) + "," + getCsvValue(sortAlbumArtist)
+				+ "," + getCsvValue(sortArtist) + "," + getCsvValue(sortComposer) + "," + getCsvValue(sortName) + "," + getCsvValue(sortSeries)
+				+ "," + getCsvValue(persistentID) + "," + getCsvValue(clean) + "," + getCsvValue(explicit) + "," + getCsvValue(trackType)
+				+ "," + getCsvValue(isProtected) + "," + getCsvValue(purchased) + "," + getCsvValue(podcast) + "," + getCsvValue(hasVideo)
+				+ "," + getCsvValue(hd) + "," + getCsvValue(videoWidth) + "," + getCsvValue(videoHeight) + "," + getCsvValue(movie)
+				+ "," + getCsvValue(musicVideo) + "," + getCsvValue(tvShow) + "," + getCsvValue(unplayed) + "," + getCsvValue(location)
+				+ "," + getCsvValue(fileFolderCount) + "," + getCsvValue(libraryFolderCount);
 	}
 
-	private static String getCSVValue(BigInteger b) {
+	private static String getCsvValue(BigInteger b) {
 		if (b == null) {
 			return "";
 		}
 		return b.toString();
 	}
 
-	private static String getCSVValue(Boolean b) {
+	private static String getCsvValue(Boolean b) {
 		if (b == null) {
 			return "";
 		}
 		return b.toString();
 	}
 
-	private static String getCSVValue(Date d) {
+	private static String getCsvValue(Date d) {
 		if (d == null) {
 			return "";
 		}
@@ -1182,14 +1182,14 @@ public class Track {
 		return "\"" + dateFormat.format(d) + "\"";
 	}
 
-	private static String getCSVValue(Integer i) {
+	private static String getCsvValue(Integer i) {
 		if (i == null) {
 			return "";
 		}
 		return i.toString();
 	}
 
-	private static String getCSVValue(String s) {
+	private static String getCsvValue(String s) {
 		if (s == null) {
 			return "";
 		}

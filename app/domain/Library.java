@@ -217,14 +217,14 @@ public class Library {
 		return m3uContents;
 	}
 
-	public String getCSV() {
-		return getCSV(new ArrayList(this.getTracks().values()));
+	public String getCsv() {
+		return getCsv(new ArrayList(this.getTracks().values()));
 	}
 
-	public static String getCSV(List<Track> trackList) {
-		String csvContents = Track.getCSVHeader();
+	public static String getCsv(List<Track> trackList) {
+		String csvContents = Track.getCsvHeader();
 		for (Track track : trackList) {
-			csvContents += "\n" + track.getCSVLine();
+			csvContents += "\n" + track.getCsvLine();
 		}
 		return csvContents;
 	}

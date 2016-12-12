@@ -29,10 +29,22 @@ import domain.Track;
 import enums.TrackFilterType;
 
 public class FileService {
+	public static final String CSV_TEMP_DIRECTORY = Play.application().path() + File.separator + "tmp" + File.separator + "csv" + File.separator;
+	public static final String CSV_EXTENSION = ".csv";
 	public static final String M3U_TEMP_DIRECTORY = Play.application().path() + File.separator + "tmp" + File.separator + "m3u" + File.separator;
 	public static final String M3U_EXTENSION = ".m3u";
 	public static final String XML_TEMP_DIRECTORY = Play.application().path() + File.separator + "tmp" + File.separator + "xml" + File.separator;
 	public static final String XML_EXTENSION = ".xml";
+	public static final String LIBRARY = "library";
+
+	public static void createTempCsvPlaylistFiles(File file, String uuid) throws NumberFormatException, 
+	JAXBException, ParseException, SAXException, IOException {
+		Library library = PlaylistService.parseXMLFile(file);
+		String m3uContent = library.getCsv();
+		String fileName = CSV_TEMP_DIRECTORY + uuid + File.separator + LIBRARY + CSV_EXTENSION;
+		FileUtils.writeStringToFile(new File(fileName), m3uContent, "UTF-8");
+		Logger.debug("Created: " + fileName);
+	}
 
 	public static void createTempM3uPlaylistFiles(File file, Map<String, PlaylistLimit> codeMap, String uuid) throws NumberFormatException, 
 		JAXBException, ParseException, SAXException, IOException {
@@ -42,7 +54,7 @@ public class FileService {
 			Integer count = entry.getValue().getCount();
 			List<Track> trackList = Track.getSortedTracksByCount(library.getTracks().values(), filter.getComparator(), count);
 			String m3uContent = Library.getM3U(trackList);
-			String fileName = M3U_TEMP_DIRECTORY + uuid + File.separator + entry.getKey()  + M3U_EXTENSION;
+			String fileName = M3U_TEMP_DIRECTORY + uuid + File.separator + entry.getKey() + M3U_EXTENSION;
 			FileUtils.writeStringToFile(new File(fileName), m3uContent, "UTF-8");
 			Logger.debug("Created: " + fileName);
 		}
@@ -55,7 +67,7 @@ public class FileService {
 			TrackFilterType filter = TrackFilterType.get(entry.getKey());
 			Plist exportPlist = library.getCustomPlaylist(filter, entry.getValue()).getPlist();
 			new File(XML_TEMP_DIRECTORY + uuid + File.separator).mkdirs();
-			String fileName = XML_TEMP_DIRECTORY + uuid + File.separator + entry.getKey()  + XML_EXTENSION;
+			String fileName = XML_TEMP_DIRECTORY + uuid + File.separator + entry.getKey() + XML_EXTENSION;
 			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName),"UTF-8"));			
 			try {
 				JAXBContext context = JAXBContext.newInstance(Plist.class);
@@ -72,6 +84,17 @@ public class FileService {
 			}
 		}
 	}
+	
+	public static List<String> getTempPlaylistFiles(String uuid) {
+		List<String> fileList = getTempCsvPlaylistFiles(uuid);
+		fileList.addAll(getTempM3uPlaylistFiles(uuid));
+		fileList.addAll(getTempXmlPlaylistFiles(uuid));
+		return fileList;
+	}
+	
+	public static List<String> getTempCsvPlaylistFiles(String uuid) {
+		return getTempPlaylistFiles(CSV_TEMP_DIRECTORY, uuid, CSV_EXTENSION);
+	}
 
 	public static List<String> getTempM3uPlaylistFiles(String uuid) {
 		return getTempPlaylistFiles(M3U_TEMP_DIRECTORY, uuid, M3U_EXTENSION);
@@ -84,15 +107,22 @@ public class FileService {
 	private static List<String> getTempPlaylistFiles(String directory, String uuid, final String extension) {
 		File downloadDir = new File(directory + uuid + File.separator);
 		List<String> files = new ArrayList<String>();
-		for (File file : downloadDir.listFiles(new FilenameFilter() {
+		File[] fileArray = downloadDir.listFiles(new FilenameFilter() {
 			public boolean accept(File dir, String name) {
 				return name.toLowerCase().endsWith(extension);
 			}
-		})) {
-			if (file.isFile())
-				files.add(file.getName());
+		});
+		if (fileArray != null) {
+			for (File file : fileArray) {
+				if (file.isFile())
+					files.add(file.getName());
+			}
 		}
 		return files;
+	}
+
+	public static File getTempCsvPlaylistFile(String uuid, String file) {
+		return new File(CSV_TEMP_DIRECTORY + uuid + File.separator + file);
 	}
 
 	public static File getTempM3uPlaylistFile(String uuid, String file) {
@@ -104,7 +134,9 @@ public class FileService {
 	}
 
 	public static void deleteTempPlaylistFiles(String uuid) throws IOException {
-		File dir = new File(M3U_TEMP_DIRECTORY + uuid + File.separator);
+		File dir = new File(CSV_TEMP_DIRECTORY + uuid + File.separator);
+		FileUtils.deleteDirectory(dir);
+		dir = new File(M3U_TEMP_DIRECTORY + uuid + File.separator);
 		FileUtils.deleteDirectory(dir);
 		dir = new File(XML_TEMP_DIRECTORY + uuid + File.separator);
 		FileUtils.deleteDirectory(dir);
