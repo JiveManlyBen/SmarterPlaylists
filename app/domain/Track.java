@@ -1193,6 +1193,6 @@ public class Track {
 		if (s == null) {
 			return "";
 		}
-		return "\"" + s + "\"";
+		return "\"" + s.replaceAll("\"", "\"\"") + "\"";
 	}
 }

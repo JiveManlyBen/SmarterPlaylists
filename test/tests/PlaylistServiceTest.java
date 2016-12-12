@@ -197,7 +197,7 @@ public class PlaylistServiceTest {
 		        Calendar calendarDate = Calendar.getInstance();
 		        calendarDate.clear();
 		        assertThat(returnedLibrary).isNotNull();
-				assertThat(returnedLibrary.getTracks().size()).isEqualTo(25);
+				assertThat(returnedLibrary.getTracks().size()).isEqualTo(26);
 				Track track = returnedLibrary.getTracks().get(10892);
 				assertThat(track).isNotNull();
 				assertThat(track.getName()).isEqualTo("World (Demo)");
