@@ -1,7 +1,8 @@
 site.name=Smarter Playlists
 footer.design=Diseño
 footer.rights=Todos los derechos reservados.
-nav.home=Inicio
+nav.home=Crear Listas
+nav.csv=Crear CSV
 nav.download=Bajar
 nav.about=Sobre
 upload.button.upload=Subir
@@ -26,4 +27,4 @@ download.error.notfound=No se encuentra el archivo especificado.
 download.label.link=Bajar vínculos
 about.page.label=¿Qué es este sitio?
 about.page.description=iTunes ofrece listas, pero son canciones imperfectas y desaparecidos.  Este sitio genera listas que hacer un mejor trabajo que incluye las canciones que usted realmente desea escuchar.
-about.page.disclaimer=Estos listas cuentan con ninguna garantía. Úselos bajo su propio riesgo.
+about.page.disclaimer=Estos listas de reproducción cuentan con ninguna garantía. Úselos bajo su propio riesgo.
