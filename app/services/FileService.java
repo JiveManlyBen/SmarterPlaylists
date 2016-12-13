@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +41,16 @@ public class FileService {
 	public static void createTempCsvPlaylistFiles(File file, String uuid) throws NumberFormatException, 
 	JAXBException, ParseException, SAXException, IOException {
 		Library library = PlaylistService.parseXMLFile(file);
-		String m3uContent = library.getCsv();
 		String fileName = CSV_TEMP_DIRECTORY + uuid + File.separator + LIBRARY + CSV_EXTENSION;
-		FileUtils.writeStringToFile(new File(fileName), m3uContent, "UTF-8");
+		File outFile = new File(fileName);
+		outFile.getParentFile().mkdirs();
+		PrintWriter pw = new PrintWriter(outFile, "UTF-8");
+		List<Track> trackList = new ArrayList<Track>(library.getTracks().values());
+		pw.println(Track.getCsvHeader());
+		for (Track track : trackList) {
+			pw.println(track.getCsvLine());
+		}
+	    pw.close();
 		Logger.debug("Created: " + fileName);
 	}
 
