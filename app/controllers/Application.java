@@ -91,7 +91,7 @@ public class Application extends Controller {
 				String contentType = libraryFilePart.getContentType();
 				if (!contentType.equals("text/xml")) {
 					flash("error", Messages.get("upload.error.contenttype"));
-					return redirect(routes.Application.index());
+					return redirect(routes.Application.csv());
 				}
 				else {
 					try {
@@ -108,12 +108,12 @@ public class Application extends Controller {
 					catch (Exception ex) {
 						Logger.error("Error when parsing XML file", ex);
 						flash("error", Messages.get("upload.error.parse"));
-						return redirect(routes.Application.index());
+						return redirect(routes.Application.csv());
 					}
 				}
 			} else {
 				flash("error", Messages.get("upload.error.missing"));
-				return redirect(routes.Application.index());
+				return redirect(routes.Application.csv());
 			}
 		} else {
 			flash("error", Messages.get("upload.error.invalid"));
