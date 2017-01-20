@@ -2,6 +2,7 @@ site.name=Smarter Playlists
 footer.design=Diseño
 footer.rights=Todos los derechos reservados.
 nav.home=Crear Listas
+nav.compare=Comparar Bibliotecas
 nav.csv=Crear CSV
 nav.download=Bajar
 nav.about=Sobre
