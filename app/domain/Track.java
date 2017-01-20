@@ -921,23 +921,6 @@ public class Track {
 		}
 	}
 
-	public static List<Track> getSharedTracks(Collection<Track> firstTracks, Collection<Track> secondTracks) {
-		List<Track> trackList = new ArrayList<Track>();
-		for (Track first : firstTracks) {
-			if (first != null && first.getArtist() != null && first.getName() != null) {
-				for (Track second : secondTracks) {
-					if (second != null && 
-							StringUtils.equalsIgnoreCase(first.getArtist().trim(), second.getArtist().trim()) && 
-							StringUtils.equalsIgnoreCase(first.getName().trim(), second.getName().trim())) {
-						trackList.add(first);
-						break;
-					}
-				}
-			}
-		}
-		return trackList;
-	}
-
 	public BigDecimal getComparisonScore(Track track) {
 		BigDecimal totalSum = new BigDecimal(0);
 		BigDecimal compareSum = new BigDecimal(0);
