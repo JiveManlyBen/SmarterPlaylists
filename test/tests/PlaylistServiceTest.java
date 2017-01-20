@@ -470,4 +470,16 @@ public class PlaylistServiceTest {
 		String exampleCSV = FileUtils.readFileToString(file);
 		assertThat(generatedCSV).isEqualTo(exampleCSV);
 	}
+
+	@Test
+	public void checkLibraryCommonSongs() throws NumberFormatException, JAXBException, ParseException, SAXException, IOException {
+		Library firstLibrary = PlaylistService.getLibrary(new File("test/assets/Library1.xml"));
+		Library secondLibrary = PlaylistService.getLibrary(new File("test/assets/LibraryA.xml"));
+		Map<String, Library> libraryMap = PlaylistService.getCommonSongs(firstLibrary, secondLibrary);
+		assertThat(libraryMap.size()).isEqualTo(2);
+		firstLibrary = libraryMap.get("437026SJ3UJ3Y3T7");
+		secondLibrary = libraryMap.get("548026PS1YM3L0G2");
+		assertThat(firstLibrary.getPlaylists().iterator().next().getPlaylistItems().size()).isEqualTo(4);
+		assertThat(secondLibrary.getPlaylists().iterator().next().getPlaylistItems().size()).isEqualTo(4);
+	}
 }

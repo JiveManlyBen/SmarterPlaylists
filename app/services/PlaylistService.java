@@ -4,11 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
@@ -130,6 +134,61 @@ public class PlaylistService {
 		library.setTracks(getTracks(plist.getDict()));
 		library.getPlaylists().addAll(getPlaylists(plist.getDict()));
 		return library;
+	}
+	public static Map<String, Library> getCommonSongs(Library firstLibrary, Library secondLibrary) {
+		Set<Track> firstSongSet = new HashSet<Track>(firstLibrary.getTracks().values());
+		Set<Track> secondSongSet = new HashSet<Track>(secondLibrary.getTracks().values());
+
+		Iterator<Track> firstIterator = firstSongSet.iterator();
+
+		List<Track> firstPlaylistItems = new ArrayList<Track>();
+		List<Track> secondPlaylistItems = new ArrayList<Track>();
+
+		while(firstIterator.hasNext()) {
+			Track firstTrack = firstIterator.next();
+			Iterator<Track> secondIterator = secondSongSet.iterator();
+			while(secondIterator.hasNext()) {
+				Track secondTrack = secondIterator.next();
+				if (firstTrack.similar(secondTrack)) {
+					firstPlaylistItems.add(firstTrack);
+					secondPlaylistItems.add(secondTrack);
+				}
+			}
+		}
+		
+		Library firstNewLibrary = new Library(firstLibrary);
+		Map<Integer, Track> map = new LinkedHashMap<Integer, Track>();
+		Map<String, String> playlistMap = new HashMap<String, String>();
+		playlistMap.put(Playlist.NAME, "Shared Tracks");
+		playlistMap.put(Playlist.ALL_ITEMS, new True().name());
+		Playlist playlist = new Playlist(playlistMap);
+		for (Track track : firstPlaylistItems) {
+			map.put(track.getTrackId(), track);
+			playlist.setAllItems(true);
+			playlist.getPlaylistItems().add(track.getTrackId());
+		}
+		firstNewLibrary.setTracks(map);
+		firstNewLibrary.getPlaylists().add(playlist);
+		
+		Library secondNewLibrary = new Library(secondLibrary);
+		map = new LinkedHashMap<Integer, Track>();
+		playlistMap = new HashMap<String, String>();
+		playlistMap.put(Playlist.NAME, "Shared Tracks");
+		playlistMap.put(Playlist.ALL_ITEMS, new True().name());
+		playlist = new Playlist(playlistMap);
+		for (Track track : secondPlaylistItems) {
+			map.put(track.getTrackId(), track);
+			playlist.setAllItems(true);
+			playlist.getPlaylistItems().add(track.getTrackId());
+		}
+		secondNewLibrary.setTracks(map);
+		secondNewLibrary.getPlaylists().add(playlist);
+
+		Map<String, Library> libraryMap = new HashMap<String, Library>();
+		libraryMap.put(firstNewLibrary.getLibraryPersistentId(), firstNewLibrary);
+		libraryMap.put(secondNewLibrary.getLibraryPersistentId(), secondNewLibrary);
+
+		return libraryMap;
 	}
 	private static Object getKeyElement(String key, Dict dict) {
 		boolean foundElement = false;
