@@ -1,15 +1,20 @@
 jQuery(function($) {
 	enableUploadButton();
-	$('#playlistUploadFile').on("change", function() {
+	$('.file-input').on("change", function() {
 		enableUploadButton();
 	});
 	function enableUploadButton() {
-		var playlistUploadFile = $('#playlistUploadFile').val();
-		if (playlistUploadFile !== undefined && playlistUploadFile !== "") {
-			$(".playlistUploadButton").prop("disabled", false);
+		var hasInvalidElement = false;
+		$('input,textarea,select').filter('[required]:visible').each(function () {
+			if ($(this).val() === '') {
+				hasInvalidElement = true;
+			}
+		});
+		if (hasInvalidElement) {
+			$(".playlistUploadButton").prop("disabled", true);
 		}
 		else {
-			$(".playlistUploadButton").prop("disabled", true);
+			$(".playlistUploadButton").prop("disabled", false);
 		}
 	}
     $('#polyglotLanguageSwitcher').polyglotLanguageSwitcher({
