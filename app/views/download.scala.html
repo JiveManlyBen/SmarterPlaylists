@@ -13,7 +13,12 @@
 																	<h2><a class="helper-image" href="/assets/images/itunes.windows.import.png" title="@Messages("upload.label.import")"><img src="/assets/images/question.png"></a>
 																	<span class="helper-offset">@Messages("download.label.link")</span></h2>
 																	@for(fileName <- fileNames) {
-																		<p><a href="/download/@(uuid)/@(fileName)">@Messages("filter.label." + org.apache.commons.io.FilenameUtils.removeExtension(fileName))</a></p>
+																		@if(org.apache.commons.io.FilenameUtils.removeExtension(fileName).equals("mostoftenplayed")) {
+																			<p><a href="/download/@(uuid)/@(fileName)">@Messages("filter.label.mostoftenplayed")</a></p>
+																		}
+																		@if(org.apache.commons.io.FilenameUtils.removeExtension(fileName).equals("library")) {
+																			<p><a href="/download/@(uuid)/@(fileName)">@Messages("filter.label.library")</a></p>
+																		}
 																	}
                                                                 </div>
                                                         </div>
