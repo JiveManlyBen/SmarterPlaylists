@@ -159,7 +159,7 @@ public class PlaylistService {
 		Library firstNewLibrary = new Library(firstLibrary);
 		Map<Integer, Track> map = new LinkedHashMap<Integer, Track>();
 		Map<String, String> playlistMap = new HashMap<String, String>();
-		playlistMap.put(Playlist.NAME, "Shared Tracks");
+		playlistMap.put(Playlist.NAME, Messages.get("compare.label.name"));
 		playlistMap.put(Playlist.ALL_ITEMS, new True().name());
 		Playlist playlist = new Playlist(playlistMap);
 		for (Track track : firstPlaylistItems) {
@@ -173,7 +173,7 @@ public class PlaylistService {
 		Library secondNewLibrary = new Library(secondLibrary);
 		map = new LinkedHashMap<Integer, Track>();
 		playlistMap = new HashMap<String, String>();
-		playlistMap.put(Playlist.NAME, "Shared Tracks");
+		playlistMap.put(Playlist.NAME, Messages.get("compare.label.name"));
 		playlistMap.put(Playlist.ALL_ITEMS, new True().name());
 		playlist = new Playlist(playlistMap);
 		for (Track track : secondPlaylistItems) {

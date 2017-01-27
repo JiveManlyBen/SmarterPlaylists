@@ -23,6 +23,7 @@ upload.label.export=Export an iTunes library to get started.
 upload.label.import=Save the file and import it into iTunes.
 upload.placeholder.genre=List genres separated by comma
 compare.label.header=Upload an iTunes library XML files to find common tracks.
+compare.label.name=Common Tracks
 csv.label.header=Upload an iTunes library XML file to get a CSV version.
 filter.label.mostoftenplayed=Most often played
 filter.label.library=iTunes Library

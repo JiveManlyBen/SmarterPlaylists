@@ -23,6 +23,7 @@ upload.label.export=Exportare el XML archivo biblioteca de iTunes para comenzar.
 upload.label.import=Guarde el archivo entonces importarlo en iTunes.
 upload.placeholder.genre=Enumerar los géneros separadas por comas
 compare.label.header=Subes un XML archivo biblioteca de iTunes para canciones comunes.
+compare.label.name=Canciones Comunes
 csv.label.header=Subes un XML archivo biblioteca de iTunes para generar una archivo CSV.
 filter.label.mostoftenplayed=Mayoría de las veces jugado
 filter.label.library=Biblioteca de iTunes
