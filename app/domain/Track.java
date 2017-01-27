@@ -959,8 +959,10 @@ public class Track {
 
 		// compare track total time
 		boolean trackTotalTime = false;
-		if (Math.abs(this.getTotalTime().intValue() - track.getTotalTime().intValue()) < 10000) {
-			trackTotalTime = true;
+		if (this.getTotalTime() != null && track.getTotalTime() != null) {
+			if (Math.abs(this.getTotalTime().intValue() - track.getTotalTime().intValue()) < 10000) {
+				trackTotalTime = true;
+			}
 		}
 
 		// compare genres
@@ -1028,7 +1030,11 @@ public class Track {
 	}
 
 	private boolean areStringsSimilar(String s1, String s2) {
-		if (StringUtils.equalsIgnoreCase(s1.toLowerCase().replace("'", "").trim(), s2.toLowerCase().replace("'", "").trim())) {
+		if (s1 == null && s2 == null) {
+			return true;
+		} else if (s1 == null || s2 == null) {
+			return false;
+		} else if (StringUtils.equalsIgnoreCase(s1.toLowerCase().replace("'", "").trim(), s2.toLowerCase().replace("'", "").trim())) {
 			return true;
 		} else if (s1.length() != s2.length()) {
 			int min = Math.min(s1.length(), s2.length());

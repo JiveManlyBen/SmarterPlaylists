@@ -21,6 +21,7 @@ import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
 import services.FileService;
 import views.html.about;
+import views.html.compare;
 import views.html.csv;
 import views.html.download;
 import views.html.index;
@@ -115,6 +116,39 @@ public class Application extends Controller {
 				flash("error", Messages.get("upload.error.missing"));
 				return redirect(routes.Application.csv());
 			}
+		} else if (operation.equals("comparelibraries")) {
+			FilePart firstLibraryFilePart = body.getFile("firstLibrary");
+			FilePart secondLibraryFilePart = body.getFile("secondLibrary");
+			if (firstLibraryFilePart != null && secondLibraryFilePart != null) {
+				String firstContentType = firstLibraryFilePart.getContentType();
+				String secondContentType = secondLibraryFilePart.getContentType();
+				if (!firstContentType.equals("text/xml") || !secondContentType.equals("text/xml")) {
+					flash("error", Messages.get("upload.error.contenttype"));
+					return redirect(routes.Application.compare());
+				}
+				else {
+					try {
+						File firstFile = firstLibraryFilePart.getFile();
+						File secondFile = secondLibraryFilePart.getFile();
+						String uuid = session("uuid");
+						if (uuid == null) {
+						    uuid = java.util.UUID.randomUUID().toString();
+						    session("uuid", uuid);
+						}
+						FileService.deleteTempPlaylistFiles(uuid);
+						FileService.createTempXmlPlaylistFilesForCompare(firstFile, secondFile, uuid);
+						return redirect(routes.Application.downloads());
+					}
+					catch (Exception ex) {
+						Logger.error("Error when parsing XML file", ex);
+						flash("error", Messages.get("upload.error.parse"));
+						return redirect(routes.Application.compare());
+					}
+				}
+			} else {
+				flash("error", Messages.get("upload.error.missing"));
+				return redirect(routes.Application.compare());
+			}
 		} else {
 			flash("error", Messages.get("upload.error.invalid"));
 			return redirect(routes.Application.index());
@@ -139,7 +173,16 @@ public class Application extends Controller {
     			} else {
     				throw new Exception("Invalid file extension (file: '" + file + "', extension: '" + fileExtention + "')");
     			}
-    			String fileName = Messages.get("filter.label." + download.getName().replace(fileExtention, "")) + fileExtention;
+    			String fileName = null;
+				if (download.getName().replace(fileExtention, "").equals("mostoftenplayed")) {
+					fileName = Messages.get("filter.label.mostoftenplayed") + fileExtention;
+				} else if (download.getName().replace(fileExtention, "").equals("library")) {
+					fileName = Messages.get("filter.label.library") + fileExtention;
+				} else if (download.getName().replace(fileExtention, "").equals("firstLibrarySongs")) {
+					fileName = Messages.get("filter.label.firstlibrary") + fileExtention;
+				} else if (download.getName().replace(fileExtention, "").equals("secondLibrarySongs")) {
+					fileName = Messages.get("filter.label.secondlibrary") + fileExtention;
+				}
     			response().setHeader("Content-Disposition", "attachment; filename=\"" + fileName +"\"");
 	    		return ok(download);
 	    	}
@@ -150,13 +193,17 @@ public class Application extends Controller {
 		flash("error", Messages.get("download.error.notfound"));
 		return redirect(routes.Application.downloads());
     }
+    
+    public static Result compare() {
+    	return ok(compare.render());
+    }
 
     public static Result csv() {
         return ok(csv.render());
     }
 
     public static Result about() {
-        return ok(about.render("All about the site"));
+        return ok(about.render());
     }
 
     public static Result language() {

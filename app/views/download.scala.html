@@ -19,6 +19,12 @@
 																		@if(org.apache.commons.io.FilenameUtils.removeExtension(fileName).equals("library")) {
 																			<p><a href="/download/@(uuid)/@(fileName)">@Messages("filter.label.library")</a></p>
 																		}
+																		@if(org.apache.commons.io.FilenameUtils.removeExtension(fileName).equals("firstLibrarySongs")) {
+																			<p><a href="/download/@(uuid)/@(fileName)">@Messages("filter.label.firstlibrary")</a></p>
+																		}
+																		@if(org.apache.commons.io.FilenameUtils.removeExtension(fileName).equals("secondLibrarySongs")) {
+																			<p><a href="/download/@(uuid)/@(fileName)">@Messages("filter.label.secondlibrary")</a></p>
+																		}
 																	}
                                                                 </div>
                                                         </div>

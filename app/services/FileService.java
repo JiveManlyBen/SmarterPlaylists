@@ -93,6 +93,39 @@ public class FileService {
 		}
 	}
 	
+	public static void createTempXmlPlaylistFilesForCompare(File firstFile, File secondFile, String uuid) throws 
+	IOException, NumberFormatException, JAXBException, ParseException, SAXException {
+		Library firstLibrary = PlaylistService.parseXMLFile(firstFile);
+		Library secondLibrary = PlaylistService.parseXMLFile(secondFile);
+		Map<String, Library> compareMap = PlaylistService.getCommonSongs(firstLibrary, secondLibrary);
+		firstLibrary = compareMap.get(firstLibrary.getLibraryPersistentId());
+		secondLibrary = compareMap.get(secondLibrary.getLibraryPersistentId());
+		Plist firstPlist = firstLibrary.getPlist();
+		Plist secondPlist = secondLibrary.getPlist();
+		new File(XML_TEMP_DIRECTORY + uuid + File.separator).mkdirs();
+		String fileName = null;
+		BufferedWriter out = null;			
+		try {
+			JAXBContext context = JAXBContext.newInstance(Plist.class);
+			Marshaller marshaller = context.createMarshaller();
+			fileName = XML_TEMP_DIRECTORY + uuid + File.separator + "firstLibrarySongs" + XML_EXTENSION;
+			out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName),"UTF-8"));
+			marshaller.marshal(firstPlist, out);
+			Logger.debug("Created: " + fileName);
+			fileName = XML_TEMP_DIRECTORY + uuid + File.separator + "secondLibrarySongs" + XML_EXTENSION;
+			out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName),"UTF-8"));
+			marshaller.marshal(firstPlist, out);
+			Logger.debug("Created: " + fileName);
+		}
+		catch (JAXBException e) {
+			Logger.error("Error occured while unmarshalling generated playlist.", e);
+			throw e;
+		}
+		finally {
+			out.close();
+		}
+	}
+	
 	public static List<String> getTempPlaylistFiles(String uuid) {
 		List<String> fileList = getTempCsvPlaylistFiles(uuid);
 		fileList.addAll(getTempM3uPlaylistFiles(uuid));

@@ -1,0 +1,33 @@
+@()
+
+@main("compare") {
+
+                                        <!-- CTA Box -->
+						<form id="playlistUploadForm" method="post" action="/upload" enctype="multipart/form-data">
+							<input type="hidden" id="operation" name="operation" value="comparelibraries"/>
+                                                <div class="row">
+                                                        <div class="12u">
+                                                                <div class="cta-box">
+                                                                @if(flash.containsKey("error")){
+																	<div class="error">@flash.get("error")</div>
+																}
+																	<h2>@Messages("compare.label.header")</h2>
+																	<div class="input-row">
+																		<a class="helper-image" href="/assets/images/itunes.windows.export.png" title="@Messages("upload.label.export")"><img src="/assets/images/question.png"></a> 
+																		<div class="file-upload-btn">
+																			<label for="firstUploadFile">@Messages("filter.label.firstlibrary")</label>
+																			<input id="firstUploadFile" class="file-input" type="file" name="firstLibrary" required>
+																		</div>
+																		<div class="file-upload-btn">
+																			<label for="secondUploadFile">@Messages("filter.label.secondlibrary")</label>
+																			<input id="secondUploadFile" class="file-input" type="file" name="secondLibrary" required>
+																		</div>
+																		<input class="button playlistUploadButton" type="submit" value="@Messages("upload.button.upload")" disabled>
+																	</div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+						</form>
+                                        <!-- Divider -->
+
+}

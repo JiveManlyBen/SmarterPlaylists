@@ -15,7 +15,11 @@ GET     /downloads/                           controllers.Application.downloads(
 # File download
 GET     /download/:uuid/:file                           controllers.Application.download(uuid:String, file:String)
 
-# About page
+# Compare Libraries page
+GET	/compare			    controllers.Application.compare()
+GET	/compare/			    controllers.Application.compare()
+
+# Create CSV page
 GET	/csv			    controllers.Application.csv()
 GET	/csv/			    controllers.Application.csv()
 
