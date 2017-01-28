@@ -179,9 +179,9 @@ public class Application extends Controller {
 				} else if (download.getName().replace(fileExtention, "").equals("library")) {
 					fileName = Messages.get("filter.label.library") + fileExtention;
 				} else if (download.getName().replace(fileExtention, "").equals("firstLibrarySongs")) {
-					fileName = Messages.get("filter.label.firstlibrary") + fileExtention;
+					fileName = Messages.get("filter.label.firstlibraryplaylist") + fileExtention;
 				} else if (download.getName().replace(fileExtention, "").equals("secondLibrarySongs")) {
-					fileName = Messages.get("filter.label.secondlibrary") + fileExtention;
+					fileName = Messages.get("filter.label.secondlibraryplaylist") + fileExtention;
 				}
     			response().setHeader("Content-Disposition", "attachment; filename=\"" + fileName +"\"");
 	    		return ok(download);
