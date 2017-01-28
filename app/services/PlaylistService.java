@@ -145,6 +145,7 @@ public class PlaylistService {
 		List<Track> firstPlaylistItems = new ArrayList<Track>();
 		List<Track> secondPlaylistItems = new ArrayList<Track>();
 
+		long startTime = System.nanoTime();
 		while(firstIterator.hasNext()) {
 			Track firstTrack = firstIterator.next();
 			Iterator<Track> secondIterator = secondSongSet.iterator();
@@ -153,9 +154,13 @@ public class PlaylistService {
 				if (firstTrack.similar(secondTrack)) {
 					firstPlaylistItems.add(firstTrack);
 					secondPlaylistItems.add(secondTrack);
+					secondIterator.remove();
 				}
 			}
 		}
+		long endTime = System.nanoTime();
+		long duration = (endTime - startTime);
+		Logger.debug("Processing time for common tracks: " + duration + " nanoseconds");
 		
 		Library firstNewLibrary = new Library(firstLibrary);
 		Map<Integer, Track> map = new LinkedHashMap<Integer, Track>();
