@@ -29,6 +29,7 @@ import org.xml.sax.SAXException;
 
 import play.Logger;
 import play.Play;
+import play.i18n.Messages;
 
 import com.apple.itunes.Array;
 import com.apple.itunes.Dict;

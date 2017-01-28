@@ -12,19 +12,26 @@
 																	<div class="error">@flash.get("error")</div>
 																}
 																	<h2>@Messages("compare.label.header")</h2>
-																	<div class="input-row">
-																		<a class="helper-image" href="/assets/images/itunes.windows.export.png" title="@Messages("upload.label.export")"><img src="/assets/images/question.png"></a> 
-																		<div class="file-upload-btn">
-																			<label for="firstUploadFile">@Messages("filter.label.firstlibrary")</label>
-																			<input id="firstUploadFile" class="file-input" type="file" name="firstLibrary" required>
+																	<div class="input-row compare-upload">
+																		<div class="helper-image-container">
+																			<a class="helper-image" href="/assets/images/itunes.windows.export.png" title="@Messages("upload.label.export")"><img src="/assets/images/question.png"></a> 
 																		</div>
-																		<div class="file-upload-btn">
-																			<label for="secondUploadFile">@Messages("filter.label.secondlibrary")</label>
-																			<input id="secondUploadFile" class="file-input" type="file" name="secondLibrary" required>
+																		<div class="file-upload-group">
+																			<div class="file-upload-container">
+																				<label for="firstUploadFile">@Messages("filter.label.firstlibrary")</label>
+																				<input id="firstUploadFile" class="file-input" type="file" name="firstLibrary" required>
+																			</div>
+																			<div class="file-upload-container">
+																				<label for="secondUploadFile">@Messages("filter.label.secondlibrary")</label>
+																				<input id="secondUploadFile" class="file-input" type="file" name="secondLibrary" required>
+																			</div>
 																		</div>
-																		<input class="button playlistUploadButton" type="submit" value="@Messages("upload.button.upload")" disabled>
+																		<div class="file-upload-button">
+																			<input class="button playlistUploadButton" type="submit" value="@Messages("upload.button.upload")" disabled>
+																		</div>
+																		<div style="clear: both;"></div>
 																	</div>
-                                                                </div>
+                                                </div>
                                                         </div>
                                                 </div>
 						</form>

@@ -294,6 +294,9 @@
 		color: red;
 		font-size: 1em;
 	}
+
+/* Copyright */
+
 	#copyright ul {
         display: inline-block;
         margin: 0;
@@ -312,3 +315,35 @@
 		content: "";
 		padding: 0 0;
 	}
+
+/* Content */
+
+	.compare-upload
+	{
+	    margin-left: auto;
+	    margin-right: auto;
+		width: 600px;
+	}
+		
+		.compare-upload .helper-image-container
+		{
+			float: left;
+			width: 10%;
+		}
+		
+		.compare-upload .file-upload-group
+		{
+			float: left;
+			width: 70%;
+		}
+		
+			.compare-upload .file-upload-group .file-upload-container
+			{
+				width: 100%;
+			}
+		
+		.compare-upload .file-upload-button
+		{
+			float: right;
+			width: 20%;
+		}

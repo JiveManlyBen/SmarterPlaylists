@@ -229,3 +229,28 @@
 			font-size: 1.4em;
 			padding: 0.5em 1em 0.5em 1em;
 		}
+
+/* Content */
+	
+	.compare-upload
+	{
+		width: initial;
+	}
+	
+		.compare-upload .file-upload-group
+		{
+			float: left;
+			width: 90%;
+		}
+		
+			.compare-upload .file-upload-group .file-upload-container
+			{
+				width: 100%;
+			}
+		
+		.compare-upload .file-upload-button
+		{
+			float: none;
+			margin: auto;
+			width: 100%;
+		}
