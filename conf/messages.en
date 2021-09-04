@@ -34,5 +34,5 @@ filter.label.secondlibraryplaylist=Second Library Playlist
 download.error.notfound=The specified file was not found.
 download.label.link=Download links
 about.page.label=What is this site for?
-about.page.description=iTunes offers static playlists and dynamically generated smart playlists, but they don't always meet the needs of users or use imperfect algorithms to determine sorting.  This site generates playlists that do a better job of including the songs you really want to listen to.
+about.page.description=iTunes offers static playlists and dynamically generated smart playlists, but they don''t always meet the needs of users or use imperfect algorithms to determine sorting.  This site generates playlists that do a better job of including the songs you really want to listen to.
 about.page.disclaimer=These playlists come with no warranty.  Use them at your own risk.
