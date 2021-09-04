@@ -34,7 +34,7 @@ public class Application extends Controller {
         		PlaylistLimit.hoursSuffix, PlaylistLimit.minutesSuffix));
     }
 
-	@BodyParser.Of(value = BodyParser.MultipartFormData.class, maxLength = 25 * 1024 * 1024)
+	@BodyParser.Of(value = BodyParser.MultipartFormData.class, maxLength = 35 * 1024 * 1024)
 	public static Result upload() {
 		MultipartFormData body = request().body().asMultipartFormData();
 		if (request().body().isMaxSizeExceeded()) {
